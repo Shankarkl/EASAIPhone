@@ -3,7 +3,9 @@
 <html class="bluebg">
 <head>
     <!---*****************added******************** -->
-<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale =1, user-scalable=no">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale =1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<meta name="viewport" content="width=device-width, user-scalable=no" />
     <!-- <title>Europ Assist</title>
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <link rel="stylesheet" href="js/jquerymobile110min.css" />
@@ -62,6 +64,20 @@
         //
         $().ready(function () {
             $("body").css({ visibility: 'visible' });
+            // var name = device.name;
+
+            if (device.name == 'iphone') {
+              //  alert("device.name::::::" + device.name)
+                localStorage.transitiontype = "none";
+            }
+            else if (device.name = 'android') {
+              //  alert("device.name::::::" + device.name)
+                localStorage.transitiontype = "slide";
+            }
+            else {
+                localStorage.transitiontype = "none";
+            }
+
         });
 
         document.addEventListener('deviceready', function () {
@@ -71,7 +87,7 @@
         }, false);
 
 
-     
+
 
 
         //document.addEventListener("deviceready", onDeviceReady, false);
@@ -84,68 +100,68 @@
         //    document.addEventListener("backbutton", onBackKeyDown, false);
         //// Handle the back button
         ////
-       /* function onBackKeyDown() {
-            alert('in device back');
-            goBack();
+        /* function onBackKeyDown() {
+        alert('in device back');
+        goBack();
         }*/
 
         /********* IndexServicesPage **************/
 
         /**** below home logo click dec6th****/
         $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-          $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-      
+        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+
         function belowheadingcollapse() {
             //alert("belowheadingcollapse");
             if (localStorage.gethome == 1) {
-               // alert("localStorage.gethomebbbb");
+                // alert("localStorage.gethomebbbb");
                 $("#hme,#assisth").show();
-                document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
+                document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divhm').className = "panelcollapsed";
                 $("#divhm").show(); //whole div red
-               
+
             }
             if (localStorage.getmedical == 2) {
-               // alert("localStorage.getmedicalbbbb");
+                // alert("localStorage.getmedicalbbbb");
                 $("#medical,#medtb").show();
                 document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divmm').className = "panelcollapsed";
                 $("#divmm").show();
-               
+
             }
             if (localStorage.getroad == 3) {
-               // alert("localStorage.getroadbbbb");
+                // alert("localStorage.getroadbbbb");
                 $("#roadas,#rdtb").show();
                 document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divrd').className = "panelcollapsed";
                 $("#divrd").show();
-               
+
 
             }
             if (localStorage.getlegal == 4) {
-               // alert("localStorage.getlegalbbbb");
+                // alert("localStorage.getlegalbbbb");
                 $("#legalas,#letb").show();
                 document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divle').className = "panelcollapsed";
                 $("#divle").show();
-                
+
             }
             if (localStorage.gettravel == 5) {
-               // alert("localStorage.gettravelbbbbbb");
+                // alert("localStorage.gettravelbbbbbb");
                 $("#travelas,#trtb").show();
                 document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divtr').className = "panelcollapsed";
                 $("#divtr").show();
-                
+
             }
         }
 
-       
+
         //uncommented Asha dec 3rd
         function callforassistance(type, value) {
             if (value == 1) {
@@ -153,23 +169,23 @@
             }
         }
 
-        
+
         /********* HEADING CLICK **********/
-       $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-       $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-      
+        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+
         $(function () {
             $("#assisth").click(function () {
-                
-                if (localStorage.gethome == 1) {                    
+
+                if (localStorage.gethome == 1) {
                     $("#assisth").hide();
-                   // alert("localStorage.gethome hide");
+                    // alert("localStorage.gethome hide");
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divhm').className = "panelcollapsed";
                     $("#divhm").show(); //whole div red
                     $("#medical,#roadas,#legalas,#travelas").hide();
                     $("#hme").show();
-                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
+                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
 
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
@@ -188,17 +204,17 @@
                         document.getElementById('divle').className = "panelcollapsed";
                     }
 
-               }
+                }
 
             });
         });
 
         $(function () {
             $("#medtb").click(function () {
-                
+
                 if (localStorage.getmedical == 2) {
 
-                
+
                     $("#medtb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divmm').className = "panelcollapsed";
@@ -206,10 +222,10 @@
                     $("#hme,#roadas,#legalas,#travelas").hide();
                     $("#medical").show();
                     document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
-                   if (document.getElementById('divhm').className == "panel") {
-                       $("#assisth").show();
+                    if (document.getElementById('divhm').className == "panel") {
+                        $("#assisth").show();
 
-                      
+
                         document.getElementById('divhm').className = "panelcollapsed";
                     }
                     if (document.getElementById('divrd').className == "panel") {
@@ -231,9 +247,9 @@
 
         $(function () {
             $("#rdtb").click(function () {
-               // alert("roadccccccccccc");
+                // alert("roadccccccccccc");
                 if (localStorage.getroad == 3) {
-                   // alert("localStorage.getroad");
+                    // alert("localStorage.getroad");
                     $("#rdtb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divrd').className = "panelcollapsed";
@@ -252,7 +268,7 @@
                     if (document.getElementById('divtr').className == "panel") {
 
                         $("#trtb").show();
-                       
+
                         document.getElementById('divtr').className = "panelcollapsed";
                     }
                     if (document.getElementById('divle').className == "panel") {
@@ -267,7 +283,7 @@
         $(function () {
             $("#letb").click(function () {
                 if (localStorage.getlegal == 4) {
-                  //  alert("localStorage.getlegalccccccccc");
+                    //  alert("localStorage.getlegalccccccccc");
                     $("#letb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divle').className = "panelcollapsed";
@@ -289,7 +305,7 @@
                     }
                     if (document.getElementById('divrd').className == "panel") {
                         $("#rdtb").show();
-                      
+
                         document.getElementById('divrd').className = "panelcollapsed";
                     }
 
@@ -298,15 +314,15 @@
         });
         $(function () {
             $("#trtb").click(function () {
-               if (localStorage.gettravel == 5) {
-                  //  alert("localStorage.gettravelcccccccccc");
+                if (localStorage.gettravel == 5) {
+                    //  alert("localStorage.gettravelcccccccccc");
                     $("#trtb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divtr').className = "panelcollapsed";
                     $("#divtr").show();
                     $("#hme,#medical,#roadas,#legalas,#travelas").hide();
                     $("#travelas").show();
-                    document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')'; 
+                    document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
 
 
                     if (document.getElementById('divmm').className == "panel") {
@@ -319,14 +335,14 @@
                     }
                     if (document.getElementById('divle').className == "panel") {
                         $("#letb").show();
-                       
+
                         document.getElementById('divle').className = "panelcollapsed";
                     }
                     if (document.getElementById('divrd').className == "panel") {
                         $("#rdtb").show();
                         document.getElementById('divrd').className = "panelcollapsed";
                     }
-                  
+
                 }
             });
         });
@@ -479,11 +495,17 @@
 
 </head>
 <body class="bluebg" onload="checkremember()">
-    <div id="loaddingimg" class="loadingimgdiv">
-      <!--  <div class="loadingimgdiv">
+     <!-- <div id="loaddingimg" class="loadingimgdiv">
+      <div class="loadingimgdiv">
         <img src="public/images/loading.gif" alt="" style="width:32px;height:32px;"/>
-        </div> -->
+        </div> 
+    </div>-->
+
+    <div id="loaddingimg" class="loadingmaindiv">
+    
     </div>
+
+
     <!-- Start of first page: #one -->
     <div data-role="page" id="indexPage">
         <div data-role="content">
@@ -2471,7 +2493,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input class="txtbxreg" id="txtRegCell" type="number" onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';">
+                                    <input class="txtbxreg" id="txtRegCell" type="number"  onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>

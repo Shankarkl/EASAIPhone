@@ -123,7 +123,7 @@ function gotoBenifit() {
         });
         currentPage = 'indexbenefit';
         pageData.push(currentPage);
-        // GetDisplayCategories();
+         GetDisplayCategories();
     }
 }
 
@@ -147,7 +147,7 @@ function gotoProfile() {
         document.getElementById('txtcellno').value = "";
         document.getElementById('txtid').value = "";
 
-        // GetProfileDetails();
+         GetProfileDetails();
     }
 }
 
