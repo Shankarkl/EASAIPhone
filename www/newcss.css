@@ -221,7 +221,7 @@ a
     border-top-color: black;
     border-top-style: solid;
     border-bottom-width: 2px;
-    border-bottom-color: black;
+   /* border-bottom-color: black;*/
     border-bottom-style: solid;
     background-color: #E53138;
 }
@@ -441,6 +441,10 @@ a
     vertical-align: top;
 }
 .trheight3
+{
+    vertical-align: top;
+}
+.trheight4
 {
     vertical-align: top;
 }
@@ -1287,17 +1291,18 @@ width: 75%;
     background-image: url('public/images/EAslicing/bgrepete.png');
     height: 100%;
 }
-
 .loadingmaindiv
 {
-    left: 0;
-    top: 0;
-   display:none;
-    position: fixed;
+    /*left: 0;
+    top: 0;*/
+    opacity:0.5;
+    filter:alpha(opacity =50);
+    display:none;
+    position: relative;
     z-index: 1000;
     height: 100%;
     width: 100%;
-    background-color: transparent;
+    background-color: black;
 }
 .loadingimgdiv
 {
@@ -1668,3 +1673,32 @@ ol.frames li img {
     
 }
 
+.NoproDiv {
+    color: #9FB7D2;
+    height: 200px;    
+    font-size: 18px;
+    font-family: Calibri,sans-serif,Verdana,Tahoma,Arial;
+    text-align:center;
+    vertical-align:middle;
+    padding:10px;
+    margin-top:100px;min-height: 100%; 
+}
+/* to hide double loading */
+.ui-loading .ui-loader
+{
+    display:none !important; 
+}
+.ui-icon-loading {
+    opacity: none !important; 
+}
+.ui-icon-loading
+{
+    
+    display:none !important; 
+}
+
+/* to remove border */
+.ui-bar-a
+{
+    border:0px solid black !important;
+}

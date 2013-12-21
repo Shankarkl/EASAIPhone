@@ -3,26 +3,9 @@
 <html class="bluebg">
 <head>
     <!---*****************added******************** -->
-<!--<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale =1, user-scalable=no">
-<meta name="viewport" content="width=device-width, initial-scale=1">-->
-<meta name="viewport" content="width=device-width, user-scalable=no" />
-    <!-- <title>Europ Assist</title>
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <link rel="stylesheet" href="js/jquerymobile110min.css" />
-    <link href="newcss.css" rel="stylesheet" type="text/css" />
-    <script src="js/spinmin.js" type="text/javascript"></script>
-    <script src="js/jqueryalerts.js" type="text/javascript"></script>
-    <link href="public/css/jqueryalerts.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/RandgoServices.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/wi.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/europservices.js"></script>
-    <script src="js/jqueryuitouchpunch.js" type="text/javascript"></script>
-    <script src="js/jquerymobile110min.js" type="text/javascript"></script>
-    <script src="js/utils.js" type="text/javascript"></script>
-    <link href="public/css/jqueryui.css" rel="stylesheet" type="text/css" />
-    <script src="js/help.js" type="text/javascript"></script>
-    <script type="text/javascript" charset="utf-8"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale =1, user-scalable=no">
+
+   <!-- <meta name="viewport" content="width=device-width, user-scalable=no" />-->
     <title>Europ Assist</title>
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <link rel="stylesheet" href="js/jquerymobile110min.css" />
@@ -35,49 +18,16 @@
     <script src="js/jqueryui.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/RandgoServices.js"></script>
-    <!--<script type="text/javascript" charset="utf-8" src="js/wi.js"></script>-->
-  <script type="text/javascript" charset="utf-8" src="js/europservices.js"></script>
     <script src="js/jqueryuitouchpunch.js" type="text/javascript"></script>
     <script src="js/jquerymobile110min.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
     <script src="js/help.js" type="text/javascript"></script>
-    <!--<script src="js/europservices.js" type="text/javascript"></script>-->
     <script type="text/javascript" charset="utf-8">
-        var friendcellno;
-        var amt;
-        var meterno;
-        var eamt;
-        var airtimeval;
-        var fee;
-        var total;
-        var cardno;
-        var cardamt;
-        var cardholder;
-        var expirydate;
-        var cvv;
 
-        // Call onDeviceReady when PhoneGap is loaded.
-        //
-        // At this point, the document has loaded but phonegap-1.0.0.js has not.
-        // When PhoneGap is loaded and talking with the native device,
-        // it will call the event `deviceready`.
-        //
-        $().ready(function () {
+            $().ready(function () {
+
             $("body").css({ visibility: 'visible' });
-            // var name = device.name;
-
-            if (device.name == 'iphone') {
-              //  alert("device.name::::::" + device.name)
-                localStorage.transitiontype = "none";
-            }
-            else if (device.name = 'android') {
-              //  alert("device.name::::::" + device.name)
-                localStorage.transitiontype = "slide";
-            }
-            else {
-                localStorage.transitiontype = "none";
-            }
-
+          
         });
 
         document.addEventListener('deviceready', function () {
@@ -86,106 +36,81 @@
 
         }, false);
 
-
-
-
-
-        //document.addEventListener("deviceready", onDeviceReady, false);
-
-        // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
-        //
-        //function onDeviceReady() {
-        //    // Register the event listener
-        //    //alert('in device ready');
-        //    document.addEventListener("backbutton", onBackKeyDown, false);
-        //// Handle the back button
-        ////
-        /* function onBackKeyDown() {
-        alert('in device back');
-        goBack();
-        }*/
-
         /********* IndexServicesPage **************/
 
         /**** below home logo click dec6th****/
         $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+          $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
 
-        function belowheadingcollapse() {
-            //alert("belowheadingcollapse");
-            if (localStorage.gethome == 1) {
-                // alert("localStorage.gethomebbbb");
+          function belowheadingcollapse() {
+              if (localStorage.gethome == 1) {
                 $("#hme,#assisth").show();
-                document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
+                document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divhm').className = "panelcollapsed";
-                $("#divhm").show(); //whole div red
-
+                $("#divhm").show(); 
+               
             }
             if (localStorage.getmedical == 2) {
-                // alert("localStorage.getmedicalbbbb");
                 $("#medical,#medtb").show();
                 document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divmm').className = "panelcollapsed";
                 $("#divmm").show();
-
+               
             }
             if (localStorage.getroad == 3) {
-                // alert("localStorage.getroadbbbb");
                 $("#roadas,#rdtb").show();
                 document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divrd').className = "panelcollapsed";
                 $("#divrd").show();
-
+               
 
             }
             if (localStorage.getlegal == 4) {
-                // alert("localStorage.getlegalbbbb");
                 $("#legalas,#letb").show();
                 document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divle').className = "panelcollapsed";
                 $("#divle").show();
-
+                
             }
             if (localStorage.gettravel == 5) {
-                // alert("localStorage.gettravelbbbbbb");
                 $("#travelas,#trtb").show();
                 document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divtr').className = "panelcollapsed";
                 $("#divtr").show();
-
+                
             }
         }
 
-
+       
         //uncommented Asha dec 3rd
         function callforassistance(type, value) {
+            //alert(type + '::' + value);
             if (value == 1) {
-                CreatePleaseCallMeRequestNew();
+                CreatePleaseCallMeRequestNew(type);
             }
         }
 
-
+        
         /********* HEADING CLICK **********/
-        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-
+       $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+       $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+      
         $(function () {
             $("#assisth").click(function () {
-
+                
                 if (localStorage.gethome == 1) {
                     $("#assisth").hide();
-                    // alert("localStorage.gethome hide");
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divhm').className = "panelcollapsed";
                     $("#divhm").show(); //whole div red
                     $("#medical,#roadas,#legalas,#travelas").hide();
                     $("#hme").show();
-                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
+                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
 
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
@@ -204,17 +129,14 @@
                         document.getElementById('divle').className = "panelcollapsed";
                     }
 
-                }
+               }
 
             });
         });
 
         $(function () {
             $("#medtb").click(function () {
-
                 if (localStorage.getmedical == 2) {
-
-
                     $("#medtb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divmm').className = "panelcollapsed";
@@ -224,9 +146,7 @@
                     document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
                     if (document.getElementById('divhm').className == "panel") {
                         $("#assisth").show();
-
-
-                        document.getElementById('divhm').className = "panelcollapsed";
+                       document.getElementById('divhm').className = "panelcollapsed";
                     }
                     if (document.getElementById('divrd').className == "panel") {
                         $("#rdtb").show();
@@ -247,9 +167,7 @@
 
         $(function () {
             $("#rdtb").click(function () {
-                // alert("roadccccccccccc");
                 if (localStorage.getroad == 3) {
-                    // alert("localStorage.getroad");
                     $("#rdtb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divrd').className = "panelcollapsed";
@@ -266,9 +184,7 @@
                         document.getElementById('divhm').className = "panelcollapsed";
                     }
                     if (document.getElementById('divtr').className == "panel") {
-
                         $("#trtb").show();
-
                         document.getElementById('divtr').className = "panelcollapsed";
                     }
                     if (document.getElementById('divle').className == "panel") {
@@ -283,8 +199,7 @@
         $(function () {
             $("#letb").click(function () {
                 if (localStorage.getlegal == 4) {
-                    //  alert("localStorage.getlegalccccccccc");
-                    $("#letb").hide();
+                   $("#letb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divle').className = "panelcollapsed";
                     $("#divle").show();
@@ -305,7 +220,6 @@
                     }
                     if (document.getElementById('divrd').className == "panel") {
                         $("#rdtb").show();
-
                         document.getElementById('divrd').className = "panelcollapsed";
                     }
 
@@ -315,7 +229,6 @@
         $(function () {
             $("#trtb").click(function () {
                 if (localStorage.gettravel == 5) {
-                    //  alert("localStorage.gettravelcccccccccc");
                     $("#trtb").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divtr').className = "panelcollapsed";
@@ -323,8 +236,6 @@
                     $("#hme,#medical,#roadas,#legalas,#travelas").hide();
                     $("#travelas").show();
                     document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
-
-
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
                         document.getElementById('divmm').className = "panelcollapsed";
@@ -335,14 +246,14 @@
                     }
                     if (document.getElementById('divle').className == "panel") {
                         $("#letb").show();
-
+                       
                         document.getElementById('divle').className = "panelcollapsed";
                     }
                     if (document.getElementById('divrd').className == "panel") {
                         $("#rdtb").show();
                         document.getElementById('divrd').className = "panelcollapsed";
                     }
-
+                  
                 }
             });
         });
@@ -352,15 +263,12 @@
 
     <script type="text/javascript">
         function openpopupPayfriend() {
-            document.getElementById('view-loading').style.display = "block";
-            friendcellno = document.getElementById('txtfrnd').value;
-            amt = document.getElementById('txtfriendAmount').value;
-            document.getElementById('rusure').innerHTML = 'You are about to pay R ' + amt + ' to ' + friendcellno + ' Are you sure you wish to proceed?<br>';
+            document.getElementById('view-loading').style.display = "block";           
+            document.getElementById('rusure').innerHTML = 'You are about to pay R ' +  document.getElementById('txtfriendAmount').value + ' to ' + document.getElementById('txtfrnd').value + ' Are you sure you wish to proceed?<br>';
         }
         /* $.mobile.changePage('#myPage', { transition: 'pop', role: 'dialog' });   */
         function yesplease() {
             document.getElementById('view-loading').style.display = "none";
-            //Peertopeer("", amt, friendcellno, "", "", 1);
             $.mobile.changePage('#transactionsuccessful', {
                 transition: "none",
                 reverse: false,
@@ -379,14 +287,13 @@
     <script type="text/javascript">
         function openpopupEcity() {
             document.getElementById('div-viewelec').style.display = "block";
-            meterno = document.getElementById('txtMeterNumber').value;
-            eamt = document.getElementById('txtElectricityAmt').value;
+            var meterno = document.getElementById('txtMeterNumber').value;
+            var eamt = document.getElementById('txtElectricityAmt').value;
             document.getElementById('rusureEcity').innerHTML = 'You are about to pay electricity bill. Are you sure you wish to proceed?<br>';
         }
 
         function yespleaseEcity() {
             document.getElementById('div-viewelec').style.display = "none";
-            //ElectricityPurchase(meterno, eamt);
             $.mobile.changePage('#transactionsuccessful', {
                 transition: "none",
                 reverse: false,
@@ -421,18 +328,16 @@
     <script type="text/javascript">
         function openpopupTdtls() {
             document.getElementById('div-viewtr').style.display = "block";
-            airtimeval = document.getElementById('txtair').value;
-            fee = document.getElementById('txtfee').value;
-            total = document.getElementById('txttotal').value;
+            var airtimeval = document.getElementById('txtair').value;
+            var fee = document.getElementById('txtfee').value;
+            var total = document.getElementById('txttotal').value;
             document.getElementById('rusureTdtls').innerHTML = 'You are about to purchare airtime. Are you sure you wish to proceed?';
         }
 
         function yespleasetrdtls() {
             document.getElementById('div-viewtr').style.display = "none";
             //AirtimePurchase(denominationID, total, "");
-
-
-        }
+            }
         function nothankshideTdtls() {
             document.getElementById('div-viewtr').style.display = "none";
         }
@@ -444,11 +349,11 @@
     <script type="text/javascript">
         function openpopupAddRemove() {
             document.getElementById('divpopupAddRemove').style.display = "block";
-            cardno = document.getElementById('txtcardnumber').value;
-            cardamt = document.getElementById('txtcardamt').value;
-            cardholder = document.getElementById('txtcardholder').value;
-            expirydate = document.getElementById('txtexpiry').value;
-            cvv = document.getElementById('txtcvv').value;
+            var cardno = document.getElementById('txtcardnumber').value;
+            var cardamt = document.getElementById('txtcardamt').value;
+            var cardholder = document.getElementById('txtcardholder').value;
+            var expirydate = document.getElementById('txtexpiry').value;
+            var cvv = document.getElementById('txtcvv').value;
             document.getElementById('rusureAddRemove').innerHTML = 'You are about to add a card. Are you sure you wish to proceed?';
 
         }
@@ -495,17 +400,9 @@
 
 </head>
 <body class="bluebg" onload="checkremember()">
-     <!-- <div id="loaddingimg" class="loadingimgdiv">
-      <div class="loadingimgdiv">
-        <img src="public/images/loading.gif" alt="" style="width:32px;height:32px;"/>
-        </div> 
-    </div>-->
-
     <div id="loaddingimg" class="loadingmaindiv">
-    
+     
     </div>
-
-
     <!-- Start of first page: #one -->
     <div data-role="page" id="indexPage">
         <div data-role="content">
@@ -515,15 +412,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
-                                    <div style="width:100%">
+                                <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
@@ -532,7 +421,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -543,7 +432,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" id="div11" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img14" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -553,7 +442,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -563,7 +452,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -573,7 +462,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -583,7 +472,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                               
                                             </td>
                                         </tr>
                                     </table>
@@ -593,7 +482,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="logincontent loginpadd" onclick="gotoRegister()">
+                    <td class="logincontent loginpadd" onclick="gotoRegFirstPage()">
                         <table class="maintable7" cellspacing="0" cellpadding="0">
                             <tr style="height:26.5px">
                                 <td></td>
@@ -653,14 +542,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                  
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -670,7 +552,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -681,7 +563,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" id="div14" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img22" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -691,7 +573,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                              
                                                 <div class="profileclass" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitewhite.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -701,7 +583,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -711,7 +593,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                                
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -721,7 +603,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                              
                                             </td>
                                         </tr>
                                     </table>
@@ -730,7 +612,7 @@
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -746,6 +628,7 @@
                 <tr height="63%">
                     <td class="gobo">
                         <table class="bgfooter" width="100%" cellspacing="0" cellpadding="0" id="tbldisplaycategories">
+                        
                         </table>
                     </td>
                 </tr>
@@ -777,7 +660,7 @@
             </table>
         </div>
         <!-- /content -->
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -854,7 +737,7 @@
                     </table>
                 </td>
             </tr>
-            <tr class="trheight3">
+            <tr class="trheight4">
                 <td class="middlecontent3">
                     <table width="100%" height="100%" cellspacing="0" cellpadding="0">
                         <tr>
@@ -991,7 +874,7 @@
             </tr>
             <!--BREAK END-->
         </table>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -1003,15 +886,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
-                                    <div style="width:100%" onclick="gohome()" >
+                                <div style="width:100%" onclick="gohome()" >
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
@@ -1020,7 +895,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="profileclass" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/serviceswhite.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1031,7 +906,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" id="div3" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img23" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1041,7 +916,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1051,7 +926,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1061,7 +936,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1071,7 +946,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                                
                                             </td>
                                         </tr>
                                     </table>
@@ -1137,7 +1012,7 @@
                                         <td class="regcol1"></td>
                                     </tr>
                                 </table>
-                              <!--  <table width="100%" cellspacing="0" cellpadding="0" id="hmetb" onclick="hmeassist()">-->
+                            
                                <table width="100%" cellspacing="0" cellpadding="0" id="hmetb" onclick="belowheadingcollapse()">
                                     <tr class="bgfooter2">
                                         <td class="regcol1"></td>
@@ -1206,7 +1081,7 @@
                                         <td class="regcol1"></td>
                                     </tr>
                                 </table>
-                               <!--  <table width="100%" cellspacing="0" cellpadding="0" onclick="mediassist()">-->
+                            
                                <table width="100%" cellspacing="0" cellpadding="0" onclick="belowheadingcollapse()">
                                     <tr class="bgfooter2">
                                         <td class="regcol1"></td>
@@ -1264,10 +1139,7 @@
                                                 </tr>
                                             </table>
                                         </td>
-                                        <!-- <td class="slideclick">
-                                            <div id="sliderroad" style="height: 0%; width: 60%;">
-                                            </div>
-                                        </td>-->
+                                      
                                         <td width="6%"></td>
                                     </tr>
                                     <tr>
@@ -1278,7 +1150,7 @@
                                         <td class="regcol1"></td>
                                     </tr>
                                 </table>
-                               <!-- <table width="100%" cellspacing="0" cellpadding="0" onclick="roadassist()">-->
+                             
                                 <table width="100%" cellspacing="0" cellpadding="0" onclick="belowheadingcollapse()">
                                     <tr class="bgfooter2">
                                         <td class="regcol1"></td>
@@ -1336,10 +1208,7 @@
                                                 </tr>
                                             </table>
                                         </td>
-                                        <!--<td class="slideclick">
-                                            <div id="sliderlegal" style="height: 0%; width: 60%;">
-                                            </div>
-                                        </td>-->
+                                     
                                         <td width="6%"></td>
                                     </tr>
                                     <tr>
@@ -1350,7 +1219,7 @@
                                         <td class="regcol1"></td>
                                     </tr>
                                 </table>
-                               <!-- <table width="100%" cellspacing="0" cellpadding="0" onclick="legalassist()">-->
+                             
                                  <table width="100%" cellspacing="0" cellpadding="0" onclick="belowheadingcollapse()">
                                     <tr class="bgfooter2">
                                         <td class="regcol1"></td>
@@ -1419,7 +1288,7 @@
                                         <td class="regcol1"></td>
                                     </tr>
                                 </table>
-                               <!-- <table width="100%" cellspacing="0" cellpadding="0" onclick="travelassist()">-->
+                              
                                 <table width="100%" cellspacing="0" cellpadding="0" onclick="belowheadingcollapse()">
                                     <tr class="bgfooter2">
                                         <td class="regcol1"></td>
@@ -1435,6 +1304,12 @@
                         </div>
                     </td>
                 </tr>
+                 <tr>
+                    <td style="vertical-align:middle;height:100%">
+                        <div class="NoproDiv"  id="NOproductDiv">There are no mobile products setup for this User. Please contact EASA ICT</div>               
+
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -1446,14 +1321,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                  
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -1463,7 +1331,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1474,7 +1342,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                            
                                                 <div class="headerbckrndimgg" id="div4" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img1" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1484,7 +1352,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1494,7 +1362,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="profileclass" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilewhite.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1504,7 +1372,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1514,7 +1382,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                              
                                             </td>
                                         </tr>
                                     </table>
@@ -1606,7 +1474,7 @@
                             </tr>
                             <tr height="10%">
                                 <td class="tdwidth"></td>
-                                <td class="textstyle1 tdwidth1">NEW PIN
+                                <td class="textstyle1 tdwidth1">NEW PASSWORD
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1619,7 +1487,7 @@
                             </tr>
                             <tr height="10%">
                                 <td class="tdwidth"></td>
-                                <td class="textstyle1 tdwidth1">CONFIRM NEW PIN
+                                <td class="textstyle1 tdwidth1">CONFIRM NEW PASSWORD
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1639,7 +1507,7 @@
                             <tr height="30%">
                                 <td width="10%"></td>
                                 <td width="80%" align="left">
-                                    <img src="public/images/EAslicing/changepin.png" id="pin" onclick="validation();" />
+                                    <img src="public/images/EAslicing/changepass.png" id="pin" onclick="validation();" />
                                 </td>
                                 <td width="10%"></td>
                             </tr>
@@ -1663,7 +1531,7 @@
                 </tr>
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -1675,14 +1543,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                   
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -1692,7 +1553,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1703,7 +1564,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" id="div1" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="wal" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1713,7 +1574,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1723,7 +1584,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1733,7 +1594,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="profileclass" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpwhite.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1743,7 +1604,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                               
                                             </td>
                                         </tr>
                                     </table>
@@ -1752,7 +1613,7 @@
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4" >
                     <td class="middlecontent3">
                         <table width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -2105,16 +1966,10 @@
                         <br />
                     </td>
                 </tr>
-                <!-- Footer-->
-                <!--<tr class="bckbtn">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
-            </table>
+              
+            </table>    
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -2127,14 +1982,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                               
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -2144,7 +1992,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="profileclass" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/serviceswhite.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2155,7 +2003,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" id="div5" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img24" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2165,7 +2013,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2175,7 +2023,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2185,7 +2033,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2195,7 +2043,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                               
                                             </td>
                                         </tr>
                                     </table>
@@ -2311,7 +2159,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
 
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -2324,14 +2172,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                 
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -2341,7 +2182,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2352,7 +2193,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                             
                                                 <div class="headerbckrndimgg" id="div6" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img25" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2362,7 +2203,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2372,7 +2213,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2382,7 +2223,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                                 
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2392,7 +2233,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                                
                                             </td>
                                         </tr>
                                     </table>
@@ -2421,7 +2262,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table class="maintable6" cellspacing="0" cellpadding="0">
                             <tr height="10%">
                                 <td class="tdwidth"></td>
-                                <td class="textstyle1">NAME
+                                <td class="textstyle1">FIRST NAME
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -2458,13 +2299,13 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
-                            <tr height="10%">
+                            <tr height="10%" style="display:none;">
                                 <td class="tdwidth"></td>
                                 <td class="textstyle1">PASSWORD
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
-                            <tr height="10%">
+                            <tr height="10%" style="display:none;">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
                                     <input type="password" class="txtbxreg" id="txtRegPassword" maxlength="50" onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';">
@@ -2578,17 +2419,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <br />
                     </td>
                 </tr>
-                <!--<tr class="bckbtn">
-                    <td>
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
+               
             </table>
         </div>
-        <!--<div data-position="fixed" data-role="footer" style="position:fixed;">
-            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-        </div>-->
+       
         <div data-position="fixed" data-role="footer" id="show_hide_backbutton">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
@@ -2603,14 +2437,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                  
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -2620,7 +2447,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                            
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle" align="center" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2631,7 +2458,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" id="div8" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img5" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2641,7 +2468,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                               
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2651,7 +2478,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2661,7 +2488,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                                 
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -2671,7 +2498,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                               
                                             </td>
                                         </tr>
                                     </table>
@@ -2760,7 +2587,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                 <td class="chkstyle" align="left" width="29%" style="padding-left:10px;vertical-align:middle">
                                     Remember me 
                                 </td>
-                                <!--<td class="tdwidth"></td>-->
+                               
                             </tr>
                         </table>
                     </td>
@@ -2798,13 +2625,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <br />
                     </td>
                 </tr>
-                <!-- Footer-->
-                <!--<tr class="bckbtn">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
         <div data-position="fixed" data-role="footer" id="show_hide_backbutton">
@@ -2984,8 +2805,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr>
                                 <td width="15%"></td>
                                 <td width="70%" align="center">
-                                    <!--<img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                                        onclick="goBack();" />-->
+                                   
                                     <img alt=" " src="public/images/EAslicing/submitbutton.png" class="regsubbtn" onclick="PayCardBills();" />
                                 </td>
                                 <td width="15%"></td>
@@ -2993,10 +2813,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                    </td>
-                </tr>-->
+              
             </table>
 
             <!-- popup div-->
@@ -3044,7 +2861,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
             <!-- popup div-->
 
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -3122,7 +2939,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -3190,15 +3007,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 <tr>
                     <td class="con2"></td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img alt="" src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
+               
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -3276,7 +3088,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -3379,14 +3191,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();">
-                    </td>
-                </tr>-->
+             
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -3527,14 +3335,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td class="elec" style="position: fixed; bottom: 0; left: 0">
-                        <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
         <!-- /content -->
@@ -3613,7 +3417,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -3671,14 +3475,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 <tr>
                     <td class="con2"></td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
         <!-- /content -->
@@ -3828,31 +3628,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="bgfooter2" height="30%">
-                <td class="eftht">
-                    <table class="tablewidth" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td width="15%">
-                            </td>
-                            <td width="70%" align="center">
-                                <img alt=" " src="public/images/EAslicing/submitbutton.png" class="submitbtn"
-                                    onclick="return (bills());" />
-                            </td>
-                            <td width="15%">
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>-->
-                <!--<tr class="trheight">
-                    <td>
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -4037,7 +3816,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
 
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -4086,7 +3865,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
             </div></div>
     <div data-role="page" id="payinstore">
         <div data-role="content">
-            <table class="maintable" cellspacing="0" cellpadding="0" id="Table2" style="position:absolute!important;">
+            <table class="maintable" cellspacing="0" cellpadding="0" id="Table2">
                 <tr class="topbar">
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
@@ -4220,15 +3999,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td class="elec">
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -4351,7 +4125,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -4492,7 +4266,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
             <!-- popup div-->
             <!-- popup div-->
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -4575,7 +4349,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -4771,7 +4545,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -4908,7 +4682,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -4986,7 +4760,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -5149,7 +4923,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -5295,7 +5069,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -5373,7 +5147,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -5438,7 +5212,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -5605,7 +5379,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
         <!-- /content -->
@@ -5784,7 +5558,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -5862,7 +5636,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="bgfooter2">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -5894,7 +5668,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6014,7 +5788,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3 bgfooter frndcell">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -6112,7 +5886,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
 
             <!-- popup div-->
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6275,7 +6049,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6353,7 +6127,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -6398,7 +6172,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6520,7 +6294,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6627,177 +6401,11 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     <td>
                         <table class="piatto" cellspacing="0" cellpadding="10" width="100%" height="100%" 
                             id="tbldisplaymerchantdeals">
-                             <!--<tr height="80%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafe">
-                                    Cafe 1999
-                                </td>
-                                <td valign="middle" rowspan="2">
-                                    <img src="public/images/EAslicing/GetVoucher.png" onclick="ClickVoucher();">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr height="20%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafecontent">
-                                    Cafe 1999 is a loud and...
-                                </td>
-                                <td>
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>-->
+                            
                         </table>
                     </td>
                 </tr>
-                <!-- <tr class="freshbrnd">
-                    <td>
-                        <table class="piatto" cellspacing="0" cellpadding="0" width="100%" height="100%">
-                            <tr height="80%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafe">
-                                    Piatto
-                                </td>
-                                <td valign="middle" rowspan="2">
-                                    <img src="public/images/EAslicing/GetVoucher.png">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr height="20%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafecontent">
-                                    Cafe 1999 is a loud and...
-                                </td>
-                                <td>
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="freshbrnd">
-                    <td>
-                        <table class="piatto" cellspacing="0" cellpadding="0" width="100%" height="100%">
-                            <tr height="80%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafe">
-                                    Fresh Brands
-                                </td>
-                                <td valign="middle" rowspan="2">
-                                    <img src="public/images/EAslicing/GetVoucher.png">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr height="20%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafecontent">
-                                    Cafe 1999 is a loud and...
-                                </td>
-                                <td>
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="freshbrnd">
-                    <td>
-                        <table class="piatto" cellspacing="0" cellpadding="0" width="100%" height="100%">
-                            <tr height="80%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafe">
-                                    Haagen-Dazs
-                                </td>
-                                <td valign="middle" rowspan="2">
-                                    <img src="public/images/EAslicing/GetVoucher.png">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr height="20%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafecontent">
-                                    Cafe 1999 is a loud and...
-                                </td>
-                                <td>
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="freshbrnd">
-                    <td>
-                        <table class="piatto" cellspacing="0" cellpadding="0" width="100%" height="100%">
-                            <tr height="80%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafe">
-                                    Global Wrapps
-                                </td>
-                                <td valign="middle" rowspan="2">
-                                    <img src="public/images/EAslicing/GetVoucher.png">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr height="20%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafecontent">
-                                    Cafe 1999 is a loud and...
-                                </td>
-                                <td>
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="freshbrnd">
-                    <td>
-                        <table class="piatto" cellspacing="0" cellpadding="0" width="100%" height="100%">
-                            <tr height="80%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafe">
-                                    Cafe 1999
-                                </td>
-                                <td valign="middle" rowspan="2">
-                                    <img src="public/images/EAslicing/GetVoucher.png">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr height="20%">
-                                <td class="regcol1">
-                                </td>
-                                <td class="cafecontent">
-                                    Cafe 1999 is a loud and...
-                                </td>
-                                <td>
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>-->
+               
                 <tr>
                     <td>
                         <br />
@@ -6806,14 +6414,9 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <br />
                     </td>
                 </tr>
-                <!--<tr class="trheight" valign="bottom">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-                    </td>
-                </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6826,14 +6429,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                  
                                     <div style="width:100%">
                                      <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -6903,7 +6499,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -6929,108 +6525,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     </td>
                 </tr>
 
-                 <!--  <tr class="bgfooter2" valign="top">
-                    <td>
-                        <table class="maintable6" cellspacing="0" cellpadding="0">
-                   <tr height="63%">
-                    <td class="gobo" style="overflow: scroll">
-                        <table class="bgfooter" width="100%" cellspacing="0" cellpadding="0" id="tblsearch">
-                         <tr>
-                         <td style="width:30%;padding-top:5%;padding-left:2%;"><input type="text" class="txtbxreg" id="txtmerchantsearch" placeholder="Search"></td>
-                         <td style="width:25%;padding-top:5%;"><img alt=" " src="public/images/EAslicing/submitbutton.png" id="btnmerchantsearch" onclick="return (GetMerchantsBySearch());" class="regsubbtn"></td>
-                        </tr>
-                        </table>
-                    </td>
-                </tr>
-                </table>
-                </td>
-                </tr>-->
-                <!--ccomm <tr>
-                    <td>
-                        <table width="100%" cellpadding="5" cellspacing="5">
-                            <tr>
-                                <td>
-                                  <div>
-                                    <div style="float:left;width:60%"><input type="text" class="txtbxreg" id="txtmerchantsearch" placeholder="Search"></div>
-                                    <div style="float:right"><img alt=" " src="public/images/EAslicing/submitbutton.png" id="btnmerchantsearch" onclick="return (GetMerchantsBySearch());" class="regsubbtn"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>-->
-
-                  <!-- search -->
-                  
-                <!--  <tr>
-                    <td>
-                        <br>
-                    </td>
-                </tr>
-                     <tr class="bgfooter2" height="10%">
-                    <td>
-                        <table class="maintable6" cellspacing="0" cellpadding="0" id="tblsearch">
-                            <tr>
-                                <td style="height:10%;width:5%;"></td>
-                                
-                                  <td width="39%" align="left" style="vertical-align:middle">
-                                   <input type="text" class="txtbxreg" id="txtmerchantsearch" placeholder="Search"/>
-                                </td>
-                                <td align="left" width="1%" style="vertical-align:middle">
-                                <img alt=" " src="public/images/EAslicing/submitbutton.png" id="txtmerchantsearch" onclick="return (GetMerchantsBySearch());" class="regsubbtn">
-                                <td class="chkstyle" align="left" width="20%" style="padding-left:10px;vertical-align:middle">
-                                   
-                                </td>
-                               
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                   <tr>
-                    <td>
-                        <br>
-                    </td>
-                </tr>-->
-                <!-- search -->
-               
-
-            
-
-                <!-- <tr class="bgfooter2" height="10%">
-                    <td>
-                        <table class="maintable6" cellspacing="0" cellpadding="0" id="tblsearch">
-                            <tr>
-                             <td class="tdwidth"></td>
-                            <td width="39%" align="left" style="vertical-align:middle">
-                                     <input type="text" class="txtbxreg" id="txtmerchantsearch" maxlength="50">
-                                </td>
-                               
-                                <td class="chkstyle" align="left" width="29%" style="padding-left:10px;vertical-align:middle">
-                                   <img alt=" " src="public/images/EAslicing/submitbutton.png" id="btnmerchantsearch" onclick="return (GetMerchantsBySearch());" class="regsubbtn">
-                                </td>
-                                 <td class="tdwidth"></td>
-                                
-                            </tr>
-                        </table>
-                    </td>
-                </tr>-->
-
-               <!-- <tr class="bgfooter2" valign="top">
-                    <td>
-                        <table class="maintable6" cellspacing="0" cellpadding="0">
-                          
-                            <tr height="10%">
-                                <td class="tdwidth"></td>
-                                <td style="width:60%">
-                                    <input type="text" class="txtbxreg" id="txtmerchantsearch" placeholder="Search"/>
-                                </td>
-                                <td class="tdwidth"> <img alt=" " src="public/images/EAslicing/submitbutton.png" id="btnmerchantsearch" onclick="return (GetMerchantsBySearch());" class="regsubbtn"></td>
-                            </tr>
-                          
-                       </table>
-                    </td>
-                </tr>-->
-               
+             
                 <!-- Search end -->
                 <tr height="63%">
                     <td class="gobo" style="overflow: scroll">
@@ -7066,7 +6561,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -7079,14 +6574,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                   
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -7156,7 +6644,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -7218,7 +6706,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -7297,7 +6785,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -7384,7 +6872,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -7462,7 +6950,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         </table>
                     </td>
                 </tr>
-                <tr class="trheight3">
+                <tr class="trheight4">
                     <td class="middlecontent3">
                         <table width="100%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
@@ -7532,7 +7020,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -7807,7 +7295,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -7923,7 +7411,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -8261,27 +7749,19 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
-    <!-- pin page -->
-    <div data-role="page" id="pinpage">
+    <!-- Rigistration First page -->
+    <div data-role="page" id="RegFstPage">
         <div data-role="content">
             <table class="maintable" cellspacing="0" cellpadding="0">
                 <tr class="topbar">
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                <td class="headerbckrndimg headerwt">                                  
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
@@ -8356,7 +7836,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="regcol1"></td>
-                                <td class="regtopHeader">PIN
+                                <td class="regtopHeader">Register
                                 </td>
                                 <td class="regcol2" align="right">
                                     <img alt=" " src="public/images/EAslicing/lock.png" class="loginimg">
@@ -8371,27 +7851,40 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <table class="maintable6" cellspacing="0" cellpadding="0">
                             <tr height="10%">
                                 <td class="tdwidth"></td>
-                                <td class="textstyle1">CREATE 5 DIGIT PIN
+                                <td class="textstyle1">USER NAME
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="txtcreate" maxlength="10">
+                                    <input type="text" class="txtbxreg" id="txtusernameregfirst" maxlength="10">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
                             <tr height="10%">
                                 <td class="tdwidth"></td>
-                                <td class="textstyle1">CONFIRM
+                                <td class="textstyle1">PASSWORD
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="txtconfirm" maxlength="10">
+                                    <input type="password" class="txtbxreg" id="txtpwregfirst" maxlength="10">
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                              <tr height="10%">
+                                <td class="tdwidth"></td>
+                                <td class="textstyle1">CONFIRM PASSWORD
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                            <tr height="10%">
+                                <td class="tdwidth"></td>
+                                <td class="tdwidth1">
+                                    <input type="password" class="txtbxreg" id="txtconfirmpwregfirst" maxlength="10">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -8407,8 +7900,8 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr>
                                 <td width="15%"></td>
                                 <td width="70%" align="center">
-                                    <img alt=" " src="public/images/EAslicing/submitbutton.png" class="regsubbtn"
-                                        onclick="return (PinValidation());">
+                                    <img alt=" " src="public/images/EAslicing/next.png" class="regsubbtn"
+                                        onclick="return (gotoRegister());">
                                 </td>
                                 <td width="15%"></td>
                             </tr>
@@ -8552,7 +8045,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="txtbxreg" id="txtfpcellno" maxlength="11">
+                                    <input type="number" class="txtbxreg" id="txtfpcellno" >
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -8612,16 +8105,9 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <br />
                     </td>
                 </tr>
-                <!-- Footer-->
-                <!--<tr class="bckbtn">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
             </table>
         </div>
-        <div data-position="fixed" data-role="footer">
+        <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
