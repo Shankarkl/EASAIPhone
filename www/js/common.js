@@ -8,7 +8,7 @@ var passowrd = '';
 var HomeID = '';
 var RoadID = '';
 var MedicalID = '';
-var legalID='';
+var legalID = '';
 var TravelID = '';
 var target = '';
 var spinner = '';
@@ -20,7 +20,7 @@ var spinner = '';
 ******************************************************************************/
 CallWebService = function (url, inputData, method, contentType, callback) {
     document.getElementById('loaddingimg').style.display = "block";
-   
+
     //document.getElementById('loaddingimg').style.display = "block";
     try {
         var xhr;
@@ -81,20 +81,20 @@ CallWebService = function (url, inputData, method, contentType, callback) {
         // alert("No network connection::checking::::::" + window.navigator.onLine);    
         if (inputData !== '') {
             if (window.navigator.onLine == true) {
-               
-               
+
+
                 xhr.send(inputData);
             } else {
-               
+
                 alert('No network connection,Please check your network connectivity!');
                 document.getElementById('loaddingimg').style.display = "none";
             }
         } else {
             if (window.navigator.onLine == true) {
-               
+
                 xhr.send(null);
             } else {
-                
+
                 alert('No network connection,Please check your network connectivity!');
                 document.getElementById('loaddingimg').style.display = "none";
             }
@@ -108,14 +108,14 @@ CallWebService = function (url, inputData, method, contentType, callback) {
 
 
 function gotoWallet() {
-   // alert("wallet");
+    // alert("wallet");
     if (checkLogin()) {
-       // alert("wallet");
+        // alert("wallet");
         prevPage = currentPage;
         $.mobile.changePage('#indexwallet', {
             transition: "none",
             reverse: false,
-            changeHash:false
+            changeHash: false
         });
         currentPage = 'indexwallet';
         pageData.push(currentPage);
@@ -128,28 +128,6 @@ function gotoWallet() {
 /*function gotoBenifit() {
 if (checkLogin()) {
 
-        $("#tbldisplaycategories tr").remove();
-        prevPage = currentPage;
-        $.mobile.changePage('#indexbenefit', {
-            transition: "none",
-            reverse: false,
-            changeHash: false
-        });
-        currentPage = 'indexbenefit';
-        pageData.push(currentPage);
-
-        $("#tbldisplaycategoriesbycid tr").remove();
-        $("#tbldisplaymerchantdeals tr").remove();
-        
-        setTimeout(function () { GetDisplayCategories(); }, 100);
-       
-       
-   }
-}*/
-function gotoBenifit() {
-if (checkLogin()) {
-document.getElementById('loaddingimg').style.display = "block";
- setTimeout(function () {
 $("#tbldisplaycategories tr").remove();
 prevPage = currentPage;
 $.mobile.changePage('#indexbenefit', {
@@ -163,91 +141,139 @@ pageData.push(currentPage);
 $("#tbldisplaycategoriesbycid tr").remove();
 $("#tbldisplaymerchantdeals tr").remove();
         
-//setTimeout(function () { GetDisplayCategories(); }, 100);
-GetDisplayCategories();
-},
-200);       
+setTimeout(function () { GetDisplayCategories(); }, 100);
+       
+       
 }
+}*/
+function gotoBenifit() {
+    if (checkLogin()) {
+        document.getElementById('loaddingimg').style.display = "block";
+        setTimeout(function () {
+            $("#tbldisplaycategories tr").remove();
+            prevPage = currentPage;
+            $.mobile.changePage('#indexbenefit', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'indexbenefit';
+            pageData.push(currentPage);
+
+            $("#tbldisplaycategoriesbycid tr").remove();
+            $("#tbldisplaymerchantdeals tr").remove();
+
+            //setTimeout(function () { GetDisplayCategories(); }, 100);
+            GetDisplayCategories();
+        },
+200);
+    }
 }
 
 /*function gotoProfile() {
    
-    if (checkLogin()) {
-        prevPage = currentPage;
-        document.getElementById('txtname').value = "";
-        document.getElementById('txtsname').value = "";
-        document.getElementById('txtemail').value = "";
-        document.getElementById('txtcellno').value = "";
-        document.getElementById('txtid').value = "";        
-        document.getElementById('txtnewpin').value = "";
-        document.getElementById('txtconpin').value = "";
+if (checkLogin()) {
+prevPage = currentPage;
+document.getElementById('txtname').value = "";
+document.getElementById('txtsname').value = "";
+document.getElementById('txtemail').value = "";
+document.getElementById('txtcellno').value = "";
+document.getElementById('txtid').value = "";        
+document.getElementById('txtnewpin').value = "";
+document.getElementById('txtconpin').value = "";
 
 
 
-        $.mobile.changePage('#indexprofile', {
-            transition: "none",
-            reverse: false,
-            changeHash: false
-        });
-        currentPage = 'indexprofile';
-        pageData.push(currentPage);
-        setTimeout(function () { GetProfileDetails(); }, 100);
+$.mobile.changePage('#indexprofile', {
+transition: "none",
+reverse: false,
+changeHash: false
+});
+currentPage = 'indexprofile';
+pageData.push(currentPage);
+setTimeout(function () { GetProfileDetails(); }, 100);
 
         
-    }
+}
 }*/
 
 function gotoProfile() {
 
     if (checkLogin()) {
- document.getElementById('loaddingimg').style.display = "block";
- setTimeout(function () {
-     prevPage = currentPage;
-     document.getElementById('txtname').value = "";
-     document.getElementById('txtsname').value = "";
-     document.getElementById('txtemail').value = "";
-     document.getElementById('txtcellno').value = "";
-     document.getElementById('txtid').value = "";
-     document.getElementById('txtnewpin').value = "";
-     document.getElementById('txtconpin').value = "";
+        document.getElementById('loaddingimg').style.display = "block";
+        setTimeout(function () {
+            prevPage = currentPage;
+            document.getElementById('txtname').value = "";
+            document.getElementById('txtsname').value = "";
+            document.getElementById('txtemail').value = "";
+            document.getElementById('txtcellno').value = "";
+            document.getElementById('txtid').value = "";
+            document.getElementById('txtnewpin').value = "";
+            document.getElementById('txtconpin').value = "";
 
 
 
-     $.mobile.changePage('#indexprofile', {
-         transition: "none",
-         reverse: false,
-         changeHash: false
-     });
-     currentPage = 'indexprofile';
-     pageData.push(currentPage);
-     //setTimeout(function () { GetProfileDetails(); }, 100);
-     GetProfileDetails();
- },
+            $.mobile.changePage('#indexprofile', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'indexprofile';
+            pageData.push(currentPage);
+            //setTimeout(function () { GetProfileDetails(); }, 100);
+            GetProfileDetails();
+        },
 200);
 
-        
-}
+
+    }
 }
 
 
-    function gotoHelp() {
-        if (checkLogin()) {
-            document.getElementById('loaddingimg').style.display = "block";
-            setTimeout(function () {
-                prevPage = currentPage;
-                $.mobile.changePage('#indexhelp', {
-                    transition: "none",
-                    reverse: false,
-                    changeHash: false
-                });
-                currentPage = 'indexhelp';
-                pageData.push(currentPage);
-                document.getElementById('loaddingimg').style.display = "none";
-            },
+function gotoHelp() {
+    if (checkLogin()) {
+        document.getElementById('loaddingimg').style.display = "block";
+        setTimeout(function () {
+            prevPage = currentPage;
+            $.mobile.changePage('#indexhelp', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'indexhelp';
+            pageData.push(currentPage);
+            document.getElementById('loaddingimg').style.display = "none";
+        },
 
         200);
-        }
     }
+}
+
+/*function gotoHelp() {
+    if (checkLogin()) {
+        document.getElementById('loaddingimg').style.display = "block";
+        setTimeout(function () {
+           // $("#tbldisplaycategories tr").remove();
+            prevPage = currentPage;
+            $.mobile.changePage('#indexhelp', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'indexhelp';
+            pageData.push(currentPage);
+
+           // $("#tbldisplaycategoriesbycid tr").remove();
+           // $("#tbldisplaymerchantdeals tr").remove();
+
+           
+            GetDisplayCategories();
+        },
+200);
+    }
+}*/
+
+
 
 
 
@@ -275,15 +301,15 @@ function gotoAddremove() {
         document.getElementById('txtcardamt').value = "";
         document.getElementById('txtcardholder').value = "";
         document.getElementById('txtcvv').value = "";
-            $.mobile.changePage('#addremove', {
-                transition: "none",
-                reverse: false,
-                changeHash: false
-            });
-            currentPage = 'addremove';
-            pageData.push(currentPage);
-        }
+        $.mobile.changePage('#addremove', {
+            transition: "none",
+            reverse: false,
+            changeHash: false
+        });
+        currentPage = 'addremove';
+        pageData.push(currentPage);
     }
+}
 function gotoEft() {
     if (checkLogin()) {
         prevPage = currentPage;
@@ -500,7 +526,7 @@ function gotocoupons() {
             jAlert("Please enter date", 'Info');
             return false;
         }
-        
+
         prevPage = currentPage;
         $.mobile.changePage('#transactionsuccessful', {
             transition: "none",
@@ -642,9 +668,9 @@ function login() {
 
     /*prevPage = currentPage;
     $.mobile.changePage('#log', {
-        transition: "none",
-        reverse: false,
-        changeHash: false
+    transition: "none",
+    reverse: false,
+    changeHash: false
     });
     currentPage = 'log';
     pageData.push(currentPage);
@@ -655,14 +681,14 @@ function login() {
 
 function goToMainIndex() {
 
-        prevPage = currentPage;
-        $.mobile.changePage('#indexPage', {
-            transition: "none",
-            reverse: true,
-            changeHash: false
-        });
-        currentPage = 'indexPage';
-        pageData.push(currentPage);
+    prevPage = currentPage;
+    $.mobile.changePage('#indexPage', {
+        transition: "none",
+        reverse: true,
+        changeHash: false
+    });
+    currentPage = 'indexPage';
+    pageData.push(currentPage);
 }
 
 function LoginValidation() {
@@ -705,10 +731,10 @@ function LoginValidation() {
     }
     //var checkbx = document.getElementById('chkremember');
 
-    try{
+    try {
         if (curimgsrc.indexOf('chkbxon.png') > 0) {
             localStorage.loginID = 1;
-        } else if(curimgsrc.indexOf('chkbx.png') > 0){
+        } else if (curimgsrc.indexOf('chkbx.png') > 0) {
             localStorage.loginID = 0;
         }
     }
@@ -716,8 +742,8 @@ function LoginValidation() {
         //alert(exp);
     }
     LogintoAllServices(cell, name, pw);
-   
-    
+
+
 }
 
 
@@ -789,9 +815,9 @@ function payfrnd() {
         return false;
     }
     /*jConfirm('You are about to pay R ' + amount + ' to ' + peernumber + '. Are you sure you wish to proceed?', '', function (r) {
-        if (r == true) {
-            Peertopeer("", amount, peernumber, "", "", 1);
-        }
+    if (r == true) {
+    Peertopeer("", amount, peernumber, "", "", 1);
+    }
     });*/
     openpopupPayfriend();
 }
@@ -864,7 +890,7 @@ function PayBills() {
         return false;
     }
 
-if (checkLogin()) {
+    if (checkLogin()) {
         prevPage = currentPage;
         $.mobile.changePage('#trdts', {
             transition: "none",
@@ -933,10 +959,10 @@ function PayCardBills() {
     }
 
     /* jConfirm('You are about to add a card. Are you sure you wish to proceed?', 'Confirm', function (r) {
-         if (r == true) {
-             TopUp(amount, card, cvv);
-         }
-     });*/
+    if (r == true) {
+    TopUp(amount, card, cvv);
+    }
+    });*/
     openpopupAddRemove();
 }
 
@@ -956,9 +982,9 @@ function payinstore() {
     }
 
     /*jConfirm('You are about to pay electricity bill. Are you sure you wish to proceed?', 'Confirm', function (r) {
-        if (r == true) {
-            ElectricityPurchase(met, amount);
-        }
+    if (r == true) {
+    ElectricityPurchase(met, amount);
+    }
     });*/
     openpopupPayStore();
 }
@@ -979,9 +1005,9 @@ function getUrlVars() {
 function checkLogin() {
     //localStorage.randgosessionid = 1;
 
-   // alert(localStorage.loginID + '::' + localStorage.randgosessionid);
+    // alert(localStorage.loginID + '::' + localStorage.randgosessionid);
     if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == "null") {
-       document.getElementById('txtLoginUserName').value = "";
+        document.getElementById('txtLoginUserName').value = "";
         document.getElementById('txtLoginPassword').value = "";
 
         prevPage = currentPage;
@@ -996,7 +1022,7 @@ function checkLogin() {
     } else {
         return true;
     }
-  // return true;
+    // return true;
 }
 
 function Transactions() {
@@ -1077,18 +1103,18 @@ function isLoggedIn() {
 /************************************profile*******************************/
 function validation() {
 
-    
+
     var pinnew = document.getElementById('txtnewpin').value;
     var pinconfirm = document.getElementById('txtconpin').value;
-    
+
     if (pinnew == "") {
         jAlert("Please enter the password!", "Info ");
         return false;
     }
     if (pinnew.length < 5) {
-       jAlert("Password must contain at least five characters!"," Info ");
-       return false;
-     }
+        jAlert("Password must contain at least five characters!", " Info ");
+        return false;
+    }
     if (pinconfirm == "") {
         jAlert("Please enter the confirm password!", " Info ");
         return false;
@@ -1101,7 +1127,7 @@ function validation() {
 }
 
 function GetProfileDetails() {
-//alert(localStorage.username);
+    //alert(localStorage.username);
     var profileinputdata = '';
     profileinputdata = '<?xml version="1.0" encoding="utf-8"?>';
     profileinputdata = profileinputdata + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
@@ -1115,7 +1141,7 @@ function GetProfileDetails() {
 }
 function GetProfileDetailsCallBack(responseData) {
     try {
-   // alert(responseData);
+        // alert(responseData);
         responseData = responseData.replace(/&gt;/gi, '>');
         responseData = responseData.replace(/&lt;/gi, '<');
         var parser = new DOMParser();
@@ -1136,14 +1162,14 @@ function GetProfileDetailsCallBack(responseData) {
         }
     }
     catch (exp) {
-   // alert("exp::::::profilepage:::::"+exp);
+        // alert("exp::::::profilepage:::::"+exp);
     }
 }
 /********************************Change password*****************************/
 function ProfileChangepassword(Newpin) {
     var changepinInputdata = "";
 
-  //  var oldpin = document.getElementById('oldpin').value;
+    //  var oldpin = document.getElementById('oldpin').value;
 
     changepinInputdata = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
     changepinInputdata = changepinInputdata + '<soap:Body>';
@@ -1157,36 +1183,36 @@ function ProfileChangepassword(Newpin) {
     CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=ChangePassword', changepinInputdata, 'POST', 'text/xml', ProfileChangepasswordCallback);
 }
 function ProfileChangepasswordCallback(responseData) {
- 
-   // alert("ProfileChangepasswordCallback:::::::::::" + responseData);
-             try {
-                 responseData = responseData.replace(/&gt;/gi, '>');
-                 responseData = responseData.replace(/&lt;/gi, '<');
-                 var parser = new DOMParser();
-                 if (responseData !== "") {
-                   var xmlDoc = parser.parseFromString(responseData, "text/xml");
 
-                   if (xmlDoc.getElementsByTagName("ChangePasswordResult")[0].textContent == 0) {
-                            jAlert("Your password has not changed.", 'Info');
-                            return false;
-                        } 
-                        else {
-                            jAlert("Your password changed successfully!", 'Info');
-                            localStorage.randgosessionid = null;
-                            localStorage.loginID = null;
-                            prevPage = currentPage;
-                            $.mobile.changePage('#indexPage', {
-                                transition: "none",
-                                reverse: false,
-                                changeHash: false
-                            });
-                            currentPage = 'indexPage';
-                            pageData.push(currentPage);                          
-                        }
-                 }
-             }
-             catch (exp) {
-             }
+    // alert("ProfileChangepasswordCallback:::::::::::" + responseData);
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+
+            if (xmlDoc.getElementsByTagName("ChangePasswordResult")[0].textContent == 0) {
+                jAlert("Your password has not changed.", 'Info');
+                return false;
+            }
+            else {
+                jAlert("Your password changed successfully!", 'Info');
+                localStorage.randgosessionid = null;
+                localStorage.loginID = null;
+                prevPage = currentPage;
+                $.mobile.changePage('#indexPage', {
+                    transition: "none",
+                    reverse: false,
+                    changeHash: false
+                });
+                currentPage = 'indexPage';
+                pageData.push(currentPage);
+            }
+        }
+    }
+    catch (exp) {
+    }
 }
 /*******************************Accept Terms and Conditions**********/
 function gototerms() {
@@ -1248,219 +1274,244 @@ function PinValidation() {
     inputData = inputData + '</soap:Body>';
     inputData = inputData + '</soap:Envelope>';
     CallWebService('http://118.139.160.226:8090/EuropeAssistStaticDataWS.asmx?op=RegisterUser', inputData, 'POST', 'text/xml', RegisterUserCallback);
-   // ImportMembers(name, sname, pw, email, cell, id);
+    // ImportMembers(name, sname, pw, email, cell, id);
 }
 
 /***********18/10/2013*************/
 function checkremember() {
-        $("#NOproductDiv").hide();
+    $("#NOproductDiv").hide();
+    $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+    $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+    $(".trheight3").hide();
+
+    if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == "null" || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == " " || localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
+        //alert("i" + localStorage.loginID);
+        localStorage.randgosessionid = null;
+
+        localStorage.gettravel = 0;
+        localStorage.getlegal = 0;
+        localStorage.getroad = 0;
+        localStorage.getmedical = 0;
+        localStorage.gethome = 0;
+
+        prevPage = currentPage;
+        $.mobile.changePage('#indexPage', {
+            transition: "none",
+            reverse: true,
+            changeHash: false
+        });
+        currentPage = 'indexPage'; //'indexservice'  indexwallet indexPage;
+        pageData.push(currentPage);
+
+
+    }
+    else if (localStorage.loginID == 1) {
+        gotoService();
+
+    }
+}
+
+/* ****** ASHA DEC 3/12/2013 ******* */
+
+function EALoginValidation() {
+
+    var name = document.getElementById('txtLoginUserName').value;
+    var pw = document.getElementById('txtLoginPassword').value;
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var checkbox1 = document.getElementById('chk');
+    var pattern = /^\d{10}$/;
+    var pwd = /^\d{5}$/;
+    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    var logunameexp = /^[A-Za-z ']*$/;
+    var curimgsrc = document.getElementById('chkremember').src;
+
+    if (name == "") {
+        jAlert("Please enter the Username!", 'Info');
+        document.txtusername.focus();
+        return false;
+    }
+    else if (pw == "") {
+        jAlert("Please enter Password!", 'Info');
+        document.txtpassword.focus();
+        return false;
+    }
+
+    try {
+        if (curimgsrc.indexOf('chkbxon.png') > 0) {
+            localStorage.loginID = 1;
+        } else if (curimgsrc.indexOf('chkbx.png') > 0) {
+            localStorage.loginID = 0;
+        }
+    }
+    catch (exp) {
+        //  alert(exp);
+    }
+
+    MYLogintoAllServices(name, pw);
+
+}
+
+
+// function MYLogintoAllServices(username, password,tguid) {
+function MYLogintoAllServices(username, password) {
+    var eaLoginInputData = "";
+    eaLoginInputData = '<?xml version="1.0" encoding="utf-8"?>';
+    eaLoginInputData = eaLoginInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+    eaLoginInputData = eaLoginInputData + '<soap:Body>';
+    eaLoginInputData = eaLoginInputData + '<MobileUserLogin xmlns="http://tempuri.org/">';
+    eaLoginInputData = eaLoginInputData + '<Username>' + username + '</Username>';
+    eaLoginInputData = eaLoginInputData + '<Password>' + password + '</Password>';
+    eaLoginInputData = eaLoginInputData + '</MobileUserLogin>';
+    eaLoginInputData = eaLoginInputData + '</soap:Body>';
+    eaLoginInputData = eaLoginInputData + '</soap:Envelope>';
+
+    CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=MobileUserLogin', eaLoginInputData, 'POST', 'text/xml', MYLogintoAllServicesCallBack);
+}
+function MYLogintoAllServicesCallBack(responseData) {
+    try {
+
         $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
         $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
         $(".trheight3").hide();
+        $("#NOproductDiv").hide();
 
-        if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == "null" || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == " " || localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
-            //alert("i" + localStorage.loginID);
-            localStorage.randgosessionid = null;
-
-            localStorage.gettravel = 0;
-            localStorage.getlegal = 0;
-            localStorage.getroad = 0;
-            localStorage.getmedical = 0;
-            localStorage.gethome = 0;
-
-            prevPage = currentPage;
-            $.mobile.changePage('#indexPage', {
-                transition: "none",
-                reverse: true,
-                changeHash: false
-            });
-            currentPage = 'indexPage'; //'indexservice'  indexwallet indexPage;
-            pageData.push(currentPage);
-
-
-        }
-        else if (localStorage.loginID == 1) {
-            gotoService();
-
-        }
-    }
-
-    /* ****** ASHA DEC 3/12/2013 ******* */
-
-    function EALoginValidation() {
-
-        var name = document.getElementById('txtLoginUserName').value;
-        var pw = document.getElementById('txtLoginPassword').value;
-        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        var checkbox1 = document.getElementById('chk');
-        var pattern = /^\d{10}$/;
-        var pwd = /^\d{5}$/;
-        var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-        var logunameexp = /^[A-Za-z ']*$/;
-        var curimgsrc = document.getElementById('chkremember').src;
-     
-        if (name == "") {
-            jAlert("Please enter the Username!", 'Info');
-            document.txtusername.focus();
-            return false;
-        }
-        else if (pw == "") {
-            jAlert("Please enter Password!", 'Info');
-            document.txtpassword.focus();
-            return false;
-        }
-
-        try {
-            if (curimgsrc.indexOf('chkbxon.png') > 0) {
-                localStorage.loginID = 1;
-            } else if (curimgsrc.indexOf('chkbx.png') > 0) {
-                localStorage.loginID = 0;
-            }
-        }
-        catch (exp) {
-          //  alert(exp);
-        }
-
-        MYLogintoAllServices(name, pw);
-
-    }
-    
-
-   // function MYLogintoAllServices(username, password,tguid) {
-    function MYLogintoAllServices(username, password) {
-        var eaLoginInputData = "";
-        eaLoginInputData = '<?xml version="1.0" encoding="utf-8"?>';
-        eaLoginInputData = eaLoginInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
-        eaLoginInputData = eaLoginInputData + '<soap:Body>';
-        eaLoginInputData = eaLoginInputData + '<MobileUserLogin xmlns="http://tempuri.org/">';
-        eaLoginInputData = eaLoginInputData + '<Username>' + username + '</Username>';
-        eaLoginInputData = eaLoginInputData + '<Password>' + password + '</Password>';
-        eaLoginInputData = eaLoginInputData + '</MobileUserLogin>';
-        eaLoginInputData = eaLoginInputData + '</soap:Body>';
-        eaLoginInputData = eaLoginInputData + '</soap:Envelope>';
-       
- CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=MobileUserLogin', eaLoginInputData, 'POST', 'text/xml', MYLogintoAllServicesCallBack);
-    }
-    function MYLogintoAllServicesCallBack(responseData) {
-        try {
-
-            $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-            $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-            $(".trheight3").hide();
-            $("#NOproductDiv").hide();
-
-            responseData = responseData.replace(/&gt;/gi, '>');
-            responseData = responseData.replace(/&lt;/gi, '<');
-            var parser = new DOMParser();
-            if (responseData !== "") {
-                xmlDoc = parser.parseFromString(responseData, "text/xml");
-                if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0] == undefined) {
-                    localStorage.guid = xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0].nodeValue;
-                    localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
- localStorage.SurName = xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("LastName")[0].childNodes[0].nodeValue;
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0] == undefined) {
+                localStorage.guid = xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0].nodeValue;
+                localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
+                localStorage.SurName = xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("LastName")[0].childNodes[0].nodeValue;
                 localStorage.EmailID = xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0].nodeValue;
                 localStorage.CellNumber = xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0].nodeValue;
-
-                    var nodval = xmlDoc.getElementsByTagName("SchemaUrl");
-                    for (i = 0; i < nodval.length; i++) {
-                        if (i == 0) {
-                            localStorage.imgUrlHome = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
-                        } else if (i == 1) {
-                            localStorage.imgUrlMedical = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
-                        } else if (i == 2) {
-                            localStorage.imgUrlRoad = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
-                        } else if (i == 3) {
-                            localStorage.imgUrlLegal = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
-                        } else if (i == 4) {
-                            localStorage.imgUrlTravel = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
-                        }
+                var nodval = xmlDoc.getElementsByTagName("SchemaUrl");
+                for (i = 0; i < nodval.length; i++) {
+                    if (i == 0) {
+                        localStorage.imgUrlHome = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
+                    } else if (i == 1) {
+                        localStorage.imgUrlMedical = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
+                    } else if (i == 2) {
+                        localStorage.imgUrlRoad = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
+                    } else if (i == 3) {
+                        localStorage.imgUrlLegal = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
+                    } else if (i == 4) {
+                        localStorage.imgUrlTravel = 'http://118.139.160.226:8078/uploadimages/' + nodval[i].childNodes[0].nodeValue;
                     }
+                }
 
 
-                    if (xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == null) {
+                if (xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == null) {
 
-                        localStorage.gethome = 0;
+                    localStorage.gethome = 0;
 
-                    }
-                    else {
-                        localStorage.gethome = 1;
-                        HomeID = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
-                        var productid = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
-                        var productname = " Home Assistance ";
-                        $("#hme,#assisth").show();
+                }
+                else {
+                    localStorage.gethome = 1;
+                    HomeID = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
+                    var productid = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Home Assistance ";
+                    $("#hme,#assisth").show();
 
-                        document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
+                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
 
-                        $("#homeseperator").removeClass("middlecontent3");
-                        document.getElementById('divhm').className = "panelcollapsed";
-                        $("#divhm").show(); //whole div red
-                    }
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divhm').className = "panelcollapsed";
+                    $("#divhm").show(); //whole div red
+                }
 
-                    if (xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == null) {
-                        localStorage.getmedical = 0;
-                    }
-                    else {
-                        MedicalID = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
-                        localStorage.getmedical = 2;
-                        var productid = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
-                        var productname = " Medical Assistance ";
-                        $("#medical,#medtb").show();
-                        document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
-                        $("#homeseperator").removeClass("middlecontent3");
-                        document.getElementById('divmm').className = "panelcollapsed";
-                        $("#divmm").show();
-                    }
-                    if (xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == null) {
-                        localStorage.getroad = 0;
-                    }
-                    else {
+                if (xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == null) {
+                    localStorage.getmedical = 0;
+                }
+                else {
+                    MedicalID = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.getmedical = 2;
+                    var productid = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Medical Assistance ";
+                    $("#medical,#medtb").show();
+                    document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divmm').className = "panelcollapsed";
+                    $("#divmm").show();
+                }
+                if (xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == null) {
+                    localStorage.getroad = 0;
+                }
+                else {
 
-                        RoadID = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
-                        localStorage.getroad = 3;
-                        var productid = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
-                        var productname = " Roadside Assistance ";
-                        $("#roadas,#rdtb").show();
-                        document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                    RoadID = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.getroad = 3;
+                    var productid = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Roadside Assistance ";
+                    $("#roadas,#rdtb").show();
+                    document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
 
-                        $("#homeseperator").removeClass("middlecontent3");
-                        document.getElementById('divrd').className = "panelcollapsed";
-                        $("#divrd").show();
-                    }
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divrd').className = "panelcollapsed";
+                    $("#divrd").show();
+                }
 
-                    if (xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == null) {
+                if (xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == null) {
 
-                        localStorage.getlegal = 0;
-                    }
-                    else {
-                        legalID = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
-                        localStorage.getlegal = 4;
-                        var productid = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
-                        var productname = " Legal Assistance";
-                        $("#legalas,#letb").show();
+                    localStorage.getlegal = 0;
+                }
+                else {
+                    legalID = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.getlegal = 4;
+                    var productid = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Legal Assistance";
+                    $("#legalas,#letb").show();
 
-                        document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
-                        $("#homeseperator").removeClass("middlecontent3");
-                        document.getElementById('divle').className = "panelcollapsed";
-                        $("#divle").show();
-                    }
+                    document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divle').className = "panelcollapsed";
+                    $("#divle").show();
+                }
 
-                    if (xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == null) {
+                if (xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == null) {
 
-                        localStorage.gettravel = 0;
-                    }
-                    else {
-                        TravelID = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
-                        localStorage.gettravel = 5;
-                        var productid = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
-                        var productname = "Travel Assistance";
-                        $("#travelas,#trtb").show();
-                        document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
-                        $("#homeseperator").removeClass("middlecontent3");
-                        document.getElementById('divtr').className = "panelcollapsed";
-                        $("#divtr").show();
+                    localStorage.gettravel = 0;
+                }
+                else {
+                    TravelID = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.gettravel = 5;
+                    var productid = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
+                    var productname = "Travel Assistance";
+                    $("#travelas,#trtb").show();
+                    document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divtr').className = "panelcollapsed";
+                    $("#divtr").show();
 
-                    } $(".trheight3").show();
-                    // LOGIN TO RANDGO SERVICES
+                } $(".trheight3").show();
+                // LOGIN TO RANDGO SERVICES
+                var randgoInputData = '';
+                randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
+                randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+                randgoInputData = randgoInputData + '<soap:Body>';
+                randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">';
+                randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>';
+                randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>';
+                randgoInputData = randgoInputData + '</Login>';
+                randgoInputData = randgoInputData + '</soap:Body>';
+                randgoInputData = randgoInputData + '</soap:Envelope>';
+                CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew);
+
+            } //if
+            else {
+                if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue == 'NO MOBILEUSERGUID') {
+
+                    localStorage.gettravel = 0;
+                    localStorage.getlegal = 0;
+                    localStorage.getroad = 0;
+                    localStorage.getmedical = 0;
+                    localStorage.gethome = 0;
+
+                    localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
+                    $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+                    $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+                    $(".trheight3").hide();
                     var randgoInputData = '';
                     randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
                     randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
@@ -1472,631 +1523,822 @@ function checkremember() {
                     randgoInputData = randgoInputData + '</soap:Body>';
                     randgoInputData = randgoInputData + '</soap:Envelope>';
                     CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew);
-
-                } //if
-                else {
-                    if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue == 'NO MOBILEUSERGUID') {
-
-                        localStorage.gettravel = 0;
-                        localStorage.getlegal = 0;
-                        localStorage.getroad = 0;
-                        localStorage.getmedical = 0;
-                        localStorage.gethome = 0;
-
-                        localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
-                        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-                        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-                        $(".trheight3").hide();
-                        var randgoInputData = '';
-                        randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
-                        randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
-                        randgoInputData = randgoInputData + '<soap:Body>';
-                        randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">';
-                        randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>';
-                        randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>';
-                        randgoInputData = randgoInputData + '</Login>';
-                        randgoInputData = randgoInputData + '</soap:Body>';
-                        randgoInputData = randgoInputData + '</soap:Envelope>';
-                        CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew);
-                    } else {
-                        jAlert(xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue, 'Info');
-                        return false;
-                    }
-                }
-            }
-
-        }
-
-        catch (exp) {
-        }
-    }
-
-    function RandoLoginCallBackNew(responseData) {
-        try {
-            responseData = responseData.replace(/&gt;/gi, '>');
-            responseData = responseData.replace(/&lt;/gi, '<');
-            var parser = new DOMParser();
-            if (responseData !== "") {
-
-                var xmlDoc = parser.parseFromString(responseData, "text/xml");
-                if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
-                    localStorage.randgosessionid = xmlDoc.getElementsByTagName("sessionid")[0].textContent;
-                    prevPage = currentPage;
-                    $.mobile.changePage('#indexservice', {
-                        transition: "none",
-                        reverse: false,
-                        changeHash: false
-                    });
-                    currentPage = 'indexservice';
-                    pageData.push(currentPage);
-
-                 if ((localStorage.gettravel == 0 && localStorage.getlegal == 0 && localStorage.getroad == 0 && localStorage.getmedical == 0 && localStorage.gethome == 0) || (localStorage.gettravel == null && localStorage.getlegal == null && localStorage.getroad == null && localStorage.getmedical == null && localStorage.gethome == null)) {
-
-
-                        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-                        $(".trheight3").hide();
-                        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-
-                        $("#NOproductDiv").show();
-                    }
-
-                }
-            }
-            else {
-                jAlert('No Data Found', 'Info');
-                return false;
-            }
-
-        } catch (exp) {
-        }
-    }
-       
-
-    /***********DEC9th ************/
-    function gotoService() {
-
-        $("#NOproductDiv").hide();
-        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-        $(".trheight3").hide();
-
-        if (checkLogin()) {
-            //alert(localStorage.gettravel + '::' + localStorage.getlegal + '::' + localStorage.getroad + '::' + localStorage.getmedical + '::' + localStorage.gethome);
-            if ((localStorage.gettravel == 0 && localStorage.getlegal == 0 && localStorage.getroad == 0 && localStorage.getmedical == 0 && localStorage.gethome == 0) || (localStorage.gettravel == null && localStorage.getlegal == null && localStorage.getroad == null && localStorage.getmedical == null && localStorage.gethome == null)) {
-
-                $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-                $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-                $(".trheight3").hide();
-                $("#NOproductDiv").show();
-            }
-            else {
-
-                $("#NOproductDiv").hide();
-                $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-                $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-                $(".trheight3").show();
-                // alert("gotoService");
-                if (localStorage.gethome == 1) {
-                    //alert("localStorage.gethome");
-                    $("#hme,#assisth").show();
-                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
-                    $("#homeseperator").removeClass("middlecontent3");
-                    document.getElementById('divhm').className = "panelcollapsed";
-                    $("#divhm").show(); //whole div red
-
-                }
-                if (localStorage.getmedical == 2) {
-                    //alert("localStorage.getmedical");
-                    $("#medical,#medtb").show();
-                    document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
-                    $("#homeseperator").removeClass("middlecontent3");
-                    document.getElementById('divmm').className = "panelcollapsed";
-                    $("#divmm").show();
-
-                }
-                if (localStorage.getroad == 3) {
-                    // alert("localStorage.getroad");
-                    $("#roadas,#rdtb").show();
-                    document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
-                    $("#homeseperator").removeClass("middlecontent3");
-                    document.getElementById('divrd').className = "panelcollapsed";
-                    $("#divrd").show();
-
-                }
-                if (localStorage.getlegal == 4) {
-                    // alert("localStorage.getlegal");
-                    $("#legalas,#letb").show();
-                    document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
-                    $("#homeseperator").removeClass("middlecontent3");
-                    document.getElementById('divle').className = "panelcollapsed";
-                    $("#divle").show();
-
-                }
-                if (localStorage.gettravel == 5) {
-                    // alert("localStorage.gettravel");
-                    $("#travelas,#trtb").show();
-                    document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
-                    $("#homeseperator").removeClass("middlecontent3");
-                    document.getElementById('divtr').className = "panelcollapsed";
-                    $("#divtr").show();
-
-                }
-
-            }
-            
-            prevPage = currentPage;
-            $.mobile.changePage('#indexservice', {
-                transition: "none",
-                reverse: false,
-                changeHash: false
-            });
-            currentPage = 'indexservice';
-            pageData.push(currentPage);
-
-        }
-    }
-
-
-    
-        /*****************************************************************************************************
-        * PURPOSE :CreatePleaseCallMeRequestNew(Services indexervice.html)
-        * AUTHOR : Asha
-        * CREATED DATE : 03 DEC 2013
-        ******************************************************************************************************/
-
-
-    function CreatePleaseCallMeRequestNew(type) {
-                var productiID = '';
-                if (type == 'home') {
-                    productiID = HomeID;
-                } else if (type == 'medical') {
-                    productiID = MedicalID;
-                } else if (type == 'road') {
-                    productiID = RoadID;
-                } else if (type == 'legal') {
-                    productiID = legalID;
-                } else if (type == 'travel') {
-                    productiID = TravelID;
                 } else {
-                productiID = '735c8b67-37c4-4f72-af94-105a26e22d2c';
-                }
-
-
-            //  alert("::::localStorage.guid:::::tag::: tokenGuid::::::" + localStorage.guid);
-            var europInputData = "";
-            europInputData = '<?xml version="1.0" encoding="utf-8"?>';
-            europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">';
-            europInputData = europInputData + '<soapenv:Header/>';
-            europInputData = europInputData + '<soapenv:Body>';
-            europInputData = europInputData + '<api:CreatePleaseCallMeRequest>';
-            europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>';
-            europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>';
-            europInputData = europInputData + '<api:testOnly>true</api:testOnly>';
-            europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>';
-            europInputData = europInputData + '<api:latitude>0</api:latitude>';
-            europInputData = europInputData + '<api:longitude>0</api:longitude>';
-            europInputData = europInputData + '</api:CreatePleaseCallMeRequest>';
-            europInputData = europInputData + '</soapenv:Body>';
-            europInputData = europInputData + '</soapenv:Envelope>';
-            CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
-           // alert("europInputData:::::::::" + europInputData);
-        }
-
-        function CreatePleaseCallMeRequestCallbackNew(responseData) {
-            // alert(":::::CreatePleaseCallMeRequestCallback::responseData:::::::" + responseData);
-
-            responseData = responseData.replace(/&gt;/gi, '>');
-            responseData = responseData.replace(/&lt;/gi, '<');
-            var parser = new DOMParser();
-            if (responseData !== "") {
-                xmlDoc = parser.parseFromString(responseData, "text/xml");
-                xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue;
-                if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue != 0) {
-                    jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue);
-                } else {
-                    jAlert('Thank you for contacting us, we will call you soon.');
+                    jAlert(xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue, 'Info');
+                    return false;
                 }
             }
         }
-        /****top logo img click ****/
 
-        function gohome() {
-            prevPage = currentPage;
-            $.mobile.changePage('#indexPage', {
-                transition: "none",
-                reverse: false,
-                changeHash: false
-            });
-            currentPage = 'indexPage';
-            pageData.push(currentPage);
-        }
+    }
 
-      
+    catch (exp) {
+    }
+}
 
-        /*function RegFirstValidation() {
-            var regfirstuname = document.getElementById('txtusernameregfirst').value;
-            var regfirstpw = document.getElementById('txtpwregfirst').value;
-            var regfirstconfirmpw = document.getElementById('txtconfirmpwregfirst').value;
-           
-        }*/
+function RandoLoginCallBackNew(responseData) {
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
 
-        /*****************************************************************************************************
-        * PURPOSE :Registration
-        * AUTHOR : Asha
-        * CREATED DATE : 14 DEC 2013
-        ******************************************************************************************************/
-
-
-        function UserRegistration() {
-            prevPage = currentPage;
-            var Name = document.getElementById('txtRegName').value;
-            var SurName = document.getElementById('txtRegSurName').value;
-            var EmailID = document.getElementById('txtRegEmail').value;
-            var CellNumber = document.getElementById('txtRegCell').value;
-            var IdNumber = document.getElementById('txtRegIDNo').value;
-            //var Password = document.getElementById('txtRegPassword').value;
-            var policyno = document.getElementById('txtRegPolicyNumber').value;
-            var unameexp = /^[A-Za-z ']*$/;
-            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            var checkbox1 = document.getElementById('chk');
-             var pattern = /^\d{11}$/;
-          // var pattern = ^(\d{9}|\d{11})$;
-            var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-            var curimgsource = document.getElementById('chkAcceptTerms').src;
-            var idexp = /^(\d{13})$/;
-            //var pwd = ^[0-9]{5}$
-            var pwd = /^\d{5}$/;
-
-            if (Name == "") {
-                jAlert("Please enter the First Name!", 'Info');
-                return false;
-            }
-            else if (!Name.match(unameexp)) {
-                jAlert("Please enter valid First Name!", 'Info');
-                return false;
-            }
-            else if (SurName == "") {
-                jAlert("Please enter the Surname!", 'Info');
-                return false;
-            }
-            else if (!SurName.match(unameexp)) {
-                jAlert("Please enter valid Surname!", 'Info');
-                return false;
-            }
-            else if (EmailID == "") {
-                jAlert("Please enter the Email id!", 'Info');
-                return false;
-            }
-            else if (EmailID.indexOf("@", 0) < 0) {
-                jAlert("Please enter valid Email id!", 'Info');
-                return false;
-            }
-
-            else if (EmailID.indexOf(".", 0) < 0) {
-                jAlert("Please enter a valid Email id!", 'Info');
-                return false;
-            }
-
-            else if (CellNumber == "") {
-                jAlert("Please enter the Cellphone number!", 'Info');
-                return false;
-            }
-           /* else if (CellNumber.length < '10') {
-                jAlert("CellNumber must contain at least 10 digits!", 'Info');
-            }
-            else if (CellNumber.length > '15') {
-                jAlert("Please enter cellNumber with in  15 digits!", 'Info');
-            } && CellNumber.length > '11'*/
-            else if (CellNumber.length < '11') {
-                jAlert("Please enter 11 digit Cell number!", 'Info');
-            }
-            else if (CellNumber.length > '11') {
-                jAlert("Please enter 11 digit Cell number!", 'Info');
-            }
-
-            else if (IdNumber == "") {
-                jAlert("Please enter the Id number!", 'Info');
-                return false;
-            }
-            else if (!IdNumber.match(idexp)) {
-                jAlert("Please enter 13 digit Id number!", 'Info');
-                return false;
-            }
-            else if (policyno == "") {
-                jAlert("Please enter the Policy number!", 'Info');
-                return false;
-            }
-            else if (policyno.length < 8) {
-                // jAlert("hello" + Password);
-                jAlert("Policy number must contain at least 8 numbers!");
-            }
-            else if (curimgsource.indexOf('acceptedbutton.png') < 0) {
-                jAlert("Please Accept Terms and Conditions!", 'Info');
-                return false;
-            }
-            else {
-                RegisterUserNew(Name, SurName, userName, CellNumber, passowrd, IdNumber, EmailID, policyno);
-            }
-
-        }
-
-        function RegisterUserNew(Name, SurName, userName, CellNumber, passowrd, IdNumber, EmailID, policyno) {
-            try {
-                localStorage.SurName = SurName;
-                localStorage.EmailID = EmailID;
-                localStorage.CellNumber = CellNumber;
-            var registeruserdata = "";
-            registeruserdata = '<?xml version="1.0" encoding="utf-8"?>';
-            registeruserdata = registeruserdata + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
-            registeruserdata = registeruserdata + '<soap:Body>';
-            registeruserdata = registeruserdata + '<MobileUserRegister xmlns="http://tempuri.org/">';
-            registeruserdata = registeruserdata + '<Name>' + Name + '</Name>';
-            registeruserdata = registeruserdata + '<Surname>' + SurName + '</Surname>';
-            registeruserdata = registeruserdata + '<username>' + userName + '</username>';
-            registeruserdata = registeruserdata + '<CellNumber>' + CellNumber + '</CellNumber>';
-            registeruserdata = registeruserdata + '<Password>' + passowrd + '</Password>';
-            registeruserdata = registeruserdata + '<IdNumber>' + IdNumber + '</IdNumber>';
-            registeruserdata = registeruserdata + '<EmailID>' + EmailID + '</EmailID>';
-            registeruserdata = registeruserdata + '<policyno>' + policyno + '</policyno>';
-            registeruserdata = registeruserdata + '</MobileUserRegister>';
-            registeruserdata = registeruserdata + '</soap:Body>';
-            registeruserdata = registeruserdata + '</soap:Envelope>'; 
-            CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=MobileUserRegister', registeruserdata, 'POST', 'text/xml', RegisterUserCallback);
-           
-        } catch (exp) {
-            //alert(exp);
-        }
-
-        }
-
-
-        function RegisterUserCallback(responseData) {
-            try {
-               // alert(responseData);
-                responseData = responseData.replace(/&gt;/gi, '>');
-                responseData = responseData.replace(/&lt;/gi, '<');
-                var parser = new DOMParser();
-                if (responseData !== "") {
-                    var xmlDoc = parser.parseFromString(responseData, "text/xml");
-                     if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != null && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != "" && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != undefined) {
-
-                        if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0].textContent == 0) {
-                            jAlert("User already registered.", 'Info');
-                            return false;
-                        } else {
-                            var usernameparse = xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0].textContent;
-                           // alert(usernameparse);
-                            prevPage = currentPage;
-                            $.mobile.changePage('#indexPage', {
-                                transition: "none",
-                                reverse: false,
-                                changeHash: false
-                            });
-                            currentPage = 'indexPage';
-                            pageData.push(currentPage);
-                            jAlert('Registration successfull, Thank you for registering.');
-                        }
-                    } else {
-                        jAlert("Register Failed.", 'Info');
-                        return false;
-                    }
-                }
-            } catch (exp) {
-              //  alert(exp);
-            }
-        }
-        function oncheck() {
-            var curimgsource = document.getElementById('chkAcceptTerms').src;
-
-            if (curimgsource.indexOf('acceptedbutton.png') >= 0) {
-                document.getElementById('chkAcceptTerms').src = "public/images/checkbox.png";
-            } else {
-                document.getElementById('chkAcceptTerms').src = "public/images/EAslicing/acceptedbutton.png";
-            }
-        }
-        /*********logcheck*********************/
-        function logcheck() {
-            var curimgsrc = document.getElementById('chkremember').src;
-
-            if (curimgsrc.indexOf('chkbx.png') >= 0) {
-                document.getElementById('chkremember').src = "public/images/EAslicing/chkbxon.png";
-            } else {
-                document.getElementById('chkremember').src = "public/images/EAslicing/chkbx.png";
-            }
-        }
-
-        function gotoRegFirstPage() {
-
-
-            document.getElementById('txtusernameregfirst').value = "";
-            document.getElementById('txtpwregfirst').value = "";
-            document.getElementById('txtconfirmpwregfirst').value = "";
-
-            prevPage = currentPage;
-            $.mobile.changePage('#RegFstPage', {
-                transition: "none",
-                reverse: false,
-                changeHash: false
-            });
-            currentPage = 'RegFstPage';
-            pageData.push(currentPage);
-            
-        }
-
-        //txtusernameregfirst
-
-
-
-
-        /*******Second time click clear all fields in page & navigate ****/
-
-        function gotoRegister() {
-
-            var regfirstuname = document.getElementById('txtusernameregfirst').value;
-            var regfirstpw = document.getElementById('txtpwregfirst').value;
-            var regfirstconfirmpw = document.getElementById('txtconfirmpwregfirst').value;
-            var unameexp = /^[A-Za-z ']*$/;
-
-            if (regfirstuname == "") {
-                jAlert("Please enter the Username!", 'Info');
-                return false;
-            }
-            else if (!regfirstuname.match(unameexp)) {
-                jAlert("Please enter valid Username!", 'Info');
-                return false;
-            }
-
-            if (regfirstpw == "") {
-                jAlert("Please enter the Password!", 'Info');
-                return false;
-            }
-            //alert(regfirstpw.length);
-            if (regfirstpw.length < 5) {
-                // jAlert("hello" + Password);
-                jAlert("Password must contain at least five characters!");
-                return false;
-            }
-
-            if (regfirstconfirmpw == "") {
-                jAlert("Please enter Confirm Password!", 'Info');
-                return false;
-            }
-            if (regfirstconfirmpw != regfirstpw) {
-                jAlert("Passwords typed do not match, please re-enter your passwords!", 'Info');
-                return false;
-
-            }
-            else {
-               
-                userName = regfirstuname;
-                passowrd = regfirstpw;
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
+                localStorage.randgosessionid = xmlDoc.getElementsByTagName("sessionid")[0].textContent;
                 prevPage = currentPage;
-                document.getElementById('txtRegName').value = "";
-                document.getElementById('txtRegSurName').value = "";
-                document.getElementById('txtRegUserName').value = "";
-                document.getElementById('txtRegPassword').value = "";
-                document.getElementById('txtRegEmail').value = "";
-                document.getElementById('txtRegCell').value = "";
-                document.getElementById('txtRegIDNo').value = "";
-                document.getElementById('txtRegPolicyNumber').value = "";
-                var curimgsource = document.getElementById('chkAcceptTerms').src;
-                document.getElementById('chkAcceptTerms').src = "public/images/checkbox.png";
-                $.mobile.changePage('#reg', {
+                $.mobile.changePage('#indexservice', {
                     transition: "none",
                     reverse: false,
                     changeHash: false
                 });
-                currentPage = 'reg';
+                currentPage = 'indexservice';
                 pageData.push(currentPage);
+
+                if ((localStorage.gettravel == 0 && localStorage.getlegal == 0 && localStorage.getroad == 0 && localStorage.getmedical == 0 && localStorage.gethome == 0) || (localStorage.gettravel == null && localStorage.getlegal == null && localStorage.getroad == null && localStorage.getmedical == null && localStorage.gethome == null)) {
+
+
+                    $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+                    $(".trheight3").hide();
+                    $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+
+                    $("#NOproductDiv").show();
+                }
+
             }
-            
+        }
+        else {
+            jAlert('No Data Found', 'Info');
+            return false;
+        }
+
+    } catch (exp) {
+    }
+}
+
+
+/***********DEC9th ************/
+function gotoService() {
+
+    $("#NOproductDiv").hide();
+    $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+    $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+    $(".trheight3").hide();
+
+    if (checkLogin()) {
+        //alert(localStorage.gettravel + '::' + localStorage.getlegal + '::' + localStorage.getroad + '::' + localStorage.getmedical + '::' + localStorage.gethome);
+        if ((localStorage.gettravel == 0 && localStorage.getlegal == 0 && localStorage.getroad == 0 && localStorage.getmedical == 0 && localStorage.gethome == 0) || (localStorage.gettravel == null && localStorage.getlegal == null && localStorage.getroad == null && localStorage.getmedical == null && localStorage.gethome == null)) {
+
+            $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+            $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+            $(".trheight3").hide();
+            $("#NOproductDiv").show();
+        }
+        else {
+
+            $("#NOproductDiv").hide();
+            $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+            $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+            $(".trheight3").show();
+            // alert("gotoService");
+            if (localStorage.gethome == 1) {
+                //alert("localStorage.gethome");
+                $("#hme,#assisth").show();
+                document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
+                $("#homeseperator").removeClass("middlecontent3");
+                document.getElementById('divhm').className = "panelcollapsed";
+                $("#divhm").show(); //whole div red
+
+            }
+            if (localStorage.getmedical == 2) {
+                //alert("localStorage.getmedical");
+                $("#medical,#medtb").show();
+                document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+                $("#homeseperator").removeClass("middlecontent3");
+                document.getElementById('divmm').className = "panelcollapsed";
+                $("#divmm").show();
+
+            }
+            if (localStorage.getroad == 3) {
+                // alert("localStorage.getroad");
+                $("#roadas,#rdtb").show();
+                document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                $("#homeseperator").removeClass("middlecontent3");
+                document.getElementById('divrd').className = "panelcollapsed";
+                $("#divrd").show();
+
+            }
+            if (localStorage.getlegal == 4) {
+                // alert("localStorage.getlegal");
+                $("#legalas,#letb").show();
+                document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                $("#homeseperator").removeClass("middlecontent3");
+                document.getElementById('divle').className = "panelcollapsed";
+                $("#divle").show();
+
+            }
+            if (localStorage.gettravel == 5) {
+                // alert("localStorage.gettravel");
+                $("#travelas,#trtb").show();
+                document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                $("#homeseperator").removeClass("middlecontent3");
+                document.getElementById('divtr').className = "panelcollapsed";
+                $("#divtr").show();
+
             }
 
-        /*****************************************************************************************************
-        * PURPOSE :ForgotPassword
-        * AUTHOR : Asha
-        * CREATED DATE : 14 DEC 2013
-        ******************************************************************************************************/
+        }
 
-      
-        function ForgotPasswordValidation() {
-            if (document.getElementById('txtfpcellno').value == "") {
+        prevPage = currentPage;
+        $.mobile.changePage('#indexservice', {
+            transition: "none",
+            reverse: false,
+            changeHash: false
+        });
+        currentPage = 'indexservice';
+        pageData.push(currentPage);
 
-                jAlert("Please enter Cell number!", 'Info');
-               // return false;
-            } 
-            /*else if (document.getElementById('txtfpcellno').value.length < '10') {
-                jAlert("CellNumber must contain at least 10 digits!", 'Info');
-            } 
-            else if (document.getElementById('txtfpcellno').value.length > '15') {
-                jAlert("Please enter cellNumber with in  15 digits!", 'Info');
-            }*/
-            else if (document.getElementById('txtfpcellno').value.length < '11') {
+    }
+}
+
+
+
+/*****************************************************************************************************
+* PURPOSE :CreatePleaseCallMeRequestNew(Services indexervice.html)
+* AUTHOR : Asha
+* CREATED DATE : 03 DEC 2013
+******************************************************************************************************/
+
+
+function CreatePleaseCallMeRequestNew(type) {
+    var productiID = '';
+    if (type == 'home') {
+        productiID = HomeID;
+    } else if (type == 'medical') {
+        productiID = MedicalID;
+    } else if (type == 'road') {
+        productiID = RoadID;
+    } else if (type == 'legal') {
+        productiID = legalID;
+    } else if (type == 'travel') {
+        productiID = TravelID;
+    } else {
+        productiID = '735c8b67-37c4-4f72-af94-105a26e22d2c';
+    }
+
+
+    //  alert("::::localStorage.guid:::::tag::: tokenGuid::::::" + localStorage.guid);
+    var europInputData = "";
+    europInputData = '<?xml version="1.0" encoding="utf-8"?>';
+    europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">';
+    europInputData = europInputData + '<soapenv:Header/>';
+    europInputData = europInputData + '<soapenv:Body>';
+    europInputData = europInputData + '<api:CreatePleaseCallMeRequest>';
+    europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>';
+    europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>';
+    europInputData = europInputData + '<api:testOnly>true</api:testOnly>';
+    europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>';
+    europInputData = europInputData + '<api:latitude>0</api:latitude>';
+    europInputData = europInputData + '<api:longitude>0</api:longitude>';
+    europInputData = europInputData + '</api:CreatePleaseCallMeRequest>';
+    europInputData = europInputData + '</soapenv:Body>';
+    europInputData = europInputData + '</soapenv:Envelope>';
+    CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
+    // alert("europInputData:::::::::" + europInputData);
+}
+
+function CreatePleaseCallMeRequestCallbackNew(responseData) {
+    // alert(":::::CreatePleaseCallMeRequestCallback::responseData:::::::" + responseData);
+
+    responseData = responseData.replace(/&gt;/gi, '>');
+    responseData = responseData.replace(/&lt;/gi, '<');
+    var parser = new DOMParser();
+    if (responseData !== "") {
+        xmlDoc = parser.parseFromString(responseData, "text/xml");
+        xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue;
+        if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue != 0) {
+            jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue);
+        } else {
+            jAlert('Thank you for contacting us, we will call you soon.');
+        }
+    }
+}
+/****top logo img click ****/
+
+function gohome() {
+    prevPage = currentPage;
+    $.mobile.changePage('#indexPage', {
+        transition: "none",
+        reverse: false,
+        changeHash: false
+    });
+    currentPage = 'indexPage';
+    pageData.push(currentPage);
+}
+
+
+
+/*function RegFirstValidation() {
+var regfirstuname = document.getElementById('txtusernameregfirst').value;
+var regfirstpw = document.getElementById('txtpwregfirst').value;
+var regfirstconfirmpw = document.getElementById('txtconfirmpwregfirst').value;
            
-                jAlert("Please enter 11 digit Cell number!", 'Info');
-            }
-             else if (document.getElementById('txtfpcellno').value.length > '11') {
-            jAlert("Please enter 11 digit Cell number!", 'Info');
+}*/
+
+/*****************************************************************************************************
+* PURPOSE :Registration
+* AUTHOR : Asha
+* CREATED DATE : 14 DEC 2013
+******************************************************************************************************/
+
+
+function UserRegistration() {
+    prevPage = currentPage;
+    var Name = document.getElementById('txtRegName').value;
+    var SurName = document.getElementById('txtRegSurName').value;
+    var EmailID = document.getElementById('txtRegEmail').value;
+    var CellNumber = document.getElementById('txtRegCell').value;
+    var IdNumber = document.getElementById('txtRegIDNo').value;
+    //var Password = document.getElementById('txtRegPassword').value;
+    var policyno = document.getElementById('txtRegPolicyNumber').value;
+    var unameexp = /^[A-Za-z ']*$/;
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var checkbox1 = document.getElementById('chk');
+    var pattern = /^\d{11}$/;
+    // var pattern = ^(\d{9}|\d{11})$;
+    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    var curimgsource = document.getElementById('chkAcceptTerms').src;
+    var idexp = /^(\d{13})$/;
+    //var pwd = ^[0-9]{5}$
+    var pwd = /^\d{5}$/;
+
+    if (Name == "") {
+        jAlert("Please enter the First Name!", 'Info');
+        return false;
+    }
+    else if (!Name.match(unameexp)) {
+        jAlert("Please enter valid First Name!", 'Info');
+        return false;
+    }
+    else if (SurName == "") {
+        jAlert("Please enter the Surname!", 'Info');
+        return false;
+    }
+    else if (!SurName.match(unameexp)) {
+        jAlert("Please enter valid Surname!", 'Info');
+        return false;
+    }
+    else if (EmailID == "") {
+        jAlert("Please enter the Email id!", 'Info');
+        return false;
+    }
+    else if (EmailID.indexOf("@", 0) < 0) {
+        jAlert("Please enter valid Email id!", 'Info');
+        return false;
+    }
+
+    else if (EmailID.indexOf(".", 0) < 0) {
+        jAlert("Please enter a valid Email id!", 'Info');
+        return false;
+    }
+
+    else if (CellNumber == "") {
+        jAlert("Please enter the Cellphone number!", 'Info');
+        return false;
+    }
+    /* else if (CellNumber.length < '10') {
+    jAlert("CellNumber must contain at least 10 digits!", 'Info');
+    }
+    else if (CellNumber.length > '15') {
+    jAlert("Please enter cellNumber with in  15 digits!", 'Info');
+    } && CellNumber.length > '11'*/
+    else if (CellNumber.length < '11') {
+        jAlert("Please enter 11 digit Cell number!", 'Info');
+    }
+    else if (CellNumber.length > '11') {
+        jAlert("Please enter 11 digit Cell number!", 'Info');
+    }
+
+    else if (IdNumber == "") {
+        jAlert("Please enter the Id number!", 'Info');
+        return false;
+    }
+    else if (!IdNumber.match(idexp)) {
+        jAlert("Please enter 13 digit Id number!", 'Info');
+        return false;
+    }
+    else if (policyno == "") {
+        jAlert("Please enter the Policy number!", 'Info');
+        return false;
+    }
+    else if (policyno.length < 8) {
+        // jAlert("hello" + Password);
+        jAlert("Policy number must contain at least 8 numbers!");
+    }
+    else if (curimgsource.indexOf('acceptedbutton.png') < 0) {
+        jAlert("Please Accept Terms and Conditions!", 'Info');
+        return false;
+    }
+    else {
+        RegisterUserNew(Name, SurName, userName, CellNumber, passowrd, IdNumber, EmailID, policyno);
+    }
+
+}
+
+function RegisterUserNew(Name, SurName, userName, CellNumber, passowrd, IdNumber, EmailID, policyno) {
+    try {
+        localStorage.Name = Name;
+        localStorage.SurName = SurName;
+        localStorage.EmailID = EmailID;
+        localStorage.CellNumber = CellNumber;
+        var registeruserdata = "";
+        registeruserdata = '<?xml version="1.0" encoding="utf-8"?>';
+        registeruserdata = registeruserdata + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+        registeruserdata = registeruserdata + '<soap:Body>';
+        registeruserdata = registeruserdata + '<MobileUserRegister xmlns="http://tempuri.org/">';
+        registeruserdata = registeruserdata + '<Name>' + Name + '</Name>';
+        registeruserdata = registeruserdata + '<Surname>' + SurName + '</Surname>';
+        registeruserdata = registeruserdata + '<username>' + userName + '</username>';
+        registeruserdata = registeruserdata + '<CellNumber>' + CellNumber + '</CellNumber>';
+        registeruserdata = registeruserdata + '<Password>' + passowrd + '</Password>';
+        registeruserdata = registeruserdata + '<IdNumber>' + IdNumber + '</IdNumber>';
+        registeruserdata = registeruserdata + '<EmailID>' + EmailID + '</EmailID>';
+        registeruserdata = registeruserdata + '<policyno>' + policyno + '</policyno>';
+        registeruserdata = registeruserdata + '</MobileUserRegister>';
+        registeruserdata = registeruserdata + '</soap:Body>';
+        registeruserdata = registeruserdata + '</soap:Envelope>';
+        CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=MobileUserRegister', registeruserdata, 'POST', 'text/xml', RegisterUserCallback);
+
+    } catch (exp) {
+        //alert(exp);
+    }
+
+}
+
+
+function RegisterUserCallback(responseData) {
+    try {
+        // alert(responseData);
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != null && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != "" && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != undefined) {
+
+                if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0].textContent == 0) {
+                    jAlert("User already registered.", 'Info');
+                    return false;
+                } else {
+                    var usernameparse = xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0].textContent;
+                    // alert(usernameparse);
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexPage', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'indexPage';
+                    pageData.push(currentPage);
+                    jAlert('Registration successfull, Thank you for registering.');
+                }
             } else {
-
-                ForgotPasswordService(document.getElementById('txtfpcellno').value);
+                jAlert("Register Failed.", 'Info');
+                return false;
             }
-
         }
+    } catch (exp) {
+        //  alert(exp);
+    }
+}
+function oncheck() {
+    var curimgsource = document.getElementById('chkAcceptTerms').src;
+
+    if (curimgsource.indexOf('acceptedbutton.png') >= 0) {
+        document.getElementById('chkAcceptTerms').src = "public/images/checkbox.png";
+    } else {
+        document.getElementById('chkAcceptTerms').src = "public/images/EAslicing/acceptedbutton.png";
+    }
+}
+/*********logcheck*********************/
+function logcheck() {
+    var curimgsrc = document.getElementById('chkremember').src;
+
+    if (curimgsrc.indexOf('chkbx.png') >= 0) {
+        document.getElementById('chkremember').src = "public/images/EAslicing/chkbxon.png";
+    } else {
+        document.getElementById('chkremember').src = "public/images/EAslicing/chkbx.png";
+    }
+}
+
+function gotoRegFirstPage() {
+
+
+    document.getElementById('txtusernameregfirst').value = "";
+    document.getElementById('txtpwregfirst').value = "";
+    document.getElementById('txtconfirmpwregfirst').value = "";
+
+    prevPage = currentPage;
+    $.mobile.changePage('#RegFstPage', {
+        transition: "none",
+        reverse: false,
+        changeHash: false
+    });
+    currentPage = 'RegFstPage';
+    pageData.push(currentPage);
+
+}
+
+//txtusernameregfirst
 
 
 
-        function ForgotPasswordService(fpcellno)
-        {
-            var forgotpwdata = "";
-            forgotpwdata = '<?xml version="1.0" encoding="utf-8"?>';
-            forgotpwdata = forgotpwdata + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
-            forgotpwdata = forgotpwdata + '<soap:Body>';
-            forgotpwdata = forgotpwdata + '<ForgotPassword xmlns="http://tempuri.org/">';
-            forgotpwdata = forgotpwdata + '<cellnumber>' + fpcellno + '</cellnumber>';
-            forgotpwdata = forgotpwdata + '</ForgotPassword>';
-            forgotpwdata = forgotpwdata + '</soap:Body>';
-            forgotpwdata = forgotpwdata + '</soap:Envelope>';
 
-            CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
-          //  CallWebService('http://197.96.19.188/EASAWebservice/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
+/*******Second time click clear all fields in page & navigate ****/
+
+function gotoRegister() {
+
+    var regfirstuname = document.getElementById('txtusernameregfirst').value;
+    var regfirstpw = document.getElementById('txtpwregfirst').value;
+    var regfirstconfirmpw = document.getElementById('txtconfirmpwregfirst').value;
+    var unameexp = /^[A-Za-z ']*$/;
+
+    if (regfirstuname == "") {
+        jAlert("Please enter the Username!", 'Info');
+        return false;
+    }
+    else if (!regfirstuname.match(unameexp)) {
+        jAlert("Please enter valid Username!", 'Info');
+        return false;
+    }
+
+    if (regfirstpw == "") {
+        jAlert("Please enter the Password!", 'Info');
+        return false;
+    }
+    //alert(regfirstpw.length);
+    if (regfirstpw.length < 5) {
+        // jAlert("hello" + Password);
+        jAlert("Password must contain at least five characters!");
+        return false;
+    }
+
+    if (regfirstconfirmpw == "") {
+        jAlert("Please enter Confirm Password!", 'Info');
+        return false;
+    }
+    if (regfirstconfirmpw != regfirstpw) {
+        jAlert("Passwords typed do not match, please re-enter your passwords!", 'Info');
+        return false;
+
+    }
+    else {
+
+        userName = regfirstuname;
+        passowrd = regfirstpw;
+        prevPage = currentPage;
+        document.getElementById('txtRegName').value = "";
+        document.getElementById('txtRegSurName').value = "";
+        document.getElementById('txtRegUserName').value = "";
+        document.getElementById('txtRegPassword').value = "";
+        document.getElementById('txtRegEmail').value = "";
+        document.getElementById('txtRegCell').value = "";
+        document.getElementById('txtRegIDNo').value = "";
+        document.getElementById('txtRegPolicyNumber').value = "";
+        var curimgsource = document.getElementById('chkAcceptTerms').src;
+        document.getElementById('chkAcceptTerms').src = "public/images/checkbox.png";
+        $.mobile.changePage('#reg', {
+            transition: "none",
+            reverse: false,
+            changeHash: false
+        });
+        currentPage = 'reg';
+        pageData.push(currentPage);
+    }
+
+}
+
+/*****************************************************************************************************
+* PURPOSE :ForgotPassword
+* AUTHOR : Asha
+* CREATED DATE : 14 DEC 2013
+******************************************************************************************************/
+
+
+function ForgotPasswordValidation() {
+    if (document.getElementById('txtfpcellno').value == "") {
+
+        jAlert("Please enter Cell number!", 'Info');
+        // return false;
+    }
+    /*else if (document.getElementById('txtfpcellno').value.length < '10') {
+    jAlert("CellNumber must contain at least 10 digits!", 'Info');
+    } 
+    else if (document.getElementById('txtfpcellno').value.length > '15') {
+    jAlert("Please enter cellNumber with in  15 digits!", 'Info');
+    }*/
+    else if (document.getElementById('txtfpcellno').value.length < '11') {
+
+        jAlert("Please enter 11 digit Cell number!", 'Info');
+    }
+    else if (document.getElementById('txtfpcellno').value.length > '11') {
+        jAlert("Please enter 11 digit Cell number!", 'Info');
+    } else {
+
+        ForgotPasswordService(document.getElementById('txtfpcellno').value);
+    }
+
+}
+
+
+
+function ForgotPasswordService(fpcellno) {
+    var forgotpwdata = "";
+    forgotpwdata = '<?xml version="1.0" encoding="utf-8"?>';
+    forgotpwdata = forgotpwdata + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+    forgotpwdata = forgotpwdata + '<soap:Body>';
+    forgotpwdata = forgotpwdata + '<ForgotPassword xmlns="http://tempuri.org/">';
+    forgotpwdata = forgotpwdata + '<cellnumber>' + fpcellno + '</cellnumber>';
+    forgotpwdata = forgotpwdata + '</ForgotPassword>';
+    forgotpwdata = forgotpwdata + '</soap:Body>';
+    forgotpwdata = forgotpwdata + '</soap:Envelope>';
+
+    CallWebService('http://118.139.160.226:8079/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
+    //  CallWebService('http://197.96.19.188/EASAWebservice/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
+}
+
+
+function ForgotPasswordServiceCallback(responseData) {
+    //alert("ForgotPasswordServiceCallback:::::::::::" + responseData);
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+
+            if (xmlDoc.getElementsByTagName("ForgotPasswordResult")[0].textContent == 0) {
+                jAlert("Please Enter Valid CellNumber.", 'Info');
+                return false;
+            }
+            else {
+                jAlert("Thank you,We have sent you an Email with your password", 'Info');
+                prevPage = currentPage;
+                $.mobile.changePage('#indexPage', {
+                    transition: "none",
+                    reverse: false,
+                    changeHash: false
+                });
+                currentPage = 'indexPage';
+                pageData.push(currentPage);
+
+            }
         }
+    }
+    catch (exp) {
+    }
+}
 
-
-         function ForgotPasswordServiceCallback(responseData)
-         {
-             //alert("ForgotPasswordServiceCallback:::::::::::" + responseData);
-             try {
-                 responseData = responseData.replace(/&gt;/gi, '>');
-                 responseData = responseData.replace(/&lt;/gi, '<');
-                 var parser = new DOMParser();
-                 if (responseData !== "") {
-                   var xmlDoc = parser.parseFromString(responseData, "text/xml");
-
-                   if (xmlDoc.getElementsByTagName("ForgotPasswordResult")[0].textContent == 0) {
-                            jAlert("Please Enter Valid CellNumber.", 'Info');
-                            return false;
-                        } 
-                        else {
-                               jAlert("Thank you,We have sent you an Email with your password", 'Info');
-                                prevPage = currentPage;
-                                $.mobile.changePage('#indexPage', {
-                                    transition: "none",
-                                    reverse: false,
-                                    changeHash: false
-                                });
-                                currentPage = 'indexPage';
-                                pageData.push(currentPage);
-                            
-                        }
-                 }
-             }
-             catch (exp) {
-             }
-          }
-
-          /*******Second time click clear all fields in page & navigate ****/ 
+/*******Second time click clear all fields in page & navigate ****/
 
 function gotoForgotPassword() {
     prevPage = currentPage;
     document.getElementById('txtfpcellno').value = "";
     $.mobile.changePage('#ForgotPassword', {
-    transition: "none",
-    reverse: false,
-    changeHash: false
+        transition: "none",
+        reverse: false,
+        changeHash: false
     });
     currentPage = 'ForgotPassword';
     pageData.push(currentPage);
 }
 
 
-  
+
 function ShowExitDialog() {
     //alert(localStorage.loginID + '::' + localStorage.randgosessionid);
     if (localStorage.loginID == 0 || localStorage.loginID == null || localStorage.loginID == '' || localStorage.loginID == 'null') {
         localStorage.randgosessionid = null;
-      }
-      device.exitApp();
-  }
+    }
+    device.exitApp();
+}
+
+/*function gotoHelp() {
+//if (checkLogin()) {
+var qtnvalue = 0;
+//document.getElementById('loaddingimg').style.display = "block";
+//setTimeout(function () {
+// $("#tblgethelp tr").remove();
+prevPage = currentPage;
+$.mobile.changePage('#indexhelp', {
+transition: "none",
+reverse: false,
+changeHash: false
+});
+currentPage = 'indexhelp';
+pageData.push(currentPage);
+
+// $("#tbldisplaycategoriesbycid tr").remove();
+// $("#tbldisplaymerchantdeals tr").remove();
+
+            
+ //DisplayHelpDetails(qtnvalue);
+//},
+//200);
+//}
+}*/
+
+/*****************************************************************************************************
+* PURPOSE :DisplayHelpDetails(indexhelp)
+* AUTHOR : ASHA
+* CREATED DATE : Jan 13 2014
+******************************************************************************************************/
+
+function DisplayHelpDetails(qtnvalue) {
+    var helpInputData = '';
+    helpInputData = '<?xml version="1.0" encoding="utf-8"?>';
+    helpInputData = helpInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+    helpInputData = helpInputData + '<soap:Body>';
+    helpInputData = helpInputData + '<GetFAQs xmlns="http://tempuri.org/">'
+    helpInputData = helpInputData + '<FAQID> ' + qtnvalue + ' </FAQID>'
+    helpInputData = helpInputData + '</GetFAQs>'
+    helpInputData = helpInputData + '</soap:Body>';
+    helpInputData = helpInputData + '</soap:Envelope>';
+
+    CallWebService('http://192.168.2.112:8079/EuropeAssistStaticDataWS.asmx', helpInputData, 'POST', 'text/xml', DisplayHelpDetailsCallback);
+
+}
+
+function DisplayHelpDetailsCallback(responseData) {
+
+    if (checkLogin()) {
+        try {
+            responseData = responseData.replace(/&gt;/gi, '>');
+            responseData = responseData.replace(/&lt;/gi, '<');
+            var parser = new DOMParser();
+            if (responseData !== "") {
+                xmlDoc = parser.parseFromString(responseData, "text/xml");
+                /*if (xmlDoc.getElementsByTagName("message")[0].textContent === "Your session has timed out. Please open a new session.") {
+                localStorage.randgosessionid = null;
+                jAlert('Your session has expired. Please login again.', 'Info');
+                prevPage = currentPage;
+                $.mobile.changePage('#log', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+                });
+                currentPage = 'log';
+                pageData.push(currentPage);
+                }*/
+
+                var gethelp = document.getElementById('tblgethelp');
+                gethelp.innerHTML = null;
+                if (xmlDoc.getElementsByTagName("FAQs") != null && xmlDoc.getElementsByTagName("FAQs").length > 0) {
+                    var FAQlist = xmlDoc.getElementsByTagName("FAQName");
+                    // var FAQid = xmlDoc.getElementsByTagName("FAQID");
+                    for (var i = 0; i < FAQlist.length; i++) {
+                        var rowcount = gethelp.rows.length;
+                        // alert("row:::::::" + rowcount)
+                        var row = gethelp.insertRow(rowcount);
+                        // alert("row:::::::" + row)
+                        gethelp.setAttribute('class', 'qtn');
+                       // row.setAttribute('class', 'qtn');
+                        // var helpid = xmlDoc.getElementsByTagName('FAQID')[i].nodeValue;
+                        var helpid = xmlDoc.getElementsByTagName('FAQs')[i].getAttribute("FAQID");
+                        alert("helpid:::::" + helpid)
+                        row.setAttribute('id', 'row' + helpid);
+
+                        var cellBlank = row.insertCell(0);
+                        cellBlank.setAttribute('class', 'regcol1');
+
+                        var cell = row.insertCell(1);
+                        var lblhelp = document.createElement("label");
+                        //lblhelp.setAttribute('class', 'nameclass');
+                        cell.appendChild(lblhelp);
+                        cell.setAttribute('class', 'textstyle3 qtnbot');
+                        lblhelp.innerHTML = xmlDoc.getElementsByTagName("FAQName")[i].textContent + '::' + helpid;
+
+                        var celimg = row.insertCell(2);
+                        var img = document.createElement("img");
+                        img.src = 'public/images/EAslicing/rightsymbolarrow.png';
+                        //img.setAttribute('class', 'regcol1 accord');
+                        celimg.setAttribute('align', 'left');
+                        celimg.setAttribute('class', 'regcol1 accord');
+                        celimg.appendChild(img);
+
+                        var cellBlanklast = row.insertCell(3);
+                        cellBlanklast.setAttribute('class', 'regcol1');
+
+                        row.onclick = function () {
+                            alert("FAQid:::::::" + this.id)
+                            var FAQhelpID = helpid;
+                            FAQhelpID = FAQhelpID.replace('row', '');
+                            alert("FAQhelpID:::::::" + FAQhelpID)
+                            //$("#tbldisplaycategoriesbycid tr").remove();
+                            prevPage = currentPage;
+                            $.mobile.changePage('#qtnanswers', {
+                                transition: "none",
+                                reverse: false,
+                                changeHash: false
+                            });
+                            currentPage = 'qtnanswers';
+                            pageData.push(currentPage);
+
+                            // setTimeout(function () { DisplayMerchantsByCategories(categoryID); }, 100);
+                            DisplayQuestionAnswers(FAQhelpID);
+
+
+
+                        }
+                    }
+                }
+            }
+        } catch (exp) {
+            alert("exp:::::::::::" + exp)
+        }
+
+    }
+}
+
+
+/*****************************************************************************************************
+* PURPOSE :DisplayQuestionAnswers(helpID)
+* AUTHOR : ASHA
+* CREATED DATE : Jan 13 2014
+******************************************************************************************************/
+function DisplayQuestionAnswers(FAQhelpID) {
+
+    var helpInputData = '';
+    helpInputData = '<?xml version="1.0" encoding="utf-8"?>';
+    helpInputData = helpInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+    helpInputData = helpInputData + '<soap:Body>';
+    helpInputData = helpInputData + '<GetFAQs xmlns="http://tempuri.org/">'
+    helpInputData = helpInputData + '<FAQID>' + FAQhelpID + '</FAQID>'
+    helpInputData = helpInputData + '</GetFAQs>'
+    helpInputData = helpInputData + '</soap:Body>';
+    helpInputData = helpInputData + '</soap:Envelope>';
+    alert("helpInputData :::QA:::INPUT" + helpInputData);
+    CallWebService('http://192.168.2.112:8079/EuropeAssistStaticDataWS.asmx', helpInputData, 'POST', 'text/xml', DisplayQuestionAnswersCallback);
+
+}
+
+
+function DisplayQuestionAnswersCallback(responseData) {
+    alert("questions:::ANS:::::::" + responseData);
+    if (checkLogin()) {
+        try {
+
+            responseData = responseData.replace(/&gt;/gi, '>');
+            responseData = responseData.replace(/&lt;/gi, '<');
+            var parser = new DOMParser();
+            if (responseData !== "") {
+                xmlDoc = parser.parseFromString(responseData, "text/xml");
+
+                var gethelpquestionansbyhelpid = document.getElementById('tblgethelpquestionans');
+                gethelpquestionansbyhelpid.innerHTML = null;
+                if (xmlDoc.getElementsByTagName("FAQName") != null && xmlDoc.getElementsByTagName("FAQName").length > 0) {
+                    var questionlist = xmlDoc.getElementsByTagName("FAQName");
+                    var answerlist = xmlDoc.getElementsByTagName("Description");
+                    alert("questionlist:::::" + questionlist);
+                    alert("answerlist:::::" + answerlist);
+                    /*for (var i = 0; i < questionlist.length; i++) {
+                    var rowcount = gethelpquestionansbyhelpid.rows.length;
+                    alert("::::::::::rc:::::"+rowcount);
+                    var row = gethelpquestionansbyhelpid.insertRow(rowcount);
+                    // row.setAttribute('class', 'tdbgc');
+                    alert("::::::::::row:::::" + row);
+                    var faqid = xmlDoc.getElementsByTagName('FAQID')[i].getAttribute("id");
+                    row.setAttribute('id', 'row' + faqid);
+
+
+                    var firstrowquestion = row.insertrow(0);
+                    var lblhelpquestion = document.createElement("label");
+                    //lblhelp.setAttribute('class', 'nameclass');
+                    firstrowquestion.appendChild(lblhelpquestion);
+                    firstrowquestion.setAttribute('class', 'textstyle3 qtnbot');
+                    lblhelpquestion.innerHTML = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
+
+                    var rowheight = row.insertrow(1);
+                    row.setAttribute('class', 'rowheight');
+
+
+                    var secondrowans = row.insertrow(2);
+                    var lblhelpans = document.createElement("label");
+                    //lblhelp.setAttribute('class', 'nameclass');
+                    secondrowans.appendChild(lblhelpans);
+                    secondrowans.setAttribute('class', 'qtncontent');
+                    lblhelpans.innerHTML = xmlDoc.getElementsByTagName("answerlist")[i].textContent;
+                          
+                    }*/
+                }
+
+            }
+        } catch (exp) {
+            alert("exp:::::::::" + exp);
+        }
+
+
+    }
+}
 
 

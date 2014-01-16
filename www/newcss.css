@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     visibility: hidden;
+   
 }
 a
 {
@@ -393,6 +394,8 @@ a
     /*padding-left:5px;
     padding-right:5px;*/
 }
+
+
 .transaction
 {
     color: #FFFFFF;
@@ -1291,10 +1294,8 @@ width: 75%;
     background-image: url('public/images/EAslicing/bgrepete.png');
     height: 100%;
 }
-.loadingmaindiv
+/*.loadingmaindiv
 {
-    /*left: 0;
-    top: 0;*/
     opacity:0.5;
     filter:alpha(opacity =50);
     display:none;
@@ -1312,6 +1313,29 @@ width: 75%;
     z-index: 1000;
     height: 32px;
     width: 32px;
+}*/
+
+ 
+.loadingmaindiv
+{
+    left: 0;
+    top: 0;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background-color:#152C3F; 
+    opacity:0.9;
+}
+.loadingimgdiv
+{
+    left: 45%;
+    top: 40%;
+    position: relative;
+    z-index: 1000;
+    height: 50px;
+    width: 50px;
 }
 .accord
 {
@@ -1701,4 +1725,23 @@ ol.frames li img {
 .ui-bar-a
 {
     border:0px solid black !important;
+}
+
+.ui-page {
+    -webkit-backface-visibility: hidden !important;
+}
+
+/* To avoid Flicker in iphone added this css & transition none instead of slide 
+.ui-page {
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+}
+.ui-page,
+.ui-page > div {
+  -webkit-transform: translateZ(0); 
+}*/
+
+.rowheight
+{
+    height:5px!important;
 }
