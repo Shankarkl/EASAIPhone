@@ -329,23 +329,23 @@ function GetDisplayMerchantDealsCallback(responseData) {
 
                             img.onclick = function () {
                                 // alert("img click dealsms:::::::::" + dealsms)
-                                alert(localStorage.username);
-                                alert(localStorage.SurName);
-                                alert(localStorage.EmailID);
-                                alert(localStorage.CellNumber);
+                              //  alert(localStorage.username);
+                               // alert(localStorage.SurName);
+                               // alert(localStorage.EmailID);
+                               // alert(localStorage.CellNumber);
                                 var dealsID = this.id.replace('row', '');
                                 var offertype = this.name.replace('offerType', '');
                                 if (offertype == "url-based") {
-                                    alert("offertype:::::" + offertype + '::' + dealsms);
+                                    //alert("offertype:::::" + offertype + '::' + dealsms);
 
                                     GetRequestUrlDeal(dealsID);
                                 }
                                 if (offertype == "email-based") {
-                                    alert("offertype:::::" + offertype + '::' + dealsms);
+                                   // alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestEmailDeal(dealsID);
                                 }
                                 if (offertype == "sms-based") {
-                                    alert("offertype:::::" + offertype + '::' + dealsms);
+                                   // alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestSMSDeal(dealsID);
                                 }
                                 /* if (offertype == "print-based") {
@@ -353,11 +353,11 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                 }*/
 
                                 if ((offertype == "print-based") && (dealsms == 0)) {
-                                    alert("offertype:::::" + offertype + '::' + dealsms);
+                                   // alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestPrintDeal(dealsID);
                                 }
                                 else if ((offertype == "print-based") && (dealsms == 1)) {
-                                    alert("offertype:::::" + offertype + '::' + dealsms);
+                                  //  alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestSMSDeal(dealsID);
                                 }
 
@@ -586,7 +586,7 @@ function GetRequestSMSDeal(dealID) {
 }
 
 function GetRequestSMSDealCallback(responseData) {
-    alert("RequestSMSDeal:::response::::::::::" + responseData);
+   // alert("RequestSMSDeal:::response::::::::::" + responseData);
     if (checkLogin()) {
         try {
            // alert("Display Merchant Deals:::::::::::::" + responseData);
