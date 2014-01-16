@@ -23,9 +23,8 @@ function GetDisplayCategories() {
 
 function GetDisplayCategoriesCallback(responseData) {
     if (checkLogin()) {
-        try {
-           // alert("DisplayCategories:::::::::::::" + responseData);
-            responseData = responseData.replace(/&gt;/gi, '>');
+    try {
+     responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
             if (responseData !== "") {
@@ -92,7 +91,10 @@ function GetDisplayCategoriesCallback(responseData) {
                             });
                             currentPage = 'merchantnames';
                             pageData.push(currentPage);
-                            GetDisplayMerchantsByCategories(categoryID);
+
+                            setTimeout(function () { GetDisplayMerchantsByCategories(categoryID); }, 100);
+                          
+                          
 
                         }
                     }
@@ -101,6 +103,7 @@ function GetDisplayCategoriesCallback(responseData) {
         } catch (exp) {
 
         }
+        
     }
 }
 
@@ -129,7 +132,7 @@ function GetDisplayMerchantsByCategories(categoryID) {
 
 function GetDisplayMerchantsByCategoriesCallback(responseData) {
     if (checkLogin()) {
-        try {
+    try {
            // alert("DisplayMerchantsByCategories:::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
@@ -207,7 +210,9 @@ function GetDisplayMerchantsByCategoriesCallback(responseData) {
                             });
                             currentPage = 'goeat';
                             pageData.push(currentPage);
-                            GetDisplayMerchantDeals(merchantId);
+                            setTimeout(function () { GetDisplayMerchantDeals(merchantId); }, 100);
+
+                           
                         }
                     }
                 }
@@ -218,6 +223,8 @@ function GetDisplayMerchantsByCategoriesCallback(responseData) {
         } catch (exp) {
 
         }
+
+
     }
 }
 
@@ -247,6 +254,7 @@ function GetDisplayMerchantDeals(merchantID) {
 
 function GetDisplayMerchantDealsCallback(responseData) {
     if (checkLogin()) {
+   
         try {
           //  alert("Display Merchant Deals:::::::::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
@@ -320,19 +328,24 @@ function GetDisplayMerchantDealsCallback(responseData) {
                             celimg.appendChild(img);
 
                             img.onclick = function () {
-                               // alert("img click dealsms:::::::::" + dealsms)
+                                // alert("img click dealsms:::::::::" + dealsms)
+                                alert(localStorage.username);
+                                alert(localStorage.SurName);
+                                alert(localStorage.EmailID);
+                                alert(localStorage.CellNumber);
                                 var dealsID = this.id.replace('row', '');
                                 var offertype = this.name.replace('offerType', '');
                                 if (offertype == "url-based") {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
+                                    alert("offertype:::::" + offertype + '::' + dealsms);
+
                                     GetRequestUrlDeal(dealsID);
                                 }
                                 if (offertype == "email-based") {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
+                                    alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestEmailDeal(dealsID);
                                 }
                                 if (offertype == "sms-based") {
-                                  //  alert("offertype:::::" + offertype + '::' + dealsms);
+                                    alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestSMSDeal(dealsID);
                                 }
                                 /* if (offertype == "print-based") {
@@ -340,11 +353,11 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                 }*/
 
                                 if ((offertype == "print-based") && (dealsms == 0)) {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
+                                    alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestPrintDeal(dealsID);
                                 }
                                 else if ((offertype == "print-based") && (dealsms == 1)) {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
+                                    alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestSMSDeal(dealsID);
                                 }
 
@@ -359,6 +372,7 @@ function GetDisplayMerchantDealsCallback(responseData) {
         } catch (exp) {
 
         }
+ 
     }
 }
 
@@ -369,16 +383,17 @@ function GetDisplayMerchantDealsCallback(responseData) {
 
 function GetRequestEmailDeal(dealID) {
     var randgoInputData = '';
+  
     randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
     randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
     randgoInputData = randgoInputData + '<soap:Body>';
     randgoInputData = randgoInputData + '<RequestEmailDeal xmlns="http://tempuri.org/">';
     randgoInputData = randgoInputData + '<rSessionId>' + localStorage.randgosessionid + '</rSessionId>';
     randgoInputData = randgoInputData + '<rDealId>' + dealID + '</rDealId>';
-    randgoInputData = randgoInputData + '<rFirstName>Peter</rFirstName>';
-    randgoInputData = randgoInputData + '<rSurname>Klugkist</rSurname>';
-    randgoInputData = randgoInputData + '<rEmail>asha@starsoft-india.com</rEmail>';
-    randgoInputData = randgoInputData + '<rContact>0798561499</rContact>';
+    randgoInputData = randgoInputData + '<rFirstName>' + localStorage.username + '</rFirstName>';
+    randgoInputData = randgoInputData + '<rSurname>' + localStorage.SurName + '</rSurname>';
+    randgoInputData = randgoInputData + '<rEmail>' + localStorage.EmailID + '</rEmail>';
+    randgoInputData = randgoInputData + '<rContact>' + localStorage.CellNumber + '</rContact>';
     randgoInputData = randgoInputData + '</RequestEmailDeal>';
     randgoInputData = randgoInputData + '</soap:Body>';
     randgoInputData = randgoInputData + '</soap:Envelope>';
@@ -388,7 +403,6 @@ function GetRequestEmailDeal(dealID) {
 
 function GetRequestEmailDealCallback(responseData) {
   
-    //alert(responseData);
     if (checkLogin()) {
         try {
            // alert("RequestEmailDeal:::::::responseData::::::" + responseData);
@@ -450,9 +464,9 @@ function GetMerchantsBySearch() {
 }
 
 function GetMerchantsBySearchCallback(responseData) {
-   
+
     if (checkLogin()) {
-        try {
+    try {
                    // alert("DisplayMerchantsBySearch::::::::::::" + responseData);
                     responseData = responseData.replace(/&gt;/gi, '>');
                     responseData = responseData.replace(/&lt;/gi, '<');
@@ -561,9 +575,9 @@ function GetRequestSMSDeal(dealID) {
     randgoInputData = randgoInputData + '<tem:RequestSMSDeal>';
     randgoInputData = randgoInputData + '<tem:rSessionId>' + localStorage.randgosessionid + '</tem:rSessionId>';
     randgoInputData = randgoInputData + '<tem:rDealId>' + dealID + '</tem:rDealId>';
-    randgoInputData = randgoInputData + '<tem:rFirstName>?</tem:rFirstName>';
-    randgoInputData = randgoInputData + '<tem:rSurname>?</tem:rSurname>';
-    randgoInputData = randgoInputData + '<tem:rContact>?</tem:rContact>';
+    randgoInputData = randgoInputData + '<tem:rFirstName>' + localStorage.username + '</tem:rFirstName>';
+    randgoInputData = randgoInputData + '<tem:rSurname>' + localStorage.SurName + '</tem:rSurname>';
+    randgoInputData = randgoInputData + '<tem:rContact>' + localStorage.CellNumber + '</tem:rContact>';
     randgoInputData = randgoInputData + '</tem:RequestSMSDeal>';
     randgoInputData = randgoInputData + '</soapenv:Body>';
     randgoInputData = randgoInputData + '</soapenv:Envelope>';
@@ -572,7 +586,7 @@ function GetRequestSMSDeal(dealID) {
 }
 
 function GetRequestSMSDealCallback(responseData) {
-  //  alert("RequestSMSDeal:::response::::::::::" + responseData);
+    alert("RequestSMSDeal:::response::::::::::" + responseData);
     if (checkLogin()) {
         try {
            // alert("Display Merchant Deals:::::::::::::" + responseData);

@@ -9,15 +9,19 @@ var HomeID = '';
 var RoadID = '';
 var MedicalID = '';
 var legalID='';
-var TravelID='';
+var TravelID = '';
+var target = '';
+var spinner = '';
+
 //alert(localStorage.gethome + '::' + localStorage.getmedical);
 
 /*******************************************************************************
 * FUNCTION TO CALL ANY WEB SERVICE
 ******************************************************************************/
 CallWebService = function (url, inputData, method, contentType, callback) {
-
-    document.getElementById('loaddingimg').style.display = "none";
+    document.getElementById('loaddingimg').style.display = "block";
+   
+    //document.getElementById('loaddingimg').style.display = "block";
     try {
         var xhr;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -77,27 +81,29 @@ CallWebService = function (url, inputData, method, contentType, callback) {
         // alert("No network connection::checking::::::" + window.navigator.onLine);    
         if (inputData !== '') {
             if (window.navigator.onLine == true) {
-                document.getElementById('loaddingimg').style.display = "block";
+               
+               
                 xhr.send(inputData);
             } else {
+               
                 alert('No network connection,Please check your network connectivity!');
                 document.getElementById('loaddingimg').style.display = "none";
             }
         } else {
             if (window.navigator.onLine == true) {
-                document.getElementById('loaddingimg').style.display = "block";
+               
                 xhr.send(null);
             } else {
+                
                 alert('No network connection,Please check your network connectivity!');
                 document.getElementById('loaddingimg').style.display = "none";
             }
         }
 
-        var target = document.getElementById('loaddingimg');
-        var spinner = new Spinner(opts).spin(target);
     } catch (ex) {
         // alert(ex + ':::Network:::');
-    }
+    } /*target = document.getElementById('loaddingimg');
+    spinner = new Spinner(opts).spin(target);*/
 }
 
 
@@ -106,7 +112,6 @@ function gotoWallet() {
     if (checkLogin()) {
        // alert("wallet");
         prevPage = currentPage;
-
         $.mobile.changePage('#indexwallet', {
             transition: "none",
             reverse: false,
@@ -120,11 +125,8 @@ function gotoWallet() {
 
 
 
-function gotoBenifit() {
-   
-
-   // alert("bbbbbb");
-    if (checkLogin()) {
+/*function gotoBenifit() {
+if (checkLogin()) {
 
         $("#tbldisplaycategories tr").remove();
         prevPage = currentPage;
@@ -138,15 +140,39 @@ function gotoBenifit() {
 
         $("#tbldisplaycategoriesbycid tr").remove();
         $("#tbldisplaymerchantdeals tr").remove();
+        
+        setTimeout(function () { GetDisplayCategories(); }, 100);
        
-        GetDisplayCategories();
+       
    }
+}*/
+function gotoBenifit() {
+if (checkLogin()) {
+document.getElementById('loaddingimg').style.display = "block";
+ setTimeout(function () {
+$("#tbldisplaycategories tr").remove();
+prevPage = currentPage;
+$.mobile.changePage('#indexbenefit', {
+transition: "none",
+reverse: false,
+changeHash: false
+});
+currentPage = 'indexbenefit';
+pageData.push(currentPage);
+
+$("#tbldisplaycategoriesbycid tr").remove();
+$("#tbldisplaymerchantdeals tr").remove();
+        
+//setTimeout(function () { GetDisplayCategories(); }, 100);
+GetDisplayCategories();
+},
+200);       
+}
 }
 
-function gotoProfile() {
+/*function gotoProfile() {
    
     if (checkLogin()) {
-       // alert("ppppppp");
         prevPage = currentPage;
         document.getElementById('txtname').value = "";
         document.getElementById('txtsname').value = "";
@@ -165,23 +191,66 @@ function gotoProfile() {
         });
         currentPage = 'indexprofile';
         pageData.push(currentPage);
-        GetProfileDetails();
+        setTimeout(function () { GetProfileDetails(); }, 100);
+
+        
     }
-}
+}*/
 
+function gotoProfile() {
 
-function gotoHelp() {
     if (checkLogin()) {
-        prevPage = currentPage;
-        $.mobile.changePage('#indexhelp', {
-            transition: "none",
-            reverse: false,
-            changeHash: false
-        });
-        currentPage = 'indexhelp';
-        pageData.push(currentPage);
-    }
+ document.getElementById('loaddingimg').style.display = "block";
+ setTimeout(function () {
+     prevPage = currentPage;
+     document.getElementById('txtname').value = "";
+     document.getElementById('txtsname').value = "";
+     document.getElementById('txtemail').value = "";
+     document.getElementById('txtcellno').value = "";
+     document.getElementById('txtid').value = "";
+     document.getElementById('txtnewpin').value = "";
+     document.getElementById('txtconpin').value = "";
+
+
+
+     $.mobile.changePage('#indexprofile', {
+         transition: "none",
+         reverse: false,
+         changeHash: false
+     });
+     currentPage = 'indexprofile';
+     pageData.push(currentPage);
+     //setTimeout(function () { GetProfileDetails(); }, 100);
+     GetProfileDetails();
+ },
+200);
+
+        
 }
+}
+
+
+    function gotoHelp() {
+        if (checkLogin()) {
+            document.getElementById('loaddingimg').style.display = "block";
+            setTimeout(function () {
+                prevPage = currentPage;
+                $.mobile.changePage('#indexhelp', {
+                    transition: "none",
+                    reverse: false,
+                    changeHash: false
+                });
+                currentPage = 'indexhelp';
+                pageData.push(currentPage);
+                document.getElementById('loaddingimg').style.display = "none";
+            },
+
+        200);
+        }
+    }
+
+
+
 
 
 
@@ -556,12 +625,13 @@ function gototransactiondetails() {
     }
 }
 function login() {
-//alert("login");
-    prevPage = currentPage;
-    document.getElementById('txtLoginCellNumber').value = "";
+
+
+
     document.getElementById('txtLoginUserName').value = "";
     document.getElementById('txtLoginPassword').value = "";
 
+    prevPage = currentPage;
     $.mobile.changePage('#log', {
         transition: "none",
         reverse: false,
@@ -569,6 +639,18 @@ function login() {
     });
     currentPage = 'log';
     pageData.push(currentPage);
+
+    /*prevPage = currentPage;
+    $.mobile.changePage('#log', {
+        transition: "none",
+        reverse: false,
+        changeHash: false
+    });
+    currentPage = 'log';
+    pageData.push(currentPage);
+
+    document.getElementById('txtLoginUserName').value = "";
+    document.getElementById('txtLoginPassword').value = "";*/
 }
 
 function goToMainIndex() {
@@ -586,7 +668,6 @@ function goToMainIndex() {
 function LoginValidation() {
     var name = document.getElementById('txtLoginUserName').value;
     var pw = document.getElementById('txtLoginPassword').value;
-    var cell = document.getElementById('txtLoginCellNumber').value;
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var checkbox1 = document.getElementById('chk');
     var pattern = /^\d{10}$/;
@@ -644,15 +725,33 @@ function LoginValidation() {
 
 
 function goBack() {
-    document.getElementById('txtmerchantsearch').value = "";
-    pageData.pop();
-    currentPage = pageData[pageData.length - 1];
-    $.mobile.changePage('#' + currentPage, {
-        transition: "none",
-        reverse: true,
-        changeHash: false
-    });
+    //alert(currentPage);
 
+    if (currentPage == 'qtnanswers') {
+        document.getElementById('loaddingimg').style.display = "block";
+        setTimeout(function () {
+            prevPage = currentPage;
+            $.mobile.changePage('#indexhelp', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'indexhelp';
+            pageData.push(currentPage);
+            document.getElementById('loaddingimg').style.display = "none";
+        },
+
+        200);
+    } else {
+        document.getElementById('txtmerchantsearch').value = "";
+        pageData.pop();
+        currentPage = pageData[pageData.length - 1];
+        $.mobile.changePage('#' + currentPage, {
+            transition: "none",
+            reverse: true,
+            changeHash: false
+        });
+    }
 }
 
 
@@ -1192,7 +1291,6 @@ function checkremember() {
 
         var name = document.getElementById('txtLoginUserName').value;
         var pw = document.getElementById('txtLoginPassword').value;
-        var cell = document.getElementById('txtLoginCellNumber').value;
         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         var checkbox1 = document.getElementById('chk');
         var pattern = /^\d{10}$/;
@@ -1259,7 +1357,9 @@ function checkremember() {
                 if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0] == undefined) {
                     localStorage.guid = xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("mobileUserGuid")[0].childNodes[0].nodeValue;
                     localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
-
+ localStorage.SurName = xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("LastName")[0].childNodes[0].nodeValue;
+                localStorage.EmailID = xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0].nodeValue;
+                localStorage.CellNumber = xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0].nodeValue;
 
                     var nodval = xmlDoc.getElementsByTagName("SchemaUrl");
                     for (i = 0; i < nodval.length; i++) {
@@ -1721,7 +1821,10 @@ function checkremember() {
         }
 
         function RegisterUserNew(Name, SurName, userName, CellNumber, passowrd, IdNumber, EmailID, policyno) {
-        try{
+            try {
+                localStorage.SurName = SurName;
+                localStorage.EmailID = EmailID;
+                localStorage.CellNumber = CellNumber;
             var registeruserdata = "";
             registeruserdata = '<?xml version="1.0" encoding="utf-8"?>';
             registeruserdata = registeruserdata + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
