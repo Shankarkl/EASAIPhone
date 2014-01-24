@@ -8,13 +8,13 @@
    <!-- <meta name="viewport" content="width=device-width, user-scalable=no" />
    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->
    <meta name="viewport" content="width=device-width, user-scalable=no" />
-
+ 
    
     <title>Europ Assist</title>
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <link rel="stylesheet" href="js/jquerymobile110min.css" />
     <link href="newcss.css" rel="stylesheet" type="text/css" />
     <script src="js/jquery164min.js" type="text/javascript"></script>
+
     <script src="js/spinmin.js" type="text/javascript"></script>
     <script src="js/jqueryalerts.js" type="text/javascript"></script>
     <link href="public/css/jqueryalerts.css" rel="stylesheet" type="text/css" />
@@ -23,15 +23,57 @@
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/RandgoServices.js"></script>
     <script src="js/jqueryuitouchpunch.js" type="text/javascript"></script>
+
     <script src="js/jquerymobile110min.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
     <script src="js/help.js" type="text/javascript"></script>
+    
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-            $().ready(function () {
 
-                $("body").css({ visibility: 'visible' });
-          
+
+
+        $().ready(function () {
+            //reg +27 function for
+            $("#txtRegCell,#txtfpcellno").keypress(function (ev) {
+                // alert('dfds');
+                var value = "+27";
+                var tval = this.value;
+                var c = ev.charCode || ev.keyCode;
+                this.selectionStart = this.selectionEnd = this.value.length;
+                if (tval.length == value.length && c == 8) {
+                    event.returnValue;
+                }
+                this.value = value + tval.substring(value.length);
+            });
+
+
+            $('#tbldiv').click(function (event) {
+
+
+                if (event.target.id === "txtRegName" || event.target.id === "RegSubmit" || event.target.id === "term" || event.target.id === "acce") {
+                    return;
+                } if (event.target.id === "txtRegSurName") {
+                    return;
+                } if (event.target.id === "txtRegEmail") {
+                    return;
+                } if (event.target.id === "txtRegCell") {
+                    return;
+                } if (event.target.id === "txtRegIDNo") {
+                    return;
+                } if (event.target.id === "txtRegPolicyNumber") {
+                    return;
+                } if (event.target.id === "chkAcceptTerms") {
+                    return;
+                }
+
+                //alert('sd');
+                $('#txtRegName,#txtRegSurName,#txtRegEmail,#txtRegCell,#txtRegIDNo,#txtRegPolicyNumber').blur();
+            });
+
+            $("body").css({ visibility: 'visible' });
+
         });
         document.addEventListener('deviceready', function () {
            
@@ -490,72 +532,13 @@
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">
+                                <td class="headerwt">
                                 <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                             
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                             
-                                                <div class="headerbckrndimgg" id="div11" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="Img14" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                              
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                              
-                                                <div class="headerbckrndimgg" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                              
                             </tr>
                         </table>
                     </td>
@@ -1036,7 +1019,8 @@
                 </tr>
                 <!-- img -->
                 <tr height="10%">
-                    <td class="home" id="hme"></td>
+                    <td class="home" id="hme">
+                     <img src="" alt="" id="hmimg" style="width:100%;height:100%;" /></td>
                 </tr>
                 <!-- img content  Home-->
                 <tr class="trheight3">
@@ -1109,7 +1093,8 @@
                 </tr>
                 <!-- img content end -->
                 <tr height="10%">
-                    <td class="medical" id="medical"></td>
+                    <td class="medical" id="medical"><img src="" alt="" id="mdimg" style="width:100%;height:100%;" />
+</td>
                 </tr>
                 <!-- img content  Medical-->
                 <tr class="trheight3">
@@ -1177,7 +1162,7 @@
                     </td>
                 </tr>
                 <tr height="10%">
-                    <td class="roadassistance" id="roadas"></td>
+                    <td class="roadassistance" id="roadas"><img src="" alt="" id="rdimg" style="width:100%;height:100%;" /></td>
                 </tr>
                 <!-- img content  Road-->
                 <tr class="trheight3">
@@ -1246,7 +1231,8 @@
                     </td>
                 </tr>
                 <tr height="10%">
-                    <td class="legal" id="legalas"></td>
+                    <td class="legal" id="legalas"><img src="" alt="" id="lgimg" style="width:100%;height:100%;" />
+</td>
                 </tr>
                 <!-- img content  legal-->
                 <tr class="trheight3">
@@ -1315,7 +1301,8 @@
                     </td>
                 </tr>
                 <tr height="10%">
-                    <td class="travel" id="travelas"></td>
+                    <td class="travel" id="travelas"><img src="" alt="" id="tlimg" style="width:100%;height:100%;" />
+</td>
                 </tr>
                 <!-- img content  travel-->
                 <tr class="trheight3">
@@ -1486,9 +1473,22 @@
                 <tr class="bgfooter2" valign="top" height="55%">
                     <td>
                         <table class="maintable6" cellspacing="0" cellpadding="0">
+                         <tr height="10%">
+                                <td class="tdwidth"></td>
+                                <td class="textstyle1 tdwidth1">USERNAME
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
                             <tr height="10%">
                                 <td class="tdwidth"></td>
-                                <td class="textstyle1 tdwidth1">NAME
+                                <td class="tdwidth1">
+                                    <input type="text" class="textbox3" id="txtuname" maxlength="50" disabled="disabled">
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                            <tr height="10%">
+                                <td class="tdwidth"></td>
+                                <td class="textstyle1 tdwidth1">FIRSTNAME
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1594,20 +1594,10 @@
                         <input type="hidden" id="oldpin" />
                     </td>
                 </tr>
-
-                
                 <tr>
                     <td>
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                       
                     </td>
                 </tr>
             </table>
@@ -1616,460 +1606,14 @@
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
-      
-    <div data-role="page" id="indexhelp" >
-        
-        <div data-role="content" >
-            <table cellpadding="0" cellspacing="0" class="maintable">              
-                <tr class="topbar">
-                    <td>
-                        <div>
-                        <table style="width:102%;height:100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="headerbckrndimg headerwt">                                   
-                                    <div style="width:100%">
-                                               <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                    </div>
-                                </td>
-
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" style="width:100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                              
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                              
-                                                <div class="headerbckrndimgg" id="div1" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="wal" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                             
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                                <div class="profileclass" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpwhite.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="walser" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                            </div>
-                    </td>
-                </tr>
-               <tr class="trheight2">
-
-                    <td class="middlecontent3">
-                        <div>
-                        <table width="100%" height="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="regcol1"></td>
-                                <td class="regtopHeader">FAQs
-                                </td>
-                                <td class="regcol2" align="right"></td>
-                                <td class="regcol1"></td>
-                            </tr>
-                        </table>
-                            </div>
-                    </td>
-                </tr>
-               <tr>
-                    <td> <div id="container"  class="scrollable">
-                        <div id="divqtn1" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">Do I need a bank account to use EASA wallet?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn2" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">What fields need to be completed?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn3" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">What if I get an upgrade or new handset?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn4" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">What are these personal details used for?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn5" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">What if I don’t have a South African ID?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn6" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">What PIN do I use?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn7" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">Who knows my PIN?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn8" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">Can I de-activate my account?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn9" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">I have checked my internet settings and changed them but still cannot use EASA?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn10" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">How do I load money onto my EASA account so that I can use it?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn11" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">When do I open my EASA application?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn12" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">How quick is a transaction?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn13" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">How do I know when a payment is confirmed and complete?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn14" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">How do I pay my friend?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn15" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">How long does an EFT take to get into my EASA account?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn16" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">How much does EASA cost me as a user?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn17" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">Are there daily limits to my account?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn18" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">Do I earn interest on my EASA balance?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn19" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">What makes EASA secure?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn20" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">EASA looks after my money, who looks after EASA?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn21" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">If I have a payment issue, who do I call?
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn22" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">WAP enablement on Vodacom
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn23" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">WAP enablement on Cell C
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn24" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="4" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">WAP enablement on MTN
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="divqtn25" onclick="helpqtnans(this);">
-                            <table width="100%" cellspacing="0" cellpadding="0" class="qtn">
-                                <tr>
-                                    <td class="regcol1"></td>
-                                    <td class="textstyle3 qtnbot">WAP enablement on Virgin Mobile
-                                    </td>
-                                    <td class="regcol1 accord" align="left">
-                                        <img src="public/images/EAslicing/rightsymbolarrow.png">
-                                    </td>
-                                    <td class="regcol1"></td>
-                                </tr>
-                            </table>
-                        </div>
-                         </div>
-                    </td>
-                </tr>
-                 <tr>
-                    <td>
-                    <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                    </td>
-                </tr>
-            
-            </table>    
-        </div>
-        <div data-role="footer">
-            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-        </div>
-       
-    </div>
-   
-    <!--Click For More Info (Services)-->
-    <div data-role="page" id="clickformoreinfo">
+     <!--Click For More Info (Services)-->
+    <div data-role="page" id="clickformoreinfo" style="overflow-x:hidden">
         <div data-role="content">
+        
            <table class="maintable" cellpadding="0" cellspacing="0">
-                <tr class="topbar">
-                    <td>
+         
+               <div class="header1" style="height:100%; width: 100%">
+                   
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
@@ -2079,89 +1623,63 @@
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
+                                <td class="headeroi" valign="top" style="overflow:hidden">
+                                    <!--<table class="maintable1" width="100%" cellspacing="0" cellpadding="0" style="overflow:hidden">
                                         <tr>
-                                            <td valign="top" style="width:100%">
+                                            <td valign="top" style="width:100%">-->
                                               
                                                 <div class="profileclass" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/serviceswhite.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="walser" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <div class="walser">
+                                                     Services
+                                                    </div>
                                                 </div>
 
                                              
                                                 <div class="headerbckrndimgg" id="div5" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img24" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <div class="serfnt">
+                                                    Wallet</div>
                                                 </div>
                                                
                                                 <div class="headerbckrndimgg" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    
+                                                   <div class="serfnt">
+                                                    Benefits</div>
                                                 </div>
                                              
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <div class="serfnt">
+                                                    Profile</div>
+                                                   
                                                 </div>
                                                
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                     <div class="serfnt">
+                                                    FAQs</div>
+                                                    
                                                 </div>
                                                
-                                            </td>
+                                          <!--  </td>
                                         </tr>
-                                    </table>
+                                    </table>-->
                                 </td>
                             </tr>
                         </table>
-                    </td>
-                </tr>
-                <tr>
+                    
+                </div>
+               
+                <tr style="min-height:300px;">
                     <td>
                         <div id="divhomeassist" class="maindivcls" style="display: none">
                             <div id="homeheader" class="homeheadercls">
                                 HOME ASSISTANCE
                             </div>
                             <div id="homecontent" class="homecontentcls">
-                              <span class="newhelpcontentheading">Source a tradesman to fix your emergency in double-quick time.</span><br />
-Help is at hand for those emergency household repairs (electrical, plumbing, locksmith or appliances) that could result in broader damage if they’re not attended to immediately. If essential services like electricity, hot water or sanitary use are compromised, call for urgent assistance.
-<br />
-<br />
-<span class="newhelpcontentheading">Benefits:</span>
-<ul>
-    <li>Service providers are dispatched in the event of electrical and plumbing problems, locksmiths, glaziers or if an essential appliance needs to be repaired.</li>
-	<li>Assistance with three incidents per calendar year or per year from policy inception.</li>
-	<li>Service includes costs of call-out and first hour labour but excludes costs relating to parts.</li>
-	<li>Assistance can be provided for non-emergency repairs on a member-to-pay basis.</li>
-
-</ul>
+                           
 
                             </div>
                         </div>
@@ -2170,18 +1688,7 @@ Help is at hand for those emergency household repairs (electrical, plumbing, loc
                                 MEDICAL ASSISTANCE
                             </div>
                             <div id="medicontent" class="homecontentcls">
-                               <span class="newhelpcontentheading">An independent national network of at least 5,000 emergency medical personnel ready to respond to your call.</span><br />
-In the event of a medical emergency, our 24-hour emergency advice and assistance call centre will arrange critical medical assistance and transportation.<br />
-<br />
-<span class="newhelpcontentheading">Benefits:</span>
-<ul>
-    <li>24-hour life-saving assistance through the immediate dispatch of emergency medical services</li>
-	<li>Emergency transportation by air or road ambulance.</li>
-	<li>Safe transfer of children following an accident.</li>
-	<li>Repatriation/return of mortal remains in the event of a death as a result of a medical emergency.</li>
-    <li>Access to non-emergency medical transportation, at member’s own cost.</li>
-
-</ul> 
+                             
                             </div>
                         </div>
                         <div id="divroadassist" class="maindivcls" style="display: none">
@@ -2189,17 +1696,7 @@ In the event of a medical emergency, our 24-hour emergency advice and assistance
                                 ROAD ASSISTANCE
                             </div>
                             <div id="rdcontent" class="homecontentcls">
-                                <span class="newhelpcontentheading">Getting you back on the road.</span><br />
-Our 24-hour help line offers peace of mind by despatching the appropriate services in the event of a roadside emergency anywhere in South Africa. In certain instances non-roadside locations are accommodated too.<br /><br />
-<span class="newhelpcontentheading">Benefits:</span>
-<ul>
-    <li>Mechanical and electrical breakdown</li>
-	<li>Jump-start service</li>
-	<li>Tyre change service</li>
-	<li>Running out of fuel</li>
-    <li>Keys locked in vehicle</li>
-
-</ul>
+                               
                             </div>
                         </div>
                         <div id="legaldiv" class="maindivcls" style="display: none">
@@ -2207,18 +1704,7 @@ Our 24-hour help line offers peace of mind by despatching the appropriate servic
                                 LEGAL ASSISTANCE
                             </div>
                             <div id="lecontent" class="homecontentcls">
-                                <span class="newhelpcontentheading">Get telephonic legal advice from in-house attorneys.</span><br /> 
-                   Our 24-hour telephonic legal advice line is manned by qualified and experienced in-house attorneys who provide
-                                 guidance and information on all legal matters, 24 hours a day, every day of the year. No matter is too big or too small and our service covers a wide range of legal concerns.<br /><br />
-                                <span class="newhelpcontentheading">Benefits:</span>
-                                <ul>
-                                    <li>Unlimited general telephonic legal advice on everything from criminal offences, debt and labour matters to fines, contracts, divorce, maintenance issues and motor vehicle accidents.</li>
-                                    <li>Enjoy one free 30-minute consultation, one free letter and one telephone call from one of a national panel of attorneys.</li>
-                                    <li>Free use of any of the following standard legal documents: a Small Claims Court Kit, Child Maintenance Kit, Domestic Employment Agreement, Lease Agreement, Purchase Agreement, and a Last Will and a Testament.</li>
-                                    <li>Strenuous internal quality control measures and monitoring by an external legal advisory board.</li>
-                                </ul>
-                                <br/>
-                                <br/>
+                             
                             </div>
                         </div>
                         <div id="traveldiv" class="maindivcls" style="display: none">
@@ -2226,33 +1712,24 @@ Our 24-hour help line offers peace of mind by despatching the appropriate servic
                                 TRAVEL ASSISTANCE
                             </div>
                             <div id="travelcontent" class="homecontentcls">
-                              <span class="newhelpcontentheading">Complete peace of mind for you and your family’s health while travelling abroad.</span><br /> 
-                   Travel with the knowledge that the pioneers and market leaders of full service travel assistance have your best interests at heart. 
-<br />
-The Europ Assistance SA medical team includes 15 professional nurses, 5 specialist travel-assistance nurses and 10 travel-assistance case managers, 25 paramedics,13 medical-case managers and 10 medical-support staff, a medical director (24-hour standby) and a divisional manager.
-<br /><br />
-                                <span class="newhelpcontentheading">Benefits:</span><br /><br />
-                                <span style="font-style:italic">Pre-travel services and assistance abroad:</span>
-                                <ul style="text-wrap:normal">
-                                    <li style="text-wrap:normal">Telephone and online advice via Netglobers/EASA Hotspots, a community travel portal with current, relevant content.</li>
-                                    <li>Inoculation requirement information as specified by the World Health Organisation.</li>
-                                    <li>Referral to travel clinics and medical service providers.</li>
-                                </ul>  
+                           
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td> <br />
-                        <br />
+                    <td> 
+                    <br /><br /><br /><br /> <br /><br />  <br /><br />  <br /><br />
                     </td>
                 </tr>
+                <tr>
+                <div data-role="footer">
+            <img alt="" src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
+        </div></tr>
 
             </table>
         </div>
-        <div data-role="footer">
-            <img alt="" src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-        </div>
+        
     </div>
     <!-- Register(services)-->
     <div data-role="page" id="reg">
@@ -2262,73 +1739,14 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">
+                                <td class="headerwt">
                                  
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                               
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img alt="" src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                             
-                                                <div class="headerbckrndimgg" id="div6" onclick="gotoWallet()" style="display: block">
-                                                    <img alt="" src="public/images/EAslicing/walletgray.png" id="Img25" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img alt="" src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img alt="" src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                 
-                                                <div class="headerbckrndimgg" onclick="gotoHelp()">
-                                                    <img alt="" src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                             
                             </tr>
                         </table>
                     </td>
@@ -2425,7 +1843,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input class="txtbxreg" id="txtRegCell" type="number"  onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';">
+                                    <input class="txtbxreg" id="txtRegCell" type="text"  value="+27" onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -2438,7 +1856,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input class="txtbxreg" id="txtRegIDNo" type="number" onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';" />
+                                    <input class="txtbxreg" id="txtRegIDNo" type="text" onfocus="document.getElementById('show_hide_backbutton').style.display='none';" onblur="document.getElementById('show_hide_backbutton').style.display='block';" />
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -2480,7 +1898,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                         <br />
                     </td>
                 </tr>
-                <tr class="bgfooter2" height="10%" valign="top">
+                <tr class="bgfooter2" height="100%" valign="top">
                     <td>
                         <table class="maintable6" cellspacing="0" cellpadding="0">
                             <tr>
@@ -2496,27 +1914,17 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                 </tr>
                 <tr>
                     <td>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        <br />  <br />
                     </td>
                 </tr>
                
             </table>
         </div>
        
-        <div data-position="fixed" data-role="footer" id="show_hide_backbutton">
+        <div data-role="footer" id="show_hide_backbutton100">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
+       
     </div>
     <!--Login(services)-->
     <div id="log" data-role="page">
@@ -2527,73 +1935,14 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">
+                                <td class="headerwt">
                                   
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                            
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle" align="center" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                              
-                                                <div class="headerbckrndimgg" id="div8" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="Img5" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                              
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                 
-                                                <div class="headerbckrndimgg" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                               
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                              
                             </tr>
                         </table>
                     </td>
@@ -2657,7 +2006,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                 <td class="tdwidth"></td>
                                 
                                   <td width="39%" align="left" style="vertical-align:middle;height:40px" onclick="gotoForgotPassword()">
-                                    <a href="#" class="hyperlink">Forgot Password?</a>
+                                    <span class="hyperlink">Forgot Password?</span>
                                 </td>
                                 <td align="left" width="1%" style="vertical-align:middle">
                                  <input data-role="none" type="image" alt="" src="public/images/EAslicing/chkbx.png" id="chkremember" class="logcheck" onclick="return (logcheck())"/>
@@ -2706,7 +2055,10 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
               
             </table>
         </div>
-        <div data-position="fixed" data-role="footer" id="show_hide_backbutton1">
+        <!--<div data-position="fixed" data-role="footer" id="show_hide_backbutton1">
+            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
+        </div>-->
+         <div data-role="footer" id="show_hide_backbutton101">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -6644,167 +5996,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
         </div>
     </div>
     <!--qtnanswers-->
-    <div data-role="page" id="qtnanswers">
-        <div data-role="content">
-            <table cellpadding="0" cellspacing="0" width="100%">
-                <tr class="topbar">
-                    <td>
-                        <table width="102%" height="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="headerbckrndimg headerwt">
-                                   
-                                    <div style="width:100%">
-                                               <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                    </div>
-                                </td>
-
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" id="div13" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="Img21" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="profileclass" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpwhite.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="walser" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-             <tr class="trheight4">
-                    <td class="middlecontent3">
-                        <table width="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="regcol1"></td>
-                                <td class="regtopHeader"> FAQs
-                                </td>
-                                <td class="regcol2" align="right"></td>
-                                <td class="regcol1"></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                   <tr>
-                    <td>
-                        <table width="100%" cellpadding="5" cellspacing="5">
-                            <tr>
-                                <td>
-                                    <div id="divhelpcontentquestion" class="textstyle3 qtnbot">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="5px"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <table width="100%" cellpadding="5" cellspacing="5">
-                            <tr>
-                                <td>
-                                    <div id="divhelpcontentanswer" class="qtncontent">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-                <!-- <table width="100%" cellspacing="5" cellpadding="5">
-                            <tr>
-                                <td class="textstyle3 qtnbot">
-                                    Do I need a bank account to use EASA wallet?
-                                </td>
-                            </tr>
-                            <tr>
-                                <td height="5px">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="qtncontent">
-                                    Do I need a bank account to use EASA wallet?
-                                </td>
-                            </tr>
-                        </table>-->
-                <tr>
-                    <td>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                    </td>
-                </tr>
-                <!-- Footer-->
-                <!--<tr class="bckbtn">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
-                            onclick="goBack();" />
-                    </td>
-                </tr>-->
-            </table>
-        </div>
-        <div data-role="footer">
-            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-        </div>
-    </div>
+    
     <!--mycoupons-->
     <div data-role="page" id="mycoupons">
         <div data-role="content">
@@ -7518,80 +6710,14 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                <td class="headerwt">
+                                   
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" id="div9" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="Img12" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                               
                             </tr>
                         </table>
                     </td>
@@ -7856,72 +6982,13 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">                                  
+                                <td class="headerwt">                                  
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" id="div7" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="Img6" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                             
                             </tr>
                         </table>
                     </td>
@@ -7950,20 +7017,20 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
-                            <tr height="10%">
+                            <tr height="10%" >
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
                                     <input type="text" class="txtbxreg" id="txtusernameregfirst" maxlength="10">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
-                            <tr height="10%">
+                            <tr height="10%" >
                                 <td class="tdwidth"></td>
                                 <td class="textstyle1">PASSWORD
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
-                            <tr height="10%">
+                            <tr height="10%" >
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
                                     <input type="password" class="txtbxreg" id="txtpwregfirst" maxlength="10">
@@ -7983,6 +7050,47 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
+                            <tr height="10%" style="display:none">
+                                <td class="tdwidth"></td>
+                                <td class="textstyle1">USER NAME
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                            <tr height="10%" style="display:none">
+                                <td class="tdwidth"></td>
+                                <td class="tdwidth1">
+                                    <input type="text" class="txtbxreg" id="Text2" maxlength="10">
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                            <tr height="10%" style="display:none">
+                                <td class="tdwidth"></td>
+                                <td class="textstyle1">PASSWORD
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                            <tr height="10%" style="display:none">
+                                <td class="tdwidth"></td>
+                                <td class="tdwidth1">
+                                    <input type="password" class="txtbxreg" id="Password1" maxlength="10">
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                              <tr height="10%" style="display:none">
+                                <td class="tdwidth"></td>
+                                <td class="textstyle1">CONFIRM PASSWORD
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                            <tr height="10%" style="display:none">
+                                <td class="tdwidth"></td>
+                                <td class="tdwidth1">
+                                    <input type="password" class="txtbxreg" id="Password2" maxlength="10">
+                                </td>
+                                <td class="tdwidth"></td>
+                            </tr>
+                           
+
                         </table>
                     </td>
                 </tr>
@@ -8034,80 +7142,14 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                     <td>
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td class="headerbckrndimg headerwt">
-                                    <!--<table width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td>
-                                                
-                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
-                                            </td>
-                                        </tr>
-                                    </table>-->
+                                <td class="headerwt">
+                                   
                                     <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
 
-                                <td class="headeroi" valign="top">
-                                    <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoService()">
-                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle" align="center" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Services
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" id="div18" onclick="gotoWallet()" style="display: block">
-                                                    <img src="public/images/EAslicing/walletgray.png" id="Img29" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Wallet
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
-                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Benefits
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
-                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">Profile
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
-                                                <div class="headerbckrndimgg" onclick="gotoHelp()">
-                                                    <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
-                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td class="serfnt" align="center">FAQs
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                
                             </tr>
                         </table>
                     </td>
@@ -8140,7 +7182,7 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="number" class="txtbxreg" id="txtfpcellno" >
+                                    <input class="txtbxreg" id="txtfpcellno" name="Fcell" type="text" value="+27"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -8207,8 +7249,275 @@ The Europ Assistance SA medical team includes 15 professional nurses, 5 speciali
         </div>
     </div>
 
-   
 
+    <div data-role="page" id="indexhelp" >
+        
+        <div data-role="content" >
+          
+            <table cellpadding="0" cellspacing="0" class="maintable" style="overflow-x:hidden!important;">    
+             <!--<tr class="headeroi" style="height:100%;width:100%"><table style="width:102%;height:100%;" cellspacing="0" cellpadding="0"> <tr> <td class="headerbckrndimg headerwt"> <div style="width:100%"><img src="public/images/EAslicing/innerlogo.png" class="europimght" /></div> </td> <td class="headeroi"style="vertical-align:top"><div class="headerbckrndimgg" onclick="gotoService()" > <img src="public/images/EAslicing/servicesgrey.png" alt="" class="headerimgstyle" /> <div class="serfnt">Services </div> </div> <div class="headerbckrndimgg" onclick="gotoWallet()" > <img src="public/images/EAslicing/walletgray.png" alt="" class="headerimgstyle" /> <div class="serfnt">Wallet</div> </div> <div class="headerbckrndimgg" onclick="gotoBenifit()" > <img src="public/images/EAslicing/benifitsgray.png" alt="" class="headerimgstyle" /> <div class="serfnt">Benefits</div> </div> <div class="headerbckrndimgg" onclick="gotoProfile()"> <img src="public/images/EAslicing/profilegray.png" alt="" class="headerimgstyle" /> <div class="serfnt">Profile</div> </div> <div class="profileclass"> <img src="public/images/EAslicing/helpwhite.png" alt="" class="headerimgstyle" /> <div class="walser">FAQs</div> </div> </td> </tr> </table></tr>          -->
+               <tr class="topbar" style="overflow-x:hidden!important;">
+                    <td>
+                        <div>
+                        <table style="width:102%;height:100%;overflow-x:hidden!important;" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="headerbckrndimg headerwt">                                   
+                                    <div style="width:100%">
+                                               <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
+                                    </div>
+                                </td>
+
+                                <td class="headeroi" valign="top">
+                                    <table class="maintable1" style="width:100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td valign="top" style="width:100%">
+                                              
+                                                <div class="headerbckrndimgg" onclick="gotoService()">
+                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
+                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="serfnt" align="center">Services
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                              
+                                                <div class="headerbckrndimgg" id="div17" onclick="gotoWallet()" style="display: block">
+                                                    <img src="public/images/EAslicing/walletgray.png" id="Img30" class="headerimgstyle" />
+                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="serfnt" align="center">Wallet
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                               
+                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
+                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
+                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="serfnt" align="center">Benefits
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                             
+                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
+                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
+                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="serfnt" align="center">Profile
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                               
+                                                <div class="profileclass" onclick="gotoHelp()">
+                                                    <img src="public/images/EAslicing/helpwhite.png" class="headerimgstyle" />
+                                                    <table style="width: 100%" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td class="walser" align="center">FAQs
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                               
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                            </div>
+                    </td>
+                </tr>
+               
+               <tr class="trheight2">
+
+                    <td class="middlecontent3">
+                        <div>
+                        <table width="100%" height="100%" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="regcol1"></td>
+                                <td class="regtopHeader">FAQs
+                                </td>
+                                <td class="regcol2" align="right"></td>
+                                <td class="regcol1"></td>
+                            </tr>
+                        </table>
+                            </div>
+                    </td>
+                </tr>
+              
+               <tr>
+                    <td> 
+                   
+                      
+                          
+                        <table class="maintable" cellspacing="0" cellpadding="0" id="tblhelp">
+                        
+                             
+                        </table>
+
+
+
+              
+                       
+                    </td>
+                </tr>
+      
+                
+
+              
+                <tr height="10%">
+                    <td>
+                        <table class="maintable5 bgfooter2" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="5%"></td>
+                                <td class="transaction1"></td>
+                                <td width="5%"></td>
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>
+                 <tr>
+                    <td>
+                    <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+            
+            </table>    
+        </div>
+        <div data-role="footer">
+            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
+        </div>
+       
+    </div>
+
+    <div data-role="page" id="qtnanswers" style="overflow-x:hidden!important;">
+        <div data-role="content">
+      
+            <table cellpadding="0" cellspacing="0" width="100%" style="overflow-x:hidden!important;">
+          <div class="header1" style="height:100%; width: 100%">
+                   
+                        <table width="102%" height="100%" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="headerbckrndimg headerwt">
+                               
+                                    <div style="width:100%">
+                                               <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
+                                    </div>
+                                </td>
+
+                                <td class="headeroi" valign="top" style="overflow:hidden">
+                                   
+                                              
+                                                <div class="headerbckrndimgg" onclick="gotoService()">
+                                                    <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
+                                                    <div class="serfnt">
+                                                     Services
+                                                    </div>
+                                                </div>
+
+                                             
+                                                <div class="headerbckrndimgg" id="div1" onclick="gotoWallet()" style="display: block">
+                                                    <img src="public/images/EAslicing/walletgray.png" id="Img5" class="headerimgstyle" />
+                                                    <div class="serfnt">
+                                                    Wallet</div>
+                                                </div>
+                                               
+                                                <div class="headerbckrndimgg" onclick="gotoBenifit()">
+                                                    <img src="public/images/EAslicing/benifitsgray.png" class="headerimgstyle" />
+                                                    
+                                                   <div class="serfnt">
+                                                    Benefits</div>
+                                                </div>
+                                             
+                                                <div class="headerbckrndimgg" onclick="gotoProfile()">
+                                                    <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
+                                                    <div class="serfnt">
+                                                    Profile</div>
+                                                   
+                                                </div>
+                                               
+                                                <div class="profileclass" onclick="gotoHelp()">
+                                                    <img src="public/images/EAslicing/helpwhite.png" class="headerimgstyle" />
+                                                     <div class="walser">
+                                                    FAQs</div>
+                                                    
+                                                </div>
+                                               
+                                      
+                                </td>
+                            </tr>
+                        </table>
+                    
+                </div
+           
+             <tr class="trheight4">
+                    <td class="middlecontent3">
+                        <table width="100%" cellspacing="0" cellpadding="0"  class="middlecontent3">
+                            <tr>
+                                <td class="regcol1"></td>
+                                <td class="regtopHeader"> FAQs
+                                </td>
+                                <td class="regcol2" align="right"></td>
+                                <td class="regcol1"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                
+
+                   <tr class="freshbrnd">
+                    <td>
+                        <table class="piatto" cellspacing="0" cellpadding="10" width="100%" height="100%" 
+                            id="tblquestionans">
+                            
+                        </table>
+                    </td>
+                </tr>
+
+               
+                <tr>
+                    <td>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+                <!-- Footer-->
+                <!--<tr class="bckbtn">
+                    <td style="position: fixed; bottom: 0; left: 0">
+                        <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
+                            onclick="goBack();" />
+                    </td>
+                </tr>-->
+            </table>
+       
+          <div data-role="footer">
+            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
+        </div>
+        </div>
+     
+    </div>
+
+   
+ </body>
+ </html>
  
-</body>
-</html>

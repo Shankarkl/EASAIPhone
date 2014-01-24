@@ -328,12 +328,58 @@ function GetDisplayMerchantDealsCallback(responseData) {
                             celimg.setAttribute('class', 'regcol2 setheight');
                             celimg.appendChild(img);
 
+                           /* var imgvoucher = document.createElement("img");
+                            imgvoucher.src = 'public/images/EAslicing/GetVoucher.png';
+                            imgvoucher.setAttribute('id', 'row' + dealid);
+                            imgvoucher.setAttribute('name', 'offerType' + offertype);
+                            celimg.setAttribute('align', 'right');
+                            celimg.setAttribute('class', 'regcol2 setheight');
+                            celimg.appendChild(imgvoucher);
+
+                            var imgvisit = document.createElement("img");
+                            imgvisit.src = 'public/images/EAslicing/GetVoucher.png';
+                            imgvisit.setAttribute('id', 'row' + dealid);
+                            imgvisit.setAttribute('name', 'offerType' + offertype);
+                            celimg.setAttribute('align', 'right');
+                            celimg.setAttribute('class', 'regcol2 setheight');
+                            celimg.appendChild(imgvisit);
+
+                            var imgcontact = document.createElement("img");
+                            imgcontact.src = 'public/images/EAslicing/GetVoucher.png';
+                            imgcontact.setAttribute('id', 'row' + dealid);
+                            imgcontact.setAttribute('name', 'offerType' + offertype);
+                            celimg.setAttribute('align', 'right');
+                            celimg.setAttribute('class', 'regcol2 setheight');
+                            celimg.appendChild(imgcontact);
+
+                            var imgcontact = document.createElement("img");
+                            imgcontact.src = 'public/images/EAslicing/GetVoucher.png';
+                            imgcontact.setAttribute('id', 'row' + dealid);
+                            imgcontact.setAttribute('name', 'offerType' + offertype);
+                            celimg.setAttribute('align', 'right');
+                            celimg.setAttribute('class', 'regcol2 setheight');
+                            celimg.appendChild(imgcontact);
+
+                            var imgsms = document.createElement("img");
+                            imgsms.src = 'public/images/EAslicing/GetVoucher.png';
+                            imgsms.setAttribute('id', 'row' + dealid);
+                            imgsms.setAttribute('name', 'offerType' + offertype);
+                            celimg.setAttribute('align', 'right');
+                            celimg.setAttribute('class', 'regcol2 setheight');
+                            celimg.appendChild(imgsms);*/
+
+                            $('a').click(function (event) {
+                                try {
+                                    event.preventDefault();
+                                    window.open($(this).attr('href'), '_blank', 'location=yes');
+                                } catch (ex) {
+                                    //  alert('sd' + ex);
+                                }
+
+                            });
+                            
                             img.onclick = function () {
-                                // alert("img click dealsms:::::::::" + dealsms)
-                                //alert(localStorage.username);
-                               // alert(localStorage.SurName);
-                               // alert(localStorage.EmailID);
-                               // alert(localStorage.CellNumber);
+                               
                                 var dealsID = this.id.replace('row', '');
                                 var offertype = this.name.replace('offerType', '');
                                 if (offertype == "url-based") {
@@ -391,7 +437,7 @@ function GetRequestEmailDeal(dealID) {
     randgoInputData = randgoInputData + '<RequestEmailDeal xmlns="http://tempuri.org/">';
     randgoInputData = randgoInputData + '<rSessionId>' + localStorage.randgosessionid + '</rSessionId>';
     randgoInputData = randgoInputData + '<rDealId>' + dealID + '</rDealId>';
-    randgoInputData = randgoInputData + '<rFirstName>' + localStorage.username + '</rFirstName>';
+    randgoInputData = randgoInputData + '<rFirstName>' + localStorage.firstname + '</rFirstName>';
     randgoInputData = randgoInputData + '<rSurname>' + localStorage.SurName + '</rSurname>';
     randgoInputData = randgoInputData + '<rEmail>' + localStorage.EmailID + '</rEmail>';
     randgoInputData = randgoInputData + '<rContact>' + localStorage.CellNumber + '</rContact>';
@@ -576,7 +622,7 @@ function GetRequestSMSDeal(dealID) {
     randgoInputData = randgoInputData + '<tem:RequestSMSDeal>';
     randgoInputData = randgoInputData + '<tem:rSessionId>' + localStorage.randgosessionid + '</tem:rSessionId>';
     randgoInputData = randgoInputData + '<tem:rDealId>' + dealID + '</tem:rDealId>';
-    randgoInputData = randgoInputData + '<tem:rFirstName>' + localStorage.username + '</tem:rFirstName>';
+    randgoInputData = randgoInputData + '<tem:rFirstName>' + localStorage.firstname + '</tem:rFirstName>';
     randgoInputData = randgoInputData + '<tem:rSurname>' + localStorage.SurName + '</tem:rSurname>';
     randgoInputData = randgoInputData + '<tem:rContact>' + localStorage.CellNumber + '</tem:rContact>';
     randgoInputData = randgoInputData + '</tem:RequestSMSDeal>';
