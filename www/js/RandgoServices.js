@@ -314,69 +314,64 @@ function GetDisplayMerchantDealsCallback(responseData) {
                             lbldealdesc.innerHTML = xmlDoc.getElementsByTagName("dealDescription")[i].textContent;
                             cell.appendChild(lbldealdesc);
 
-                            rowcount = gettbldisplaymerchantdeals.rows.length;
-                            var row3 = gettbldisplaymerchantdeals.insertRow(rowcount);
+                            if (offertype == "url-based") {
+                                rowcount = gettbldisplaymerchantdeals.rows.length;
+                                var row3 = gettbldisplaymerchantdeals.insertRow(rowcount);
+                                var celimg = row3.insertCell(0);
+                                celimg.setAttribute('width', '30%');
+                                var img = document.createElement("img");
+                                img.src = 'public/images/EAslicing/visit.png';
+                                img.setAttribute('id', 'row' + dealid);
+                                img.setAttribute('name', 'offerType' + offertype);
+                                celimg.setAttribute('align', 'right');
+                                celimg.setAttribute('class', 'regcol2 setheight');
+                                celimg.appendChild(img);
+                            }
+                            else if (offertype == "email-based") {
+                                rowcount = gettbldisplaymerchantdeals.rows.length;
+                                var row3 = gettbldisplaymerchantdeals.insertRow(rowcount);
+                                var celimg = row3.insertCell(0);
+                                celimg.setAttribute('width', '30%');
+                                var img = document.createElement("img");
+                                img.src = 'public/images/EAslicing/contact.png';
+                                img.setAttribute('id', 'row' + dealid);
+                                img.setAttribute('name', 'offerType' + offertype);
+                                celimg.setAttribute('align', 'right');
+                                celimg.setAttribute('class', 'regcol2 setheight');
+                                celimg.appendChild(img);
+                            }
 
-                            var celimg = row3.insertCell(0);
-                            celimg.setAttribute('width', '30%');
+                            else if ((offertype == "print-based") && (dealsms == 1)) {
+                                rowcount = gettbldisplaymerchantdeals.rows.length;
+                                var row3 = gettbldisplaymerchantdeals.insertRow(rowcount);
+                                var celimg = row3.insertCell(0);
+                                celimg.setAttribute('width', '30%');
+                                var img = document.createElement("img");
+                                img.src = 'public/images/EAslicing/sms.png';
+                                img.setAttribute('id', 'row' + dealid);
+                                img.setAttribute('name', 'offerType' + offertype);
+                                celimg.setAttribute('align', 'right');
+                                celimg.setAttribute('class', 'regcol2 setheight');
+                                celimg.appendChild(img);
 
-                            var img = document.createElement("img");
-                            img.src = 'public/images/EAslicing/GetVoucher.png';
-                            img.setAttribute('id', 'row' + dealid);
-                            img.setAttribute('name', 'offerType' + offertype);
-                            celimg.setAttribute('align', 'right');
-                            celimg.setAttribute('class', 'regcol2 setheight');
-                            celimg.appendChild(img);
+                            }
+                           // if ((offertype == "print-based") && (dealsms == 1)) 
+                            else 
+                            {
+                                rowcount = gettbldisplaymerchantdeals.rows.length;
+                                var row3 = gettbldisplaymerchantdeals.insertRow(rowcount);
+                                var celimg = row3.insertCell(0);
+                                celimg.setAttribute('width', '30%');
+                                var img = document.createElement("img");
+                                img.src = 'public/images/EAslicing/GetVoucher.png';
+                                img.setAttribute('id', 'row' + dealid);
+                                img.setAttribute('name', 'offerType' + offertype);
+                                celimg.setAttribute('align', 'right');
+                                celimg.setAttribute('class', 'regcol2 setheight');
+                                celimg.appendChild(img);
+                            }
 
-                           /* var imgvoucher = document.createElement("img");
-                            imgvoucher.src = 'public/images/EAslicing/GetVoucher.png';
-                            imgvoucher.setAttribute('id', 'row' + dealid);
-                            imgvoucher.setAttribute('name', 'offerType' + offertype);
-                            celimg.setAttribute('align', 'right');
-                            celimg.setAttribute('class', 'regcol2 setheight');
-                            celimg.appendChild(imgvoucher);
-
-                            var imgvisit = document.createElement("img");
-                            imgvisit.src = 'public/images/EAslicing/GetVoucher.png';
-                            imgvisit.setAttribute('id', 'row' + dealid);
-                            imgvisit.setAttribute('name', 'offerType' + offertype);
-                            celimg.setAttribute('align', 'right');
-                            celimg.setAttribute('class', 'regcol2 setheight');
-                            celimg.appendChild(imgvisit);
-
-                            var imgcontact = document.createElement("img");
-                            imgcontact.src = 'public/images/EAslicing/GetVoucher.png';
-                            imgcontact.setAttribute('id', 'row' + dealid);
-                            imgcontact.setAttribute('name', 'offerType' + offertype);
-                            celimg.setAttribute('align', 'right');
-                            celimg.setAttribute('class', 'regcol2 setheight');
-                            celimg.appendChild(imgcontact);
-
-                            var imgcontact = document.createElement("img");
-                            imgcontact.src = 'public/images/EAslicing/GetVoucher.png';
-                            imgcontact.setAttribute('id', 'row' + dealid);
-                            imgcontact.setAttribute('name', 'offerType' + offertype);
-                            celimg.setAttribute('align', 'right');
-                            celimg.setAttribute('class', 'regcol2 setheight');
-                            celimg.appendChild(imgcontact);
-
-                            var imgsms = document.createElement("img");
-                            imgsms.src = 'public/images/EAslicing/GetVoucher.png';
-                            imgsms.setAttribute('id', 'row' + dealid);
-                            imgsms.setAttribute('name', 'offerType' + offertype);
-                            celimg.setAttribute('align', 'right');
-                            celimg.setAttribute('class', 'regcol2 setheight');
-                            celimg.appendChild(imgsms);*/
-
-                            $('a').click(function (event) {
-                                try {
-                                    event.preventDefault();
-                                    window.open($(this).attr('href'), '_blank', 'location=yes');
-                                } catch (ex) {
-                                    //  alert('sd' + ex);
-                                }
-
-                            });
+                            $("a").removeAttr('href');
                             
                             img.onclick = function () {
                                
@@ -388,23 +383,21 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                     GetRequestUrlDeal(dealsID);
                                 }
                                 if (offertype == "email-based") {
-                                    //alert("offertype:::::" + offertype + '::' + dealsms);
+                                   // alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestEmailDeal(dealsID);
                                 }
                                 if (offertype == "sms-based") {
                                    // alert("offertype:::::" + offertype + '::' + dealsms);
                                     GetRequestSMSDeal(dealsID);
                                 }
-                                /* if (offertype == "print-based") {
-                                GetRequestPrintDeal(dealsID);
-                                }*/
+                              
 
                                 if ((offertype == "print-based") && (dealsms == 0)) {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
+                                   // alert("offertype:::dealsms::" + offertype + '::' + dealsms);
                                     GetRequestPrintDeal(dealsID);
                                 }
                                 else if ((offertype == "print-based") && (dealsms == 1)) {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
+                                    //alert("offertype:::dealsms::" + offertype + '::' + dealsms);
                                     GetRequestSMSDeal(dealsID);
                                 }
 
@@ -660,7 +653,7 @@ function GetRequestSMSDealCallback(responseData) {
                     if (xmlDoc.getElementsByTagName("deals") != null && xmlDoc.getElementsByTagName("deals").length > 0) {
                      
                         document.getElementById('divmsg').innerHTML = xmlDoc.getElementsByTagName("deals")[0].getElementsByTagName("oprationMessage")[0].textContent;
-                        jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " oprationMessage: " + document.getElementById('divmsg').innerText);
+                        jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " oprationMessage: " + document.getElementById('divmsg').innerText, 'Info');
 
 
                     }
@@ -704,7 +697,7 @@ function GetRequestPrintDealCallback(responseData) {
             if (responseData !== "") {
                 xmlDoc = parser.parseFromString(responseData, "text/xml");
                 document.getElementById('divmsg').innerHTML = xmlDoc.getElementsByTagName("deal")[0].getElementsByTagName("offerDescription")[0].textContent;
-                jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " - " + document.getElementById('divmsg').innerText);
+                jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " - " + document.getElementById('divmsg').innerText, 'Info');
                 /**DEC 7th **/
                 //  document.getElementById('divmsg').innerHTML = xmlDoc.getElementsByTagName("deal")[0].getElementsByTagName("redemptionDetails")[0].textContent;
                 // alert(xmlDoc.getElementsByTagName("message")[0].textContent + " redemptionDetails::::::::: " + document.getElementById('divmsg').innerText);
@@ -761,7 +754,7 @@ var parser = new DOMParser();
 if (responseData !== "") {
 xmlDoc = parser.parseFromString(responseData, "text/xml");
 var alertmsg = xmlDoc.getElementsByTagName("deals")[0].getElementsByTagName("url")[0].textContent;
-jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " - " + alertmsg);
+jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " - " + alertmsg, 'Info');
 if (xmlDoc.getElementsByTagName("message")[0].textContent === "Your session has timed out. Please open a new session.") {
 localStorage.randgosessionid = null;
 jAlert('Your session has expired. Please login again.', 'Info');

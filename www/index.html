@@ -2,41 +2,29 @@
 <!DOCTYPE PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html class="bluebg">
 <head>
-    <!---*****************added******************** 
-<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale =1, user-scalable=no">-->
-        
-   <!-- <meta name="viewport" content="width=device-width, user-scalable=no" />
-   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />-->
-   <meta name="viewport" content="width=device-width, user-scalable=no" />
- 
-   
-    <title>Europ Assist</title>
-    <link rel="stylesheet" href="js/jquerymobile110min.css" />
-    <link href="newcss.css" rel="stylesheet" type="text/css" />
-    <script src="js/jquery164min.js" type="text/javascript"></script>
-
-    <script src="js/spinmin.js" type="text/javascript"></script>
-    <script src="js/jqueryalerts.js" type="text/javascript"></script>
-    <link href="public/css/jqueryalerts.css" rel="stylesheet" type="text/css" />
-    <link href="public/css/jqueryui.css" rel="stylesheet" />
-    <script src="js/jqueryui.js" type="text/javascript"></script> 
-    <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/RandgoServices.js"></script>
-    <script src="js/jqueryuitouchpunch.js" type="text/javascript"></script>
-
-    <script src="js/jquerymobile110min.js" type="text/javascript"></script>
-    <script src="js/utils.js" type="text/javascript"></script>
-    <script src="js/help.js" type="text/javascript"></script>
-    
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <script type="text/javascript" charset="utf-8">
-
-
-
-
-        $().ready(function () {
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<title>Europ Assist</title>
+<link rel="stylesheet" href="js/jquerymobile110min.css" />
+<link href="newcss.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery164min.js" type="text/javascript"></script>
+<script src="js/spinmin.js" type="text/javascript"></script>
+<script src="js/jqueryalerts.js" type="text/javascript"></script>
+<link href="public/css/jqueryalerts.css" rel="stylesheet" type="text/css" />
+<link href="public/css/jqueryui.css" rel="stylesheet" />
+<script src="js/jqueryui.js" type="text/javascript"></script> 
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/RandgoServices.js"></script>
+<script src="js/jqueryuitouchpunch.js" type="text/javascript"></script>
+<script src="js/jquerymobile110min.js" type="text/javascript"></script>
+<script src="js/utils.js" type="text/javascript"></script>
+<script src="js/help.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+ <!--  <script type="text/javascript" charset="utf-8" src="cordova2.6.0.js"></script>
+<script type="text/javascript" src="cordova-2.7.0.js"></script>-->
+<script type="text/javascript" charset="utf-8">
+    $().ready(function () {
             //reg +27 function for
-            $("#txtRegCell,#txtfpcellno").keypress(function (ev) {
+        $("#txtRegCell,#txtfpcellno,#txtcellno").keypress(function (ev) {
                 // alert('dfds');
                 var value = "+27";
                 var tval = this.value;
@@ -67,8 +55,6 @@
                 } if (event.target.id === "chkAcceptTerms") {
                     return;
                 }
-
-                //alert('sd');
                 $('#txtRegName,#txtRegSurName,#txtRegEmail,#txtRegCell,#txtRegIDNo,#txtRegPolicyNumber').blur();
             });
 
@@ -76,8 +62,16 @@
 
         });
         document.addEventListener('deviceready', function () {
-           
-            document.addEventListener("backbutton", ShowExitDialog, false);  
+        document.addEventListener("backbutton", ShowExitDialog, false);
+          /*  if (device.model == "HTC Desire S") {
+                $(".footerHeight").height(10);
+
+            }
+
+            else {
+               
+                $(".footerHeight").height(200);
+            }*/
 
         }, false);
 
@@ -95,17 +89,25 @@
           $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
 
           function belowheadingcollapse() {
-              if (localStorage.gethome == 1) {
-                $("#hme,#assisth").show();
-                document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
+          //    if (localStorage.gethome == 1) {
+               $("#assisth").show(); $("#hme").show();
+               // document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
+               document.getElementById("hmimg").src = localStorage.imgUrlHome;
+               document.getElementById("hmimg1").src = localStorage.imgUrlHome;
+
+               $("#hmimg").show(); 
+
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divhm').className = "panelcollapsed";
-                $("#divhm").show(); 
+                $("#divhm").show();
                
-            }
+           // }
             if (localStorage.getmedical == 2) {
                 $("#medical,#medtb").show();
-                document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+                // document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+                document.getElementById("mdimg").src = localStorage.imgUrlMedical;
+                document.getElementById("mdimg1").src = localStorage.imgUrlMedical;
+                $("#mdimg").show(); 
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divmm').className = "panelcollapsed";
                 $("#divmm").show();
@@ -113,7 +115,10 @@
             }
             if (localStorage.getroad == 3) {
                 $("#roadas,#rdtb").show();
-                document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                // document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                document.getElementById("rdimg").src = localStorage.imgUrlRoad;
+                document.getElementById("rdimg1").src = localStorage.imgUrlRoad;
+                $("#rdimg").show(); 
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divrd').className = "panelcollapsed";
                 $("#divrd").show();
@@ -122,7 +127,10 @@
             }
             if (localStorage.getlegal == 4) {
                 $("#legalas,#letb").show();
-                document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                document.getElementById("lgimg").src = localStorage.imgUrlLegal;
+                document.getElementById("lgimg1").src = localStorage.imgUrlLegal;
+                $("#lgimg").show(); 
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divle').className = "panelcollapsed";
                 $("#divle").show();
@@ -130,7 +138,10 @@
             }
             if (localStorage.gettravel == 5) {
                 $("#travelas,#trtb").show();
-                document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                //  document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                document.getElementById("tlimg").src = localStorage.imgUrlTravel;
+                document.getElementById("tlimg1").src = localStorage.imgUrlTravel;
+                $("#tlimg").show();
                 $("#homeseperator").removeClass("middlecontent3");
                 document.getElementById('divtr').className = "panelcollapsed";
                 $("#divtr").show();
@@ -153,16 +164,18 @@
        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
       
         $(function () {
-            $("#assisth").click(function () {
-                
-                if (localStorage.gethome == 1) {
-                    $("#assisth").hide();
+            $("#assisth,#hme").click(function () {               
+               // if (localStorage.gethome == 1) {
+                    $("#assisth,#hme").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divhm').className = "panelcollapsed";
                     $("#divhm").show(); //whole div red
                     $("#medical,#roadas,#legalas,#travelas").hide();
-                    $("#hme").show();
-                    document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';   
+
+                  //  document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
+                    document.getElementById("hmimg").src = localStorage.imgUrlHome;
+                    document.getElementById("hmimg1").src = localStorage.imgUrlHome;
+                    $("#hmimg").show();   
 
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
@@ -181,21 +194,24 @@
                         document.getElementById('divle').className = "panelcollapsed";
                     }
 
-               }
+             //  }
 
             });
         });
 
         $(function () {
-            $("#medtb").click(function () {
+            $("#medtb,#medical").click(function () {
                 if (localStorage.getmedical == 2) {
-                    $("#medtb").hide();
+                    $("#medtb,#medical").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divmm').className = "panelcollapsed";
                     $("#divmm").show();
                     $("#hme,#roadas,#legalas,#travelas").hide();
-                    $("#medical").show();
-                    document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+                 //  $("#medical").show();
+                    // document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+                    document.getElementById("mdimg").src = localStorage.imgUrlMedical;
+                    document.getElementById("mdimg1").src = localStorage.imgUrlMedical;
+                    $("#mdimg").show();
                     if (document.getElementById('divhm').className == "panel") {
                         $("#assisth").show();
                        document.getElementById('divhm').className = "panelcollapsed";
@@ -218,15 +234,18 @@
         });
 
         $(function () {
-            $("#rdtb").click(function () {
+            $("#rdtb,#roadas").click(function () {
                 if (localStorage.getroad == 3) {
-                    $("#rdtb").hide();
+                    $("#rdtb,#roadas").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divrd').className = "panelcollapsed";
                     $("#divrd").show();
                     $("#hme,#medical,#legalas,#travelas").hide();
-                    $("#roadas").show();
-                    document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                    //$("#roadas").show();
+                    //  document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                    document.getElementById("rdimg").src = localStorage.imgUrlRoad;
+                    document.getElementById("rdimg1").src = localStorage.imgUrlRoad;
+                    $("#rdimg").show();
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
                         document.getElementById('divmm').className = "panelcollapsed";
@@ -249,15 +268,18 @@
         });
 
         $(function () {
-            $("#letb").click(function () {
+            $("#letb,#legalas").click(function () {
                 if (localStorage.getlegal == 4) {
-                   $("#letb").hide();
+                    $("#letb,#legalas").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divle').className = "panelcollapsed";
                     $("#divle").show();
                     $("#hme,#medical,#roadas,#travelas").hide();
-                    $("#legalas").show();
-                    document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                   // $("#legalas").show();
+                    // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                    document.getElementById("lgimg").src = localStorage.imgUrlLegal;
+                    document.getElementById("lgimg1").src = localStorage.imgUrlLegal;
+                    $("#lgimg").show(); 
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
                         document.getElementById('divmm').className = "panelcollapsed";
@@ -279,15 +301,18 @@
             });
         });
         $(function () {
-            $("#trtb").click(function () {
+            $("#trtb,#travelas").click(function () {
                 if (localStorage.gettravel == 5) {
-                    $("#trtb").hide();
+                    $("#trtb,#travelas").hide();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divtr').className = "panelcollapsed";
                     $("#divtr").show();
                     $("#hme,#medical,#roadas,#legalas,#travelas").hide();
-                    $("#travelas").show();
-                    document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                   // $("#travelas").show();
+                    //  document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                    document.getElementById("tlimg").src = localStorage.imgUrlTravel;
+                    document.getElementById("tlimg1").src = localStorage.imgUrlTravel;
+                    $("#tlimg").show();
                     if (document.getElementById('divmm').className == "panel") {
                         $("#medtb").show();
                         document.getElementById('divmm').className = "panelcollapsed";
@@ -442,8 +467,9 @@
      });
      
     </script>
-    <style>
+    <style type="text/css">
 .ui-datepicker-trigger { position:relative;top:-32px ;left:100%;-webkit-appearance:none;padding-right:3px;width:17%;}
+
 </style>
 
 <!-- DEC 21st added for slide transistion last changed-->
@@ -544,7 +570,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="logincontent loginpadd" onclick="gotoRegFirstPage()">
+                    <td class="logincontent loginpadd" onclick="gotoFstpage('reg');">
                         <table class="maintable7" cellspacing="0" cellpadding="0">
                             <tr style="height:26.5px">
                                 <td></td>
@@ -560,6 +586,8 @@
                                     <div id="foo">
                                     </div>
                                 </td>
+                                  
+
                             </tr>
                              <tr style="height:26.5px">
                                 <td></td>
@@ -568,7 +596,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="logincontent loginpadd" onclick="login()">
+                    <td class="logincontent loginpadd" onclick="gotoFstpage('login');">
                         <table class="maintable7" cellspacing="0" cellpadding="0">
                             <tr style="height:26.5px">
                                 <td></td>
@@ -581,6 +609,8 @@
                                     <img src="public/images/EAslicing/lock.png" class="loginimg">
                                 </td>
                                 <td class="regcol1"></td>
+                              
+
                             </tr>
                             <tr style="height:26.5px">
                                 <td></td>
@@ -956,8 +986,7 @@
                                 <td class="headeroi" valign="top">
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td valign="top" style="width:100%">
-                                              
+                                            <td valign="top" style="width:100%">                                              
                                                 <div class="profileclass" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/serviceswhite.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -1017,16 +1046,15 @@
                         </table>
                     </td>
                 </tr>
-                <!-- img -->
-                <tr height="10%">
-                    <td class="home" id="hme">
-                     <img src="" alt="" id="hmimg" style="width:100%;height:100%;" /></td>
-                </tr>
+              
                 <!-- img content  Home-->
                 <tr class="trheight3">
                     <td class="middlecontent4" id="homeseperator">
                         <div id="divhm" class="panelcollapsed">
-                            <h2 width="100%" id="assisth" style="margin: 0!important; padding: 0;">
+                          <h2 class="home" id="hme" style="height:84px;margin:0">
+                            <img src="" alt="" id="hmimg" style="width:100%;height:100%;" />
+                            </h2>
+                            <h2 width="100%" id="assisth" style="margin: 0!important;  background: #e53138 url(public/images/arrowup.gif) no-repeat 280px;padding: 0;">
                                 <table height="100%" width="100%" cellspacing="0" cellpadding="0">
                                     <tr id="tddiv">
                                         <td class="regcol1"></td>
@@ -1041,6 +1069,9 @@
                             </h2>
                             <!-- collapsable div -->
                             <div class="panelcontent" id="divhome">
+                            <div class="home" id="h1" style="height:84px;margin:0;background-image: url('public/images/EAslicing/bgrepete.png');background-repeat:repeat;" onclick="belowheadingcollapse()">
+                            <img src="" alt="" id="hmimg1" style="width:100%;height:100%;" />
+                            </div>
                                 <table width="100%" class="plbg btpd" cellspacing="0" cellpadding="0" border="0">
                                     <tr>
                                         <td class="btpd" width="5%"></td>
@@ -1091,16 +1122,15 @@
                         </div>
                     </td>
                 </tr>
-                <!-- img content end -->
-                <tr height="10%">
-                    <td class="medical" id="medical"><img src="" alt="" id="mdimg" style="width:100%;height:100%;" />
-</td>
-                </tr>
+               
                 <!-- img content  Medical-->
                 <tr class="trheight3">
                     <td class="middlecontent4">
                         <div id="divmm" class="panelcollapsed">
-                            <h2 id="medtb" style="margin: 0!important; padding: 0;">
+                           <h2 class="medical" id="medical" style="height:84px;margin:0">
+                            <img src="" alt="" id="mdimg" style="width:100%;height:100%;" />
+                          </h2>
+                            <h2 id="medtb" style="margin: 0!important;  background: #e53138 url(public/images/arrowup.gif) no-repeat 280px;padding: 0;">
                                 <table width="100%" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="regcol1"></td>
@@ -1114,6 +1144,9 @@
                                 </table>
                             </h2>
                             <div class="panelcontent" id="divmedical">
+                            <div class="medical" id="h2" style="height:84px;margin:0;background-image: url('public/images/EAslicing/bgrepete.png');background-repeat:repeat;" onclick="belowheadingcollapse()">
+                            <img src="" alt="" id="mdimg1" style="width:100%;height:100%;" />
+                            </div>
                                 <table class="plbg btpd" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="btpd" width="6%"></td>
@@ -1161,14 +1194,15 @@
                         </div>
                     </td>
                 </tr>
-                <tr height="10%">
-                    <td class="roadassistance" id="roadas"><img src="" alt="" id="rdimg" style="width:100%;height:100%;" /></td>
-                </tr>
+               
                 <!-- img content  Road-->
                 <tr class="trheight3">
                     <td class="middlecontent4">
                         <div id="divrd" class="panelcollapsed">
-                            <h2 id="rdtb" style="margin: 0!important; padding: 0;">
+                        <h2 class="roadassistance" id="roadas" style="height:84px;margin:0">
+                            <img src="" alt="" id="rdimg" style="width:100%;height:100%;" />
+                          </h2>
+                            <h2 id="rdtb" style="margin: 0!important; padding: 0; background: #e53138 url(public/images/arrowup.gif) no-repeat 280px;">
                                 <table width="100%" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="regcol1"></td>
@@ -1182,6 +1216,9 @@
                                 </table>
                             </h2>
                             <div class="panelcontent" id="divroad">
+                              <div class="roadassistance" id="h3" style="height:84px;margin:0;background-image: url('public/images/EAslicing/bgrepete.png');background-repeat:repeat;" onclick="belowheadingcollapse()">
+                            <img src="" alt="" id="rdimg1" style="width:100%;height:100%;" />
+                            </div>
                                 <table class="plbg btpd" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="btpd" width="6%"></td>
@@ -1230,15 +1267,15 @@
                         </div>
                     </td>
                 </tr>
-                <tr height="10%">
-                    <td class="legal" id="legalas"><img src="" alt="" id="lgimg" style="width:100%;height:100%;" />
-</td>
-                </tr>
+          
                 <!-- img content  legal-->
                 <tr class="trheight3">
                     <td class="middlecontent4">
                         <div id="divle" class="panelcollapsed">
-                            <h2 id="letb" style="margin: 0!important; padding: 0;">
+                        <h2 class="legal" id="legalas" style="height:84px;margin:0">
+                            <img src="" alt="" id="lgimg" style="width:100%;height:100%;" />
+                          </h2>
+                            <h2 id="letb" style="margin: 0!important; padding: 0; background: #e53138 url(public/images/arrowup.gif) no-repeat 280px;">
                                 <table width="100%" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="regcol1"></td>
@@ -1252,6 +1289,9 @@
                                 </table>
                             </h2>
                             <div class="panelcontent" id="divlegal">
+                            <div class="legal" id="h4" style="height:84px;margin:0;background-image: url('public/images/EAslicing/bgrepete.png');background-repeat:repeat;" onclick="belowheadingcollapse()">
+                            <img src="" alt="" id="lgimg1" style="width:100%;height:100%;" />
+                            </div>
                                 <table class="plbg btpd" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="btpd" width="6%"></td>
@@ -1300,15 +1340,15 @@
                         </div>
                     </td>
                 </tr>
-                <tr height="10%">
-                    <td class="travel" id="travelas"><img src="" alt="" id="tlimg" style="width:100%;height:100%;" />
-</td>
-                </tr>
+              
                 <!-- img content  travel-->
                 <tr class="trheight3">
                     <td>
                         <div id="divtr" class="panelcollapsed">
-                            <h2 id="trtb" style="margin: 0!important; padding: 0;">
+                           
+                            <h2 class="travel" id="travelas" style="height:84px;margin:0">
+                            <img src="" alt="" id="tlimg" style="width:100%;height:100%;" />
+                          </h2> <h2 id="trtb" style="margin: 0!important; padding: 0;background: #e53138 url(public/images/arrowup.gif) no-repeat 280px;">
                                 <table width="100%" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="regcol1"></td>
@@ -1322,6 +1362,9 @@
                                 </table>
                             </h2>
                             <div class="panelcontent" id="divtravel">
+                            <div class="travel" id="h5" style="height:84px;margin:0;background-image: url('public/images/EAslicing/bgrepete.png');background-repeat:repeat;" onclick="belowheadingcollapse()">
+                            <img src="" alt="" id="tlimg1" style="width:100%;height:100%;" />
+                            </div>
                                 <table class="plbg btpd" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="btpd" width="6%"></td>
@@ -1379,7 +1422,7 @@
             </table>
         </div>
     </div>
-    <div data-role="page" id="indexprofile">
+     <div data-role="page" id="indexprofile">
         <div data-role="content">
             <table class="maintable" cellspacing="0" cellpadding="0">
                 <tr class="topbar">
@@ -1482,7 +1525,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="textbox3" id="txtuname" maxlength="50" disabled="disabled">
+                                    <input type="text" class="textbox3" id="txtuname" disabled="disabled" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1495,7 +1538,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="textbox3" id="txtname" maxlength="50" disabled="disabled">
+                                    <input type="text" class="textbox3" id="txtname" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1508,7 +1551,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="textbox3" id="txtsname" maxlength="50" disabled="disabled">
+                                    <input type="text" class="textbox3" id="txtsname" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1521,7 +1564,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="textbox3" id="txtemail" maxlength="50" disabled="disabled">
+                                    <input type="text" class="textbox3" id="txtemail" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1534,7 +1577,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="number" class="textbox3" id="txtcellno" maxlength="11" disabled="disabled">
+                                   <input class="textbox3" id="txtcellno" type="text"  value="+27" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1547,7 +1590,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="textbox3" id="txtid" maxlength="50" disabled="disabled">
+                                    <input type="text" class="textbox3" id="txtid" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1560,7 +1603,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="textbox3" id="txtnewpin" maxlength="50">
+                                    <input type="password" class="textbox3" id="txtnewpin" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1573,7 +1616,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="textbox3" id="txtconpin" maxlength="50">
+                                    <input type="password" class="textbox3" id="txtconpin" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_profile').style.display='none';" onblur="document.getElementById('show_hide_backbutton_profile').style.display='block';"/>
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1584,14 +1627,15 @@
                     <td class="change">
                         <table class="tablewidth" cellspacing="0" cellpadding="0">
                             <tr height="30%">
-                                <td width="10%"></td>
-                                <td width="80%" align="left">
-                                    <img src="public/images/EAslicing/changepass.png" id="pin" onclick="validation();" />
+                                <td width="15%"></td>
+                                <td width="70%" align="center">
+                                    <img src="public/images/EAslicing/submitbutton.png" class="regsubbtn" id="pin" onclick="validation();" />
                                 </td>
-                                <td width="10%"></td>
+                                <td width="15%"></td>
                             </tr>
                         </table>
-                        <input type="hidden" id="oldpin" />
+                        <input type="hidden" id="oldpin" value="" />
+                          <input type="hidden" id="userid" value="" />
                     </td>
                 </tr>
                 <tr>
@@ -1600,9 +1644,15 @@
                        
                     </td>
                 </tr>
+                <tr class="footerHeight">
+                    <td>
+                    
+                    </td>
+                </tr>
+
             </table>
         </div>
-        <div data-role="footer">
+        <div data-role="footer" id="show_hide_backbutton_profile">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -1732,6 +1782,7 @@
         
     </div>
     <!-- Register(services)-->
+    
     <div data-role="page" id="reg">
         <div data-role="content">
             <table class="maintable" cellspacing="0" cellpadding="0">
@@ -1917,16 +1968,24 @@
                         <br />  <br />
                     </td>
                 </tr>
+                 <tr class="footerHeight">
+                    <td>
+                    
+                    </td>
+                </tr>
+
+              
                
             </table>
         </div>
        
-        <div data-role="footer" id="show_hide_backbutton100">
+        <div data-role="footer" id="show_hide_backbutton">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
        
     </div>
-    <!--Login(services)-->
+   
+   <!-- Login(services)-->
     <div id="log" data-role="page">
         <div data-role="content">
             <table class="maintable" cellspacing="0" cellpadding="0">
@@ -1974,7 +2033,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="txtbxreg" id="txtLoginUserName" maxlength="50" onfocus="document.getElementById('show_hide_backbutton1').style.display='none';" onblur="document.getElementById('show_hide_backbutton1').style.display='block';">
+                                    <input type="text" class="txtbxreg" id="txtLoginUserName" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_log').style.display='none';" onblur="document.getElementById('show_hide_backbutton_log').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -1987,7 +2046,7 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="txtLoginPassword" maxlength="50" onfocus="document.getElementById('show_hide_backbutton1').style.display='none';" onblur="document.getElementById('show_hide_backbutton1').style.display='block';">
+                                    <input type="password" class="txtbxreg" id="txtLoginPassword" maxlength="50" onfocus="document.getElementById('show_hide_backbutton_log').style.display='none';" onblur="document.getElementById('show_hide_backbutton_log').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -2009,7 +2068,7 @@
                                     <span class="hyperlink">Forgot Password?</span>
                                 </td>
                                 <td align="left" width="1%" style="vertical-align:middle">
-                                 <input data-role="none" type="image" alt="" src="public/images/EAslicing/chkbx.png" id="chkremember" class="logcheck" onclick="return (logcheck())"/>
+                                 <input data-role="none" type="image" alt="" src="public/images/EAslicing/chkbx.png" id="chkremember" class="logcheck" onclick="return (logcheck())" style="width: 20px;height: 20px;"/>
                                  </td>
                                 <td class="chkstyle" align="left" width="29%" style="padding-left:10px;vertical-align:middle">
                                     Remember me 
@@ -2052,13 +2111,18 @@
                         <br />
                     </td>
                 </tr>
+                 <tr class="footerHeight">
+                    <td>
+                    
+                    </td>
+                </tr>
               
             </table>
         </div>
         <!--<div data-position="fixed" data-role="footer" id="show_hide_backbutton1">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>-->
-         <div data-role="footer" id="show_hide_backbutton101">
+         <div data-role="footer" id="show_hide_backbutton_log">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
@@ -5869,7 +5933,7 @@
                                     <table class="maintable1" width="100%" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td valign="top" style="width:100%">
-                                                <!--<div style="height:100%;width:5%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoService()">
                                                     <img src="public/images/EAslicing/servicesgrey.png" class="headerimgstyle " />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -5880,7 +5944,7 @@
                                                     </table>
                                                 </div>
 
-                                               <!--<div style="width:4%;float:left;height:100%" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" id="div16" onclick="gotoWallet()" style="display: block">
                                                     <img src="public/images/EAslicing/walletgray.png" id="Img27" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -5890,7 +5954,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="width:7%;float:left;height:100%" class="nav">dsaasd</div>-->
+                                             
                                                 <div class="profileclass" onclick="gotoBenifit()">
                                                     <img src="public/images/EAslicing/benifitewhite.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -5900,7 +5964,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                              
                                                 <div class="headerbckrndimgg" onclick="gotoProfile()">
                                                     <img src="public/images/EAslicing/profilegray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -5910,7 +5974,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                 <!--<div style="height:100%;width:2%;float:left" class="nav"></div>-->
+                                           
                                                 <div class="headerbckrndimgg" onclick="gotoHelp()">
                                                     <img src="public/images/EAslicing/helpgray.png" class="headerimgstyle" />
                                                     <table style="width: 100%" cellspacing="0" cellpadding="0">
@@ -5920,7 +5984,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <!--<div style="height:100%;width:7%;float:left" class="nav"></div>-->
+                                                
                                             </td>
                                         </tr>
                                     </table>
@@ -7001,7 +7065,7 @@
                                 <td class="regtopHeader">Register
                                 </td>
                                 <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/lock.png" class="loginimg">
+                                    <img alt=" " src="public/images/EAslicing/register.png" class="loginimg">
                                 </td>
                                 <td class="regcol1"></td>
                             </tr>
@@ -7020,7 +7084,7 @@
                             <tr height="10%" >
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="text" class="txtbxreg" id="txtusernameregfirst" maxlength="10">
+                                    <input type="text" class="txtbxreg" id="txtusernameregfirst" maxlength="10" onfocus="document.getElementById('show_hide_backbutton_firstregpage').style.display='none';" onblur="document.getElementById('show_hide_backbutton_firstregpage').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -7033,7 +7097,7 @@
                             <tr height="10%" >
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="txtpwregfirst" maxlength="10">
+                                    <input type="password" class="txtbxreg" id="txtpwregfirst" maxlength="10" onfocus="document.getElementById('show_hide_backbutton_firstregpage').style.display='none';" onblur="document.getElementById('show_hide_backbutton_firstregpage').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
@@ -7046,49 +7110,12 @@
                             <tr height="10%">
                                 <td class="tdwidth"></td>
                                 <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="txtconfirmpwregfirst" maxlength="10">
+                                    <input type="password" class="txtbxreg" id="txtconfirmpwregfirst" maxlength="10" onfocus="document.getElementById('show_hide_backbutton_firstregpage').style.display='none';" onblur="document.getElementById('show_hide_backbutton_firstregpage').style.display='block';">
                                 </td>
                                 <td class="tdwidth"></td>
                             </tr>
-                            <tr height="10%" style="display:none">
-                                <td class="tdwidth"></td>
-                                <td class="textstyle1">USER NAME
-                                </td>
-                                <td class="tdwidth"></td>
-                            </tr>
-                            <tr height="10%" style="display:none">
-                                <td class="tdwidth"></td>
-                                <td class="tdwidth1">
-                                    <input type="text" class="txtbxreg" id="Text2" maxlength="10">
-                                </td>
-                                <td class="tdwidth"></td>
-                            </tr>
-                            <tr height="10%" style="display:none">
-                                <td class="tdwidth"></td>
-                                <td class="textstyle1">PASSWORD
-                                </td>
-                                <td class="tdwidth"></td>
-                            </tr>
-                            <tr height="10%" style="display:none">
-                                <td class="tdwidth"></td>
-                                <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="Password1" maxlength="10">
-                                </td>
-                                <td class="tdwidth"></td>
-                            </tr>
-                              <tr height="10%" style="display:none">
-                                <td class="tdwidth"></td>
-                                <td class="textstyle1">CONFIRM PASSWORD
-                                </td>
-                                <td class="tdwidth"></td>
-                            </tr>
-                            <tr height="10%" style="display:none">
-                                <td class="tdwidth"></td>
-                                <td class="tdwidth1">
-                                    <input type="password" class="txtbxreg" id="Password2" maxlength="10">
-                                </td>
-                                <td class="tdwidth"></td>
-                            </tr>
+                          
+                          
                            
 
                         </table>
@@ -7121,13 +7148,21 @@
                         <br />
                     </td>
                 </tr>
-                <tr class="bckbtn">
+                 <tr class="footerHeight">
+                    <td>
+                    
+                    </td>
+                </tr>
+                <!--<tr class="bckbtn">
                     <td style="position: fixed; bottom: 0; left: 0">
                         <img alt=" " src="public/images/EAslicing/backbutton.png" class="headerimgstyle1"
                             onclick="goBack();" />
                     </td>
-                </tr>
+                </tr>-->
             </table>
+        </div>
+         <div data-role="footer" id="show_hide_backbutton_firstregpage">
+            <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
         </div>
     </div>
     <div id="divmsg" style="display:none"></div>
@@ -7242,6 +7277,11 @@
                         <br />
                     </td>
                 </tr>
+                 <tr class="footerHeight">
+                    <td>
+                    
+                    </td>
+                </tr>
             </table>
         </div>
         <div data-role="footer">
@@ -7251,14 +7291,11 @@
 
 
     <div data-role="page" id="indexhelp" >
-        
-        <div data-role="content" >
-          
-            <table cellpadding="0" cellspacing="0" class="maintable" style="overflow-x:hidden!important;">    
-             <!--<tr class="headeroi" style="height:100%;width:100%"><table style="width:102%;height:100%;" cellspacing="0" cellpadding="0"> <tr> <td class="headerbckrndimg headerwt"> <div style="width:100%"><img src="public/images/EAslicing/innerlogo.png" class="europimght" /></div> </td> <td class="headeroi"style="vertical-align:top"><div class="headerbckrndimgg" onclick="gotoService()" > <img src="public/images/EAslicing/servicesgrey.png" alt="" class="headerimgstyle" /> <div class="serfnt">Services </div> </div> <div class="headerbckrndimgg" onclick="gotoWallet()" > <img src="public/images/EAslicing/walletgray.png" alt="" class="headerimgstyle" /> <div class="serfnt">Wallet</div> </div> <div class="headerbckrndimgg" onclick="gotoBenifit()" > <img src="public/images/EAslicing/benifitsgray.png" alt="" class="headerimgstyle" /> <div class="serfnt">Benefits</div> </div> <div class="headerbckrndimgg" onclick="gotoProfile()"> <img src="public/images/EAslicing/profilegray.png" alt="" class="headerimgstyle" /> <div class="serfnt">Profile</div> </div> <div class="profileclass"> <img src="public/images/EAslicing/helpwhite.png" alt="" class="headerimgstyle" /> <div class="walser">FAQs</div> </div> </td> </tr> </table></tr>          -->
-               <tr class="topbar" style="overflow-x:hidden!important;">
-                    <td>
-                        <div>
+    <div data-role="content" >
+    <table cellpadding="0" cellspacing="0" class="maintable" style="overflow-x:hidden!important;"> 
+    <tr class="topbar" style="overflow-x:hidden!important;">
+         <td>
+            <div>
                         <table style="width:102%;height:100%;overflow-x:hidden!important;" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">                                   
@@ -7352,19 +7389,9 @@
               
                <tr>
                     <td> 
-                   
-                      
-                          
-                        <table class="maintable" cellspacing="0" cellpadding="0" id="tblhelp">
-                        
-                             
-                        </table>
-
-
-
-              
-                       
-                    </td>
+                    <table class="maintable" cellspacing="0" cellpadding="0" id="tblhelp">
+                     </table>
+                      </td>
                 </tr>
       
                 
@@ -7520,4 +7547,5 @@
    
  </body>
  </html>
+ 
  
