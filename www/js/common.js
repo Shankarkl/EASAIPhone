@@ -13,6 +13,7 @@ var TravelID = '';
 var target = '';
 var spinner = '';
 var Pagename = '';
+localStorage.count = 0;
 /*******************************************************************************
 * FUNCTION TO CALL ANY WEB SERVICE
 ******************************************************************************/
@@ -35,54 +36,30 @@ CallWebService = function (url, inputData, method, contentType, callback) {
 
             if (xhr.readyState == 4 && (xhr.status == 404 || xhr.status == 403 || xhr.status == 500 || xhr.status == 504)) {
                 //alert(xhr.status + 'status(500status)');
-                localStorage.randgosessionid = null;
-                localStorage.loginID = null;
-                document.getElementById('txtLoginUserName').value = "";
-                document.getElementById('txtLoginPassword').value = "";
                 jAlert("The System is temporarily unavailable, please try again later.", 'Info');
                 document.getElementById('loaddingimg').style.display = "none";
-
-                prevPage = currentPage;
-                $.mobile.changePage('#log', {
-                    transition: "none",
-                    reverse: false,
-                    changeHash: false
-                });
-                currentPage = 'log';
-                pageData.push(currentPage);
 
             }
         };
 
         xhr.onerror = function (e) {
-            localStorage.randgosessionid = null;
-            localStorage.loginID = null;
-            document.getElementById('txtLoginUserName').value = "";
-            document.getElementById('txtLoginPassword').value = "";
+
             jAlert("The System is temporarily unavailable, please try again later.", 'Info');
             document.getElementById('loaddingimg').style.display = "none";
 
-            prevPage = currentPage;
-            $.mobile.changePage('#log', {
-                transition: "none",
-                reverse: false,
-                changeHash: false
-            });
-            currentPage = 'log';
-            pageData.push(currentPage);
+
         };
 
         xhr.open(method, url);
         xhr.setRequestHeader("Content-Type", contentType);
-        xhr.timeout = 120000;
+        xhr.timeout = 60000;
         xhr.ontimeout = function (e) {
             jAlert("The System is temporarily unavailable, please try again later.", 'Info');
             document.getElementById('loaddingimg').style.display = "none";
-            document.getElementById('txtLoginUserName').value = "";
-            document.getElementById('txtLoginPassword').value = "";
+
         }
 
-        // alert("No network connection::checking::::::" + window.navigator.onLine);    
+
         if (inputData !== '') {
             if (window.navigator.onLine == true) {
 
@@ -141,16 +118,48 @@ function gotoBenifit() {
 
             $("#tbldisplaycategoriesbycid tr").remove();
             $("#tbldisplaymerchantdeals tr").remove();
-
+            var randgoInputData = '';
+            randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
+            randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+            randgoInputData = randgoInputData + '<soap:Body>';
+            randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">';
+            randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>';
+            randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>';
+            randgoInputData = randgoInputData + '</Login>';
+            randgoInputData = randgoInputData + '</soap:Body>';
+            randgoInputData = randgoInputData + '</soap:Envelope>';
+            CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew);
             //setTimeout(function () { GetDisplayCategories(); }, 100);
-            GetDisplayCategories();
-           
+
+
         },
 200);
     }
 }
 
 
+function RandoLoginCallBackNew(responseData) {
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
+                localStorage.randgosessionid = xmlDoc.getElementsByTagName("sessionid")[0].textContent;
+                GetDisplayCategories();
+
+            }
+        }
+        else {
+            jAlert('No Data Found', 'Info');
+            return false;
+        }
+
+    } catch (exp) {
+    }
+}
 
 function gotoProfile() {
 
@@ -660,7 +669,7 @@ function LoginValidation() {
 
 function goBack() {
     if (currentPage == 'log' || currentPage == 'RegFstPage') {
-    setTimeout(function () {
+        setTimeout(function () {
             prevPage = currentPage;
             $.mobile.changePage('#indexPage', {
                 transition: "none",
@@ -669,7 +678,7 @@ function goBack() {
             });
             currentPage = 'indexPage';
             pageData.push(currentPage);
-          
+
         },
 
         200);
@@ -924,26 +933,7 @@ function getUrlVars() {
 }
 /*******check checklogin *********/
 function checkLogin() {
-    //localStorage.randgosessionid = 1;
-
-    // alert(localStorage.loginID + '::' + localStorage.randgosessionid);
-    if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == "null") {
-        document.getElementById('txtLoginUserName').value = "";
-        document.getElementById('txtLoginPassword').value = "";
-
-        prevPage = currentPage;
-        $.mobile.changePage('#log', {
-            transition: "none",
-            reverse: false,
-            changeHash: false
-        });
-        currentPage = 'log';
-        pageData.push(currentPage);
-        return false;
-    } else {
-        return true;
-    }
-    // return true;
+return true;
 }
 
 function Transactions() {
@@ -1091,14 +1081,14 @@ function validation() {
         jAlert("Please enter the Cellphone number!", 'Info');
         return false;
     } else if (!CellNumberResult.match(num)) {
-        jAlert("Please enter valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid Cellphone number!", 'Info');
         return false;
     }
     else if (CellNumberResult.length < '12') {
-        jAlert("Please enter valid Cellphone number!", 'Info'); return false;
+        jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
     }
     else if (CellNumberResult.length > '12') {
-        jAlert("Please enter valid Cellphone number!", 'Info'); return false;
+        jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
     }
     else if (IdNumber == "") {
         jAlert("Please enter the Id number!", 'Info');
@@ -1108,12 +1098,12 @@ function validation() {
         jAlert("Please enter 13 digit Id number!", 'Info');
         return false;
     } else {
-      //  alert(CellNumberResult);
+        //  alert(CellNumberResult);
         CellNumberResult = CellNumberResult.slice(1);
         if (pinnew == '') {
             document.getElementById('txtnewpin').value = 'gohome';
-                Profileupdate(document.getElementById('userid').value, FName, SurName, Name, document.getElementById('oldpin').value, IdNumber, EmailID, CellNumberResult);
-          
+            Profileupdate(document.getElementById('userid').value, FName, SurName, Name, document.getElementById('oldpin').value, IdNumber, EmailID, CellNumberResult);
+
         } else {
             if (pinnew.length < 5) {
                 jAlert("Password must contain at least five characters!", " Info ");
@@ -1144,8 +1134,8 @@ function validation() {
             }
         }
     }
-    
-    
+
+
 }
 
 
@@ -1161,7 +1151,7 @@ function GetProfileDetails() {
     profileinputdata = profileinputdata + '</soap:Body>';
     profileinputdata = profileinputdata + '</soap:Envelope>';
     CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=GetProfileDetails', profileinputdata, 'POST', 'text/xml', GetProfileDetailsCallBack);
-   // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetProfileDetails', profileinputdata, 'POST', 'text/xml', GetProfileDetailsCallBack);
+    // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetProfileDetails', profileinputdata, 'POST', 'text/xml', GetProfileDetailsCallBack);
 }
 function GetProfileDetailsCallBack(responseData) {
     try {
@@ -1176,12 +1166,12 @@ function GetProfileDetailsCallBack(responseData) {
                 document.getElementById('txtname').value = xmlDoc.getElementsByTagName("FirstName")[0].textContent;
                 document.getElementById('txtsname').value = xmlDoc.getElementsByTagName("LastName")[0].textContent;
                 document.getElementById('txtid').value = xmlDoc.getElementsByTagName("IDNumber")[0].textContent;
-                document.getElementById('txtcellno').value ='+'+ xmlDoc.getElementsByTagName("CellNumber")[0].textContent;
+                document.getElementById('txtcellno').value = '+' + xmlDoc.getElementsByTagName("CellNumber")[0].textContent;
                 document.getElementById('txtemail').value = xmlDoc.getElementsByTagName("EMAILID")[0].textContent;
                 document.getElementById('oldpin').value = xmlDoc.getElementsByTagName("Password")[0].textContent;
                 document.getElementById('userid').value = xmlDoc.getElementsByTagName("UserId")[0].textContent;
-                
-                
+
+
             }
             else {
                 jAlert('No Data found', 'Info');
@@ -1211,10 +1201,10 @@ function Profileupdate(Userid, Fname, Sname, Uname, Password, IDNum, EmailID, ce
     changepinInputdata = changepinInputdata + '</UpdateUserdetails>';
     changepinInputdata = changepinInputdata + '</soap:Body>';
     changepinInputdata = changepinInputdata + '</soap:Envelope>';
-  
+
     //CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=UpdateUserdetails', changepinInputdata, 'POST', 'text/xml', ProfileupdateCallback);
     CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=UpdateUserdetails', changepinInputdata, 'POST', 'text/xml', ProfileupdateCallback);
-    
+
 }
 function ProfileupdateCallback(responseData) {
     // alert("ProfileChangepasswordCallback:::::::::::" + responseData);
@@ -1226,29 +1216,29 @@ function ProfileupdateCallback(responseData) {
             var xmlDoc = parser.parseFromString(responseData, "text/xml");
 
             if (xmlDoc.getElementsByTagName("UpdateUserdetailsResult")[0].textContent == 0) {
-                    jAlert("Your password has not changed.", 'Info');
-                    return false;
+                jAlert("Your password has not changed.", 'Info');
+                return false;
             }
-                else {
-                    //alert('::' + document.getElementById('txtnewpin').value);
-                    if (document.getElementById('txtnewpin').value == 'gohome') {
-                        jAlert("Profile updated successfully!", 'Info');
-                        document.getElementById('txtnewpin').value = '';
-                        gotoService();
-                        return false;
-                    } else {
-                        jAlert("Your password changed successfully!", 'Info');
-                        localStorage.randgosessionid = null;
-                        localStorage.loginID = null;
-                        prevPage = currentPage;
-                        $.mobile.changePage('#indexPage', {
-                            transition: "none",
-                            reverse: false,
-                            changeHash: false
-                        });
-                        currentPage = 'indexPage';
-                        pageData.push(currentPage);
-                    }
+            else {
+                //alert('::' + document.getElementById('txtnewpin').value);
+                if (document.getElementById('txtnewpin').value == 'gohome') {
+                    jAlert("Profile updated successfully!", 'Info');
+                    document.getElementById('txtnewpin').value = '';
+                    gotoService();
+                    return false;
+                } else {
+                    jAlert("Your password changed successfully!", 'Info');
+                    localStorage.randgosessionid = null;
+                    localStorage.loginID = null;
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexPage', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'indexPage';
+                    pageData.push(currentPage);
+                }
             }
         }
     }
@@ -1272,14 +1262,15 @@ function gototerms() {
 
 /***********18/10/2013*************/
 function checkremember() {
-  $("#tlimg,#lgimg,#rdimg,#mdimg,#hmimg").hide();
+    $("#tlimg,#lgimg,#rdimg,#mdimg,#hmimg").hide();
     $("#NOproductDiv").hide();
     $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
     $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
     $(".trheight3").hide();
 
-    if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == "null" || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == " " || localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
-        //alert("i" + localStorage.loginID);
+   // if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == "null" || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == " " || localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
+   // if (localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
+    if (localStorage.loginID == 0 || localStorage.loginID == undefined || localStorage.loginID == null || localStorage.loginID == 'undefined' || localStorage.loginID == '' || localStorage.loginID == "null") {
         localStorage.randgosessionid = null;
 
         localStorage.gettravel = 0;
@@ -1291,7 +1282,7 @@ function checkremember() {
         prevPage = currentPage;
         $.mobile.changePage('#indexPage', {
             transition: "none",
-            reverse: true, 
+            reverse: true,
             changeHash: false
         });
         currentPage = 'indexPage'; //'indexservice'  indexwallet indexPage;qtnanswers;clickformoreinfo
@@ -1370,7 +1361,7 @@ function MYLogintoAllServices(username, password) {
     eaLoginInputData = eaLoginInputData + '</soap:Envelope>';
 
     CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=MobileUserLogin', eaLoginInputData, 'POST', 'text/xml', MYLogintoAllServicesCallBack);
-   // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=MobileUserLogin', eaLoginInputData, 'POST', 'text/xml', MYLogintoAllServicesCallBack);
+    // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=MobileUserLogin', eaLoginInputData, 'POST', 'text/xml', MYLogintoAllServicesCallBack);
 }
 
 
@@ -1397,31 +1388,31 @@ function MYLogintoAllServicesCallBack(responseData) {
                 localStorage.CellNumber = xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0].nodeValue;
                 //localStorage.Description = xmlDoc.getElementsByTagName("Description")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("Description")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("Description")[0].childNodes[0].nodeValue;
                 var nodval = xmlDoc.getElementsByTagName("SchemaUrlTable");
-               // alert(xmlDoc.getElementsByTagName("SchemaUrlTable")[0].childNodes[0].nodeValue);
+                // alert(xmlDoc.getElementsByTagName("SchemaUrlTable")[0].childNodes[0].nodeValue);
                 for (i = 0; i < nodval.length; i++) {
-                   /* document.getElementById('loaddingimg').style.display = "block";
+                    /* document.getElementById('loaddingimg').style.display = "block";
                     setTimeout(function () {
                     },
-                     200);*/
+                    200);*/
 
                     if (i == 0) {
-                       
-                            document.getElementById('homecontent').innerHTML = "";
-                            // document.getElementById('homecontent').innerHTML = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                            var desc1 = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                            desc1 = desc1.replace(/&lt;/g, '<');
-                            desc1 = desc1.replace(/&gt;/g, '/>');
-                            desc1 = desc1.replace(/&quot;/g, '"');
-                            desc1 = desc1.replace(/&nbsp;/g, ' ');
-                            desc1 = desc1.replace(/&amp;/g, '&');
-                            desc1 = desc1.replace(/&#39;/g, "'");
-                            document.getElementById('homecontent').innerHTML = desc1;
-                           // desc1.setAttribute('width', '100%');
-                              localStorage.imgUrlHome = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
-                           // localStorage.imgUrlHome = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
 
-                            
-                          
+                        document.getElementById('homecontent').innerHTML = "";
+                        // document.getElementById('homecontent').innerHTML = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        var desc1 = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        desc1 = desc1.replace(/&lt;/g, '<');
+                        desc1 = desc1.replace(/&gt;/g, '/>');
+                        desc1 = desc1.replace(/&quot;/g, '"');
+                        desc1 = desc1.replace(/&nbsp;/g, ' ');
+                        desc1 = desc1.replace(/&amp;/g, '&');
+                        desc1 = desc1.replace(/&#39;/g, "'");
+                        document.getElementById('homecontent').innerHTML = desc1;
+                        // desc1.setAttribute('width', '100%');
+                        localStorage.imgUrlHome = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                        // localStorage.imgUrlHome = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+
+
+
                     } else if (i == 1) {
                         document.getElementById('medicontent').innerHTML = "";
                         var desc2 = xmlDoc.getElementsByTagName("Description")[i].textContent;
@@ -1432,9 +1423,9 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc2 = desc2.replace(/&amp;/g, '&');
                         desc2 = desc2.replace(/&#39;/g, "'");
                         document.getElementById('medicontent').innerHTML = desc2;
-                       // desc2.setAttribute('width', '100%');
-                         localStorage.imgUrlMedical = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
-                       // localStorage.imgUrlMedical = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
+                        // desc2.setAttribute('width', '100%');
+                        localStorage.imgUrlMedical = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                        // localStorage.imgUrlMedical = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
                     } else if (i == 2) {
                         document.getElementById('rdcontent').innerHTML = "";
                         var desc3 = xmlDoc.getElementsByTagName("Description")[i].textContent;
@@ -1444,11 +1435,11 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc3 = desc3.replace(/&nbsp;/g, ' ');
                         desc3 = desc3.replace(/&amp;/g, '&');
                         desc3 = desc3.replace(/&#39;/g, "'");
-                       // desc3.setAttribute('width', '100%');
+                        // desc3.setAttribute('width', '100%');
                         document.getElementById('rdcontent').innerHTML = desc3;
 
-                         localStorage.imgUrlRoad = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
-                       // localStorage.imgUrlRoad = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                        localStorage.imgUrlRoad = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                        // localStorage.imgUrlRoad = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                     } else if (i == 3) {
                         document.getElementById('lecontent').innerHTML = "";
                         var desc4 = xmlDoc.getElementsByTagName("Description")[i].textContent;
@@ -1458,11 +1449,11 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc4 = desc4.replace(/&nbsp;/g, ' ');
                         desc4 = desc4.replace(/&amp;/g, '&');
                         desc4 = desc4.replace(/&#39;/g, "'");
-                       // desc4.setAttribute('width', '100%');
+                        // desc4.setAttribute('width', '100%');
                         document.getElementById('lecontent').innerHTML = desc4;
 
                         localStorage.imgUrlLegal = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
-                       // localStorage.imgUrlLegal = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
+                        // localStorage.imgUrlLegal = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
                     } else if (i == 4) {
                         document.getElementById('travelcontent').innerHTML = "";
                         var desc5 = xmlDoc.getElementsByTagName("Description")[i].textContent;
@@ -1472,13 +1463,13 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc5 = desc5.replace(/&nbsp;/g, ' ');
                         desc5 = desc5.replace(/&amp;/g, '&');
                         desc5 = desc5.replace(/&#39;/g, "'");
-                       // desc5.setAttribute('width', '100%');
+                        // desc5.setAttribute('width', '100%');
                         document.getElementById('travelcontent').innerHTML = desc5;
 
                         localStorage.imgUrlTravel = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
-                       // localStorage.imgUrlTravel = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
+                        // localStorage.imgUrlTravel = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
                     }
-                   
+
                 }
 
 
@@ -1498,8 +1489,8 @@ function MYLogintoAllServicesCallBack(responseData) {
                     //  document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
                     document.getElementById("hmimg").src = localStorage.imgUrlHome;
                     document.getElementById("hmimg1").src = localStorage.imgUrlHome;
-                    
-                    $("#hmimg").show(); 
+
+                    $("#hmimg").show();
 
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divhm').className = "panelcollapsed";
@@ -1514,11 +1505,11 @@ function MYLogintoAllServicesCallBack(responseData) {
                     localStorage.getmedical = 2;
                     var productid = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
                     var productname = " Medical Assistance ";
-                    $("#medical,#medtb").show(); 
+                    $("#medical,#medtb").show();
                     // document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
                     document.getElementById("mdimg").src = localStorage.imgUrlMedical;
                     document.getElementById("mdimg1").src = localStorage.imgUrlMedical;
-                    $("#mdimg").show(); 
+                    $("#mdimg").show();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divmm').className = "panelcollapsed";
                     $("#divmm").show();
@@ -1536,7 +1527,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                     //document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
                     document.getElementById("rdimg").src = localStorage.imgUrlRoad;
                     document.getElementById("rdimg1").src = localStorage.imgUrlRoad;
-                    $("#rdimg").show(); 
+                    $("#rdimg").show();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divrd').className = "panelcollapsed";
                     $("#divrd").show();
@@ -1554,9 +1545,9 @@ function MYLogintoAllServicesCallBack(responseData) {
                     $("#legalas,#letb").show();
                     document.getElementById("lgimg").src = localStorage.imgUrlLegal;
                     document.getElementById("lgimg1").src = localStorage.imgUrlLegal;
-                    $("#lgimg").show(); 
+                    $("#lgimg").show();
 
-                   // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                    // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divle').className = "panelcollapsed";
                     $("#divle").show();
@@ -1574,7 +1565,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                     $("#travelas,#trtb").show();
                     // document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
                     document.getElementById("tlimg").src = localStorage.imgUrlTravel;
-                    document.getElementById("tlimg1").src = localStorage.imgUrlTravel; 
+                    document.getElementById("tlimg1").src = localStorage.imgUrlTravel;
                     $("#tlimg").show();
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divtr').className = "panelcollapsed";
@@ -1582,17 +1573,14 @@ function MYLogintoAllServicesCallBack(responseData) {
 
                 } $(".trheight3").show();
                 // LOGIN TO RANDGO SERVICES
-                var randgoInputData = '';
-                randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
-                randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
-                randgoInputData = randgoInputData + '<soap:Body>';
-                randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">';
-                randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>';
-                randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>';
-                randgoInputData = randgoInputData + '</Login>';
-                randgoInputData = randgoInputData + '</soap:Body>';
-                randgoInputData = randgoInputData + '</soap:Envelope>';
-                CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew);
+                prevPage = currentPage;
+                $.mobile.changePage('#indexservice', {
+                    transition: "none",
+                    reverse: true,
+                    changeHash: false
+                });
+                currentPage = 'indexservice';
+                pageData.push(currentPage);
 
             } //if
             else {
@@ -1613,18 +1601,16 @@ function MYLogintoAllServicesCallBack(responseData) {
                     localStorage.SurName = xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("LastName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("LastName")[0].childNodes[0].nodeValue;
                     localStorage.EmailID = xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("EMAILID")[0].childNodes[0].nodeValue;
                     localStorage.CellNumber = xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("CellNumber")[0].childNodes[0].nodeValue;
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexservice', {
+                        transition: "none",
+                        reverse: true,
+                        changeHash: false
+                    });
+                    currentPage = 'indexservice';
+                    pageData.push(currentPage);
+                    $("#NOproductDiv").show();
 
-                    var randgoInputData = '';
-                    randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
-                    randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
-                    randgoInputData = randgoInputData + '<soap:Body>';
-                    randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">';
-                    randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>';
-                    randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>';
-                    randgoInputData = randgoInputData + '</Login>';
-                    randgoInputData = randgoInputData + '</soap:Body>';
-                    randgoInputData = randgoInputData + '</soap:Envelope>';
-                    CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew);
                 } else {
                     jAlert(xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue, 'Info');
                     return false;
@@ -1641,45 +1627,6 @@ function MYLogintoAllServicesCallBack(responseData) {
 
 
 
-function RandoLoginCallBackNew(responseData) {
-    try {
-        responseData = responseData.replace(/&gt;/gi, '>');
-        responseData = responseData.replace(/&lt;/gi, '<');
-        var parser = new DOMParser();
-        if (responseData !== "") {
-
-            var xmlDoc = parser.parseFromString(responseData, "text/xml");
-            if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
-                localStorage.randgosessionid = xmlDoc.getElementsByTagName("sessionid")[0].textContent;
-                prevPage = currentPage;
-                $.mobile.changePage('#indexservice', {
-                    transition: "none",
-                    reverse: false,
-                    changeHash: false
-                });
-                currentPage = 'indexservice';
-                pageData.push(currentPage);
-
-                if ((localStorage.gettravel == 0 && localStorage.getlegal == 0 && localStorage.getroad == 0 && localStorage.getmedical == 0 && localStorage.gethome == 0) || (localStorage.gettravel == null && localStorage.getlegal == null && localStorage.getroad == null && localStorage.getmedical == null && localStorage.gethome == null)) {
-
-
-                    $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-                    $(".trheight3").hide();
-                    $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-
-                    $("#NOproductDiv").show();
-                }
-
-            }
-        }
-        else {
-            jAlert('No Data Found', 'Info');
-            return false;
-        }
-
-    } catch (exp) {
-    }
-}
 
 
 /***********DEC9th ************/
@@ -1703,7 +1650,7 @@ function gotoService() {
 
 
         document.getElementById("tlimg").src = "";
-        document.getElementById("tlimg1").src = ""; 
+        document.getElementById("tlimg1").src = "";
 
         var mobileuserguidInputData = '';
         mobileuserguidInputData = '<?xml version="1.0" encoding="utf-8"?>';
@@ -1715,315 +1662,288 @@ function gotoService() {
         mobileuserguidInputData = mobileuserguidInputData + '</soap:Body>';
         mobileuserguidInputData = mobileuserguidInputData + '</soap:Envelope>';
         CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=GetUserProducts', mobileuserguidInputData, 'POST', 'text/xml', mobileuserguidCallBack);
-      //  CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetUserProducts', mobileuserguidInputData, 'POST', 'text/xml', mobileuserguidCallBack);
-       
-    } 
+        //  CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetUserProducts', mobileuserguidInputData, 'POST', 'text/xml', mobileuserguidCallBack);
+
+    }
 }
 
- function mobileuserguidCallBack(responseData) {
+function mobileuserguidCallBack(responseData) {
 
-     try {
-       //  alert(responseData);
-     /** login callback **/
-         $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
-         $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
-         $(".trheight3").hide();
-         $("#NOproductDiv").hide();
+    try {
+        //  alert(responseData);
+        /** login callback **/
+        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+        $(".trheight3").hide();
+        $("#NOproductDiv").hide();
 
-         responseData = responseData.replace(/&gt;/gi, '>');
-         responseData = responseData.replace(/&lt;/gi, '<');
-         var parser = new DOMParser();
-         if (responseData !== "") {
-             xmlDoc = parser.parseFromString(responseData, "text/xml");
-             if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0] == undefined) {
-                 var nodval = xmlDoc.getElementsByTagName("SchemaUrlTable");
-                 for (i = 0; i < nodval.length; i++) {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0] == undefined) {
+                var nodval = xmlDoc.getElementsByTagName("SchemaUrlTable");
+                for (i = 0; i < nodval.length; i++) {
                     if (i == 0) {
-                         
-                         document.getElementById('homecontent').innerHTML = "";
-                        
-                         var desc1 = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                         desc1 = desc1.replace(/&lt;/g, '<');
-                         desc1 = desc1.replace(/&gt;/g, '/>');
-                         desc1 = desc1.replace(/&quot;/g, '"');
-                         desc1 = desc1.replace(/&nbsp;/g, ' ');
-                         desc1 = desc1.replace(/&amp;/g, '&');
-                         desc1 = desc1.replace(/&#39;/g, "'");
-                         document.getElementById('homecontent').innerHTML = desc1;
-                         localStorage.imgUrlHome = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+
+                        document.getElementById('homecontent').innerHTML = "";
+
+                        var desc1 = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        desc1 = desc1.replace(/&lt;/g, '<');
+                        desc1 = desc1.replace(/&gt;/g, '/>');
+                        desc1 = desc1.replace(/&quot;/g, '"');
+                        desc1 = desc1.replace(/&nbsp;/g, ' ');
+                        desc1 = desc1.replace(/&amp;/g, '&');
+                        desc1 = desc1.replace(/&#39;/g, "'");
+                        document.getElementById('homecontent').innerHTML = desc1;
+                        localStorage.imgUrlHome = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlHome = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
-                         
-                     } else if (i == 1) {
-                         document.getElementById('medicontent').innerHTML = "";
-                         var desc2 = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                         desc2 = desc2.replace(/&lt;/g, '<');
-                         desc2 = desc2.replace(/&gt;/g, '/>');
-                         desc2 = desc2.replace(/&quot;/g, '"');
-                         desc2 = desc2.replace(/&nbsp;/g, ' ');
-                         desc2 = desc2.replace(/&amp;/g, '&');
-                         desc2 = desc2.replace(/&#39;/g, "'");
-                         document.getElementById('medicontent').innerHTML = desc2;
-                         localStorage.imgUrlMedical = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
+
+                    } else if (i == 1) {
+                        document.getElementById('medicontent').innerHTML = "";
+                        var desc2 = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        desc2 = desc2.replace(/&lt;/g, '<');
+                        desc2 = desc2.replace(/&gt;/g, '/>');
+                        desc2 = desc2.replace(/&quot;/g, '"');
+                        desc2 = desc2.replace(/&nbsp;/g, ' ');
+                        desc2 = desc2.replace(/&amp;/g, '&');
+                        desc2 = desc2.replace(/&#39;/g, "'");
+                        document.getElementById('medicontent').innerHTML = desc2;
+                        localStorage.imgUrlMedical = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlMedical = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; ;
-                     } else if (i == 2) {
-                         document.getElementById('rdcontent').innerHTML = "";
-                         var desc3 = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                         desc3 = desc3.replace(/&lt;/g, '<');
-                         desc3 = desc3.replace(/&gt;/g, '/>');
-                         desc3 = desc3.replace(/&quot;/g, '"');
-                         desc3 = desc3.replace(/&nbsp;/g, ' ');
-                         desc3 = desc3.replace(/&amp;/g, '&');
-                         desc3 = desc3.replace(/&#39;/g, "'");
-                         document.getElementById('rdcontent').innerHTML = desc3;
-                         localStorage.imgUrlRoad = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                    } else if (i == 2) {
+                        document.getElementById('rdcontent').innerHTML = "";
+                        var desc3 = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        desc3 = desc3.replace(/&lt;/g, '<');
+                        desc3 = desc3.replace(/&gt;/g, '/>');
+                        desc3 = desc3.replace(/&quot;/g, '"');
+                        desc3 = desc3.replace(/&nbsp;/g, ' ');
+                        desc3 = desc3.replace(/&amp;/g, '&');
+                        desc3 = desc3.replace(/&#39;/g, "'");
+                        document.getElementById('rdcontent').innerHTML = desc3;
+                        localStorage.imgUrlRoad = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlRoad = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; ;
-                     } else if (i == 3) {
-                         document.getElementById('lecontent').innerHTML = "";
-                         var desc4 = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                         desc4 = desc4.replace(/&lt;/g, '<');
-                         desc4 = desc4.replace(/&gt;/g, '/>');
-                         desc4 = desc4.replace(/&quot;/g, '"');
-                         desc4 = desc4.replace(/&nbsp;/g, ' ');
-                         desc4 = desc4.replace(/&amp;/g, '&');
-                         desc4 = desc4.replace(/&#39;/g, "'");
-                         document.getElementById('lecontent').innerHTML = desc4;
-                         localStorage.imgUrlLegal = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                    } else if (i == 3) {
+                        document.getElementById('lecontent').innerHTML = "";
+                        var desc4 = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        desc4 = desc4.replace(/&lt;/g, '<');
+                        desc4 = desc4.replace(/&gt;/g, '/>');
+                        desc4 = desc4.replace(/&quot;/g, '"');
+                        desc4 = desc4.replace(/&nbsp;/g, ' ');
+                        desc4 = desc4.replace(/&amp;/g, '&');
+                        desc4 = desc4.replace(/&#39;/g, "'");
+                        document.getElementById('lecontent').innerHTML = desc4;
+                        localStorage.imgUrlLegal = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlLegal = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; ;
-                     } else if (i == 4) {
-                         document.getElementById('travelcontent').innerHTML = "";
-                         var desc5 = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                         desc5 = desc5.replace(/&lt;/g, '<');
-                         desc5 = desc5.replace(/&gt;/g, '/>');
-                         desc5 = desc5.replace(/&quot;/g, '"');
-                         desc5 = desc5.replace(/&nbsp;/g, ' ');
-                         desc5 = desc5.replace(/&amp;/g, '&');
-                         desc5 = desc5.replace(/&#39;/g, "'");
-                         document.getElementById('travelcontent').innerHTML = desc5;
-                         localStorage.imgUrlTravel = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
+                    } else if (i == 4) {
+                        document.getElementById('travelcontent').innerHTML = "";
+                        var desc5 = xmlDoc.getElementsByTagName("Description")[i].textContent;
+                        desc5 = desc5.replace(/&lt;/g, '<');
+                        desc5 = desc5.replace(/&gt;/g, '/>');
+                        desc5 = desc5.replace(/&quot;/g, '"');
+                        desc5 = desc5.replace(/&nbsp;/g, ' ');
+                        desc5 = desc5.replace(/&amp;/g, '&');
+                        desc5 = desc5.replace(/&#39;/g, "'");
+                        document.getElementById('travelcontent').innerHTML = desc5;
+                        localStorage.imgUrlTravel = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlTravel = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; ;
-                     }
+                    }
 
-                 }
-
-
-
-                 if (xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == null) {
-
-                     localStorage.gethome = 0;
-
-                 }
-                 else {
-                     localStorage.gethome = 1;
-                     HomeID = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
-                     var productid = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
-                     var productname = " Home Assistance ";
-                     $("#hme,#assisth").show();
-
-                     document.getElementById("hmimg").src = localStorage.imgUrlHome;
-                     $("#hmimg").show(); 
+                }
 
 
-                     $("#homeseperator").removeClass("middlecontent3");
-                     document.getElementById('divhm').className = "panelcollapsed";
-                     $("#divhm").show(); //whole div red
-                 }
 
-                 if (xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == null) {
-                     localStorage.getmedical = 0;
-                 }
-                 else {
-                     MedicalID = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
-                     localStorage.getmedical = 2;
-                     var productid = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
-                     var productname = " Medical Assistance ";
-                     $("#medical,#medtb").show();
+                if (xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue == null) {
 
-                     document.getElementById("mdimg").src = localStorage.imgUrlMedical;
-                     $("#mdimg").show();
-                     $("#homeseperator").removeClass("middlecontent3");
-                     document.getElementById('divmm').className = "panelcollapsed";
-                     $("#divmm").show();
-                 }
-                 if (xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == null) {
-                     localStorage.getroad = 0;
-                 }
-                 else {
+                    localStorage.gethome = 0;
 
-                     RoadID = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
-                     localStorage.getroad = 3;
-                     var productid = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
-                     var productname = " Roadside Assistance ";
-                     $("#roadas,#rdtb").show();
+                }
+                else {
+                    localStorage.gethome = 1;
+                    HomeID = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
+                    var productid = xmlDoc.getElementsByTagName("HomeAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Home Assistance ";
+                    $("#hme,#assisth").show();
 
-                     document.getElementById("rdimg").src = localStorage.imgUrlRoad;
-                     $("#rdimg").show(); 
+                    document.getElementById("hmimg").src = localStorage.imgUrlHome;
+                    $("#hmimg").show();
 
 
-                     $("#homeseperator").removeClass("middlecontent3");
-                     document.getElementById('divrd').className = "panelcollapsed";
-                     $("#divrd").show();
-                 }
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divhm').className = "panelcollapsed";
+                    $("#divhm").show(); //whole div red
+                }
 
-                 if (xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == null) {
+                if (xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue == null) {
+                    localStorage.getmedical = 0;
+                }
+                else {
+                    MedicalID = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.getmedical = 2;
+                    var productid = xmlDoc.getElementsByTagName("MedicalAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Medical Assistance ";
+                    $("#medical,#medtb").show();
 
-                     localStorage.getlegal = 0;
-                 }
-                 else {
-                     legalID = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
-                     localStorage.getlegal = 4;
-                     var productid = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
-                     var productname = " Legal Assistance";
-                     $("#legalas,#letb").show();
+                    document.getElementById("mdimg").src = localStorage.imgUrlMedical;
+                    $("#mdimg").show();
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divmm').className = "panelcollapsed";
+                    $("#divmm").show();
+                }
+                if (xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue == null) {
+                    localStorage.getroad = 0;
+                }
+                else {
 
-                     document.getElementById("lgimg").src = localStorage.imgUrlLegal;
-                     $("#lgimg").show(); 
-                     $("#homeseperator").removeClass("middlecontent3");
-                     document.getElementById('divle').className = "panelcollapsed";
-                     $("#divle").show();
-                 }
+                    RoadID = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.getroad = 3;
+                    var productid = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Roadside Assistance ";
+                    $("#roadas,#rdtb").show();
 
-                 if (xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == null) {
-
-                     localStorage.gettravel = 0;
-                 }
-                 else {
-                     TravelID = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
-                     localStorage.gettravel = 5;
-                     var productid = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
-                     var productname = "Travel Assistance";
-                     $("#travelas,#trtb").show();
-                     document.getElementById("tlimg").src = localStorage.imgUrlTravel;
-                     $("#tlimg").show();
-                     $("#homeseperator").removeClass("middlecontent3");
-                     document.getElementById('divtr').className = "panelcollapsed";
-                     $("#divtr").show();
-
-                 } $(".trheight3").show();
-
-                 if (localStorage.gethome == 0 && localStorage.getmedical == 0 && localStorage.getroad == 0 && localStorage.getlegal == 0 && localStorage.gettravel == 0) {
-                     $("#NOproductDiv").show();
-                     $(".trheight3").hide();
-                     prevPage = currentPage;
-                     $.mobile.changePage('#indexservice', {
-                         transition: "none",
-                         reverse: false,
-                         changeHash: false
-                     });
-                     currentPage = 'indexservice';
-                     pageData.push(currentPage);
-
-                 } else {
-                     $("#NOproductDiv").hide();
-                     prevPage = currentPage;
-                     $.mobile.changePage('#indexservice', {
-                         transition: "none",
-                         reverse: false,
-                         changeHash: false
-                     });
-                     currentPage = 'indexservice';
-                     pageData.push(currentPage);
-                 }
-             } //if
-             else {
-                 if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue == 'NO MOBILEUSERGUID') {
-
-                     localStorage.gettravel = 0;
-                     localStorage.getlegal = 0;
-                     localStorage.getroad = 0;
-                     localStorage.getmedical = 0;
-                     localStorage.gethome = 0;
-                     $("#NOproductDiv").show();
-                     $(".trheight3").hide();
-                     // localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
-                     prevPage = currentPage;
-                     $.mobile.changePage('#indexservice', {
-                         transition: "none",
-                         reverse: false,
-                         changeHash: false
-                     });
-                     currentPage = 'indexservice';
-                     pageData.push(currentPage);
-
-                    
-                 } else {
-                     jAlert(xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue, 'Info');
-                     return false;
-                 }
-             }
-         }
-
-     }
-
-     catch (exp) {
-         //alert(exp);
-         jAlert("The System is temporarily unavailable, please try again later.", 'Info');
-         $.mobile.changePage('#indexservice', {
-             transition: "none",
-             reverse: false,
-             changeHash: false
-         });
-         currentPage = 'indexservice';
-         pageData.push(currentPage);
-
-     }
-     }
-    
-      
-   
-  
+                    document.getElementById("rdimg").src = localStorage.imgUrlRoad;
+                    $("#rdimg").show();
 
 
- 
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divrd').className = "panelcollapsed";
+                    $("#divrd").show();
+                }
 
+                if (xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue == null) {
+
+                    localStorage.getlegal = 0;
+                }
+                else {
+                    legalID = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.getlegal = 4;
+                    var productid = xmlDoc.getElementsByTagName("LegalAssistance")[0].childNodes[0].nodeValue;
+                    var productname = " Legal Assistance";
+                    $("#legalas,#letb").show();
+
+                    document.getElementById("lgimg").src = localStorage.imgUrlLegal;
+                    $("#lgimg").show();
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divle').className = "panelcollapsed";
+                    $("#divle").show();
+                }
+
+                if (xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == 'null' || xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue == null) {
+
+                    localStorage.gettravel = 0;
+                }
+                else {
+                    TravelID = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
+                    localStorage.gettravel = 5;
+                    var productid = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
+                    var productname = "Travel Assistance";
+                    $("#travelas,#trtb").show();
+                    document.getElementById("tlimg").src = localStorage.imgUrlTravel;
+                    $("#tlimg").show();
+                    $("#homeseperator").removeClass("middlecontent3");
+                    document.getElementById('divtr').className = "panelcollapsed";
+                    $("#divtr").show();
+
+                } $(".trheight3").show();
+
+                if (localStorage.gethome == 0 && localStorage.getmedical == 0 && localStorage.getroad == 0 && localStorage.getlegal == 0 && localStorage.gettravel == 0) {
+                    $("#NOproductDiv").show();
+                    $(".trheight3").hide();
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexservice', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'indexservice';
+                    pageData.push(currentPage);
+
+                } else {
+                    $("#NOproductDiv").hide();
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexservice', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'indexservice';
+                    pageData.push(currentPage);
+                }
+            } //if
+            else {
+                if (xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue == 'NO MOBILEUSERGUID') {
+
+                    localStorage.gettravel = 0;
+                    localStorage.getlegal = 0;
+                    localStorage.getroad = 0;
+                    localStorage.getmedical = 0;
+                    localStorage.gethome = 0;
+                    $("#NOproductDiv").show();
+                    $(".trheight3").hide();
+                    // localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexservice', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'indexservice';
+                    pageData.push(currentPage);
+
+
+                } else {
+                    jAlert(xmlDoc.getElementsByTagName("MESSAGE")[0].childNodes[0].nodeValue, 'Info');
+                    return false;
+                }
+            }
+        }
+
+    }
+
+    catch (exp) {
+        //alert(exp);
+        jAlert("The System is temporarily unavailable, please try again later.", 'Info');
+        $.mobile.changePage('#indexservice', {
+            transition: "none",
+            reverse: false,
+            changeHash: false
+        });
+        currentPage = 'indexservice';
+        pageData.push(currentPage);
+
+    }
+}
 
 
 /*****************************************************************************************************
 * PURPOSE :CreatePleaseCallMeRequestNew(Services indexervice.html)
-* AUTHOR : Asha
-* CREATED DATE : 03 DEC 2013
+* AUTHOR : kavya(call image reverse back)
+* CREATED DATE : 11 FEB 2014
 ******************************************************************************************************/
 
 
 function CreatePleaseCallMeRequestNew(type) {
+    // alert("type::::::" + type);
+    // alert("localStorage.count::::::" + localStorage.count);
+    // alert("HomeID:::::::" + HomeID)
     var productiID = '';
-    if (type == 'home') {
-        productiID = HomeID;
-    } else if (type == 'medical') {
-        productiID = MedicalID;
-    } else if (type == 'road') {
-        productiID = RoadID;
-    } else if (type == 'legal') {
-        productiID = legalID;
-    } else if (type == 'travel') {
-        productiID = TravelID;
+    if (type == 'home' && localStorage.count == 0) {
+    productiID = ''; productiID = HomeID; localStorage.count = 1; var europInputData = ""; europInputData = '<?xml version="1.0" encoding="utf-8"?>'; europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">'; europInputData = europInputData + '<soapenv:Header/>'; europInputData = europInputData + '<soapenv:Body>'; europInputData = europInputData + '<api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>'; europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>'; europInputData = europInputData + '<api:testOnly>true</api:testOnly>'; europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>'; europInputData = europInputData + '<api:latitude>0</api:latitude>'; europInputData = europInputData + '<api:longitude>0</api:longitude>'; europInputData = europInputData + '</api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '</soapenv:Body>'; europInputData = europInputData + '</soapenv:Envelope>'; CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
+    } else if (type == 'medical' && localStorage.count == 0) {
+    productiID = ''; productiID = MedicalID; localStorage.count = 1; var europInputData = ""; europInputData = '<?xml version="1.0" encoding="utf-8"?>'; europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">'; europInputData = europInputData + '<soapenv:Header/>'; europInputData = europInputData + '<soapenv:Body>'; europInputData = europInputData + '<api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>'; europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>'; europInputData = europInputData + '<api:testOnly>true</api:testOnly>'; europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>'; europInputData = europInputData + '<api:latitude>0</api:latitude>'; europInputData = europInputData + '<api:longitude>0</api:longitude>'; europInputData = europInputData + '</api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '</soapenv:Body>'; europInputData = europInputData + '</soapenv:Envelope>'; CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
+    } else if (type == 'road' && localStorage.count == 0) {
+     productiID = ''; productiID = RoadID; localStorage.count = 1; var europInputData = ""; europInputData = '<?xml version="1.0" encoding="utf-8"?>'; europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">'; europInputData = europInputData + '<soapenv:Header/>'; europInputData = europInputData + '<soapenv:Body>'; europInputData = europInputData + '<api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>'; europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>'; europInputData = europInputData + '<api:testOnly>true</api:testOnly>'; europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>'; europInputData = europInputData + '<api:latitude>0</api:latitude>'; europInputData = europInputData + '<api:longitude>0</api:longitude>'; europInputData = europInputData + '</api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '</soapenv:Body>'; europInputData = europInputData + '</soapenv:Envelope>'; CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
+    } else if (type == 'legal' && localStorage.count == 0) {
+    productiID = ''; productiID = legalID; localStorage.count = 1; var europInputData = ""; europInputData = '<?xml version="1.0" encoding="utf-8"?>'; europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">'; europInputData = europInputData + '<soapenv:Header/>'; europInputData = europInputData + '<soapenv:Body>'; europInputData = europInputData + '<api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>'; europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>'; europInputData = europInputData + '<api:testOnly>true</api:testOnly>'; europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>'; europInputData = europInputData + '<api:latitude>0</api:latitude>'; europInputData = europInputData + '<api:longitude>0</api:longitude>'; europInputData = europInputData + '</api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '</soapenv:Body>'; europInputData = europInputData + '</soapenv:Envelope>'; CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
+    } else if (type == 'travel' && localStorage.count == 0) {
+    productiID = ''; productiID = TravelID; localStorage.count = 1; var europInputData = ""; europInputData = '<?xml version="1.0" encoding="utf-8"?>'; europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">'; europInputData = europInputData + '<soapenv:Header/>'; europInputData = europInputData + '<soapenv:Body>'; europInputData = europInputData + '<api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>'; europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>'; europInputData = europInputData + '<api:testOnly>true</api:testOnly>'; europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>'; europInputData = europInputData + '<api:latitude>0</api:latitude>'; europInputData = europInputData + '<api:longitude>0</api:longitude>'; europInputData = europInputData + '</api:CreatePleaseCallMeRequest>'; europInputData = europInputData + '</soapenv:Body>'; europInputData = europInputData + '</soapenv:Envelope>'; CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
     } else {
         productiID = '735c8b67-37c4-4f72-af94-105a26e22d2c';
     }
-
-
-    //  alert("::::localStorage.guid:::::tag::: tokenGuid::::::" + localStorage.guid);
-    var europInputData = "";
-    europInputData = '<?xml version="1.0" encoding="utf-8"?>';
-    europInputData = europInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="https://api.europassistance.co.za/">';
-    europInputData = europInputData + '<soapenv:Header/>';
-    europInputData = europInputData + '<soapenv:Body>';
-    europInputData = europInputData + '<api:CreatePleaseCallMeRequest>';
-    europInputData = europInputData + '<api:mobileUserGuid>' + localStorage.guid + '</api:mobileUserGuid>';
-    europInputData = europInputData + '<api:validateOnly>false</api:validateOnly>';
-    europInputData = europInputData + '<api:testOnly>true</api:testOnly>';
-    europInputData = europInputData + '<api:mobileProductGuid>' + productiID + '</api:mobileProductGuid>';
-    europInputData = europInputData + '<api:latitude>0</api:latitude>';
-    europInputData = europInputData + '<api:longitude>0</api:longitude>';
-    europInputData = europInputData + '</api:CreatePleaseCallMeRequest>';
-    europInputData = europInputData + '</soapenv:Body>';
-    europInputData = europInputData + '</soapenv:Envelope>';
-    CallWebService('https://api.europassistance.co.za/services/MobileServices.asmx', europInputData, 'POST', 'text/xml', CreatePleaseCallMeRequestCallbackNew);
-    // alert("europInputData:::::::::" + europInputData);
 }
 
 function CreatePleaseCallMeRequestCallbackNew(responseData) {
-    // alert(":::::CreatePleaseCallMeRequestCallback::responseData:::::::" + responseData);
-
     responseData = responseData.replace(/&gt;/gi, '>');
     responseData = responseData.replace(/&lt;/gi, '<');
     var parser = new DOMParser();
@@ -2031,9 +1951,11 @@ function CreatePleaseCallMeRequestCallbackNew(responseData) {
         xmlDoc = parser.parseFromString(responseData, "text/xml");
         xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue;
         if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue != 0) {
-            jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue,'Info');
+            jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue, 'Info');
+            //jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue);
         } else {
             jAlert('Thank you for contacting us, we will call you soon.', 'Info');
+            //alert("Thank you for contacting us, we will call you soon")
         }
     }
 }
@@ -2052,12 +1974,6 @@ function gohome() {
 
 
 
-/*function RegFirstValidation() {
-var regfirstuname = document.getElementById('txtusernameregfirst').value;
-var regfirstpw = document.getElementById('txtpwregfirst').value;
-var regfirstconfirmpw = document.getElementById('txtconfirmpwregfirst').value;
-           
-}*/
 
 /*****************************************************************************************************
 * PURPOSE :Registration
@@ -2067,7 +1983,7 @@ var regfirstconfirmpw = document.getElementById('txtconfirmpwregfirst').value;
 
 
 function UserRegistration() {
-   
+
     // window.resizeTo($(window).width(), $(window).height());
     try {
         $(window).scrollTop(0);
@@ -2130,14 +2046,14 @@ function UserRegistration() {
             jAlert("Please enter the Cellphone number!", 'Info');
             return false;
         } else if (!CellNumberResult.match(num)) {
-            jAlert("Please enter valid Cellphone number!", 'Info');
+            jAlert("Please enter a valid Cellphone number!", 'Info');
             return false;
         }
         else if (CellNumberResult.length < '12') {
-            jAlert("Please enter valid Cellphone number!", 'Info'); return false;
+            jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
         }
         else if (CellNumberResult.length > '12') {
-            jAlert("Please enter valid Cellphone number!", 'Info'); return false;
+            jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
         }
         else if (IdNumber == "") {
             jAlert("Please enter the Id number!", 'Info');
@@ -2170,7 +2086,7 @@ function UserRegistration() {
 
     }
     catch (ex) {
-     //   alert("aaaaaaaaa"+ex);
+        //   alert("aaaaaaaaa"+ex);
     }
 
 }
@@ -2200,8 +2116,8 @@ function RegisterUserNew(Name, SurName, userName, CellNumberResult, passowrd, Id
         registeruserdata = registeruserdata + '</soap:Envelope>';
         //alert(registeruserdata);
         CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=MobileUserRegister', registeruserdata, 'POST', 'text/xml', RegisterUserCallback);
-       // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=MobileUserRegister', registeruserdata, 'POST', 'text/xml', RegisterUserCallback);
-       
+        // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=MobileUserRegister', registeruserdata, 'POST', 'text/xml', RegisterUserCallback);
+
     } catch (exp) {
         //alert(exp);
     }
@@ -2212,58 +2128,58 @@ function RegisterUserNew(Name, SurName, userName, CellNumberResult, passowrd, Id
 
 
 function RegisterUserCallback(responseData) {
-try {
- window.resizeTo($(window).width(), $(window).height());
-responseData = responseData.replace(/&gt;/gi, '>');
-responseData = responseData.replace(/&lt;/gi, '<');
-var parser = new DOMParser();
-if (responseData !== "") {
-var xmlDoc = parser.parseFromString(responseData, "text/xml");
-if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != null && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != "" && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != undefined) {
-    if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == '-1') {
+    try {
+        window.resizeTo($(window).width(), $(window).height());
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != null && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != "" && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != undefined) {
+                if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == '-1') {
 
-        jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue, 'Info');
-        return false;
-    } else if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == '0' || xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == 0) {
-        prevPage = currentPage;
-        $.mobile.changePage('#indexPage', {
-            transition: "none",
-            reverse: true,
-            changeHash: false
-        });
-        currentPage = 'indexPage';
-        pageData.push(currentPage);
-        jAlert('Registration successfull, Thank you for registering.', 'Info');
-        return false;
-    } else {
-        jAlert('Register is successful. You can login to the application, but you have no access to Europe Assist services', 'Info');
-       
-        prevPage = currentPage;
-        $.mobile.changePage('#indexPage', {
-            transition: "none",
-            reverse: true,
-            changeHash: false
-        });
-        currentPage = 'indexPage';
-        pageData.push(currentPage);
-        alert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue);
+                    jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue, 'Info');
+                    return false;
+                } else if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == '0' || xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == 0) {
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexPage', {
+                        transition: "none",
+                        reverse: true,
+                        changeHash: false
+                    });
+                    currentPage = 'indexPage';
+                    pageData.push(currentPage);
+                    jAlert('Registration successfull, Thank you for registering.', 'Info');
+                    return false;
+                } else {
+                    jAlert('Register is successful. You can login to the application, but you have no access to Europe Assist services', 'Info');
+
+                    prevPage = currentPage;
+                    $.mobile.changePage('#indexPage', {
+                        transition: "none",
+                        reverse: true,
+                        changeHash: false
+                    });
+                    currentPage = 'indexPage';
+                    pageData.push(currentPage);
+                    alert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue);
+                }
+
+
+            }
+            else {
+                jAlert("Register Failed.", 'Info');
+                return false;
+            }
+        }
     }
+    catch (exp) {
 
-
-} 
-else {
-jAlert("Register Failed.", 'Info');
-return false;
-}
-}
-}
- catch (exp) {
-
-}
+    }
 }
 function oncheck() {
     var curimgsource = document.getElementById('chkAcceptTerms').src;
-   // alert(curimgsource.indexOf());
+    // alert(curimgsource.indexOf());
     if (curimgsource.indexOf('acceptedbutton.png') >= 0) {
         document.getElementById('chkAcceptTerms').src = "public/images/checkbox.png";
     } else {
@@ -2388,15 +2304,15 @@ function ForgotPasswordValidation() {
 
     } else if (!cellRemoveFirstZero.match(num)) {
 
-        jAlert("Please enter valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid Cellphone number!", 'Info');
 
     }
     else if (cellRemoveFirstZero.length < '12') {
-        jAlert("Please enter valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid Cellphone number!", 'Info');
 
     }
     else if (cellRemoveFirstZero.length > '12') {
-        jAlert("Please enter valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid Cellphone number!", 'Info');
 
     } else {
         var FCellNumber = document.getElementById('txtfpcellno').value;
@@ -2420,11 +2336,12 @@ function ForgotPasswordService(fpcellno) {
 
 
     // CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
-   // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
-    CallWebService('http://117.247.177.228:8079/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
+    // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
+    //  CallWebService('http://117.247.177.228:8079/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
+    CallWebService('http://197.96.19.188/EASAwebservice/EuropeAssistStaticDataWS.asmx?op=ForgotPassword', forgotpwdata, 'POST', 'text/xml', ForgotPasswordServiceCallback);
 
-   
-} 
+
+}
 
 
 function ForgotPasswordServiceCallback(responseData) {
@@ -2437,11 +2354,14 @@ function ForgotPasswordServiceCallback(responseData) {
             var xmlDoc = parser.parseFromString(responseData, "text/xml");
 
             if (xmlDoc.getElementsByTagName("ForgotPasswordResult")[0].textContent == 0) {
-                jAlert("Please Enter Valid CellNumber.", 'Info');
+                jAlert("Please Enter a Valid CellNumber.", 'Info');
                 return false;
             }
             else {
-                jAlert("Thank you,We have sent you an Email with your password", 'Info');
+                // jAlert("Thank you,We have sent you an Email with your password", 'Info');
+                //   jAlert("Thank you,We have sent your password to the registered EmailAddress", 'Info');
+                jAlert("Thank you,We have sent your password to your registered EmailAddress", 'Info');
+
                 prevPage = currentPage;
                 $.mobile.changePage('#indexPage', {
                     transition: "none",
@@ -2483,13 +2403,14 @@ function ShowExitDialog() {
 }
 
 function gotoHelp() {
-   if (checkLogin()) {
+    if (checkLogin()) {
         var qtnvalue = 0;
-            // $("#tbldisplaycategoriesbycid tr").remove();
-             //$("#tbldisplaymerchantdeals tr").remove();
-             $("#tblhelp tr").remove()
+        // $("#tbldisplaycategoriesbycid tr").remove();
+        //$("#tbldisplaymerchantdeals tr").remove();
+        $("#tblhelp tr").remove()
         document.getElementById('loaddingimg').style.display = "block";
-        setTimeout(function () {;
+        setTimeout(function () {
+            ;
             prevPage = currentPage;
             $.mobile.changePage('#indexhelp', {
                 transition: "none",
@@ -2503,7 +2424,7 @@ function gotoHelp() {
             DisplayHelpDetails(qtnvalue);
         },
 200);
-   }
+    }
 }
 
 /*****************************************************************************************************
@@ -2524,8 +2445,8 @@ function DisplayHelpDetails(qtnvalue) {
     helpInputData = helpInputData + '</soap:Envelope>';
 
     CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=GetFAQs', helpInputData, 'POST', 'text/xml', DisplayHelpDetailsCallback);
-   // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetFAQs', helpInputData, 'POST', 'text/xml', DisplayHelpDetailsCallback);
- 
+    // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetFAQs', helpInputData, 'POST', 'text/xml', DisplayHelpDetailsCallback);
+
 }
 
 function DisplayHelpDetailsCallback(responseData) {
@@ -2541,51 +2462,51 @@ function DisplayHelpDetailsCallback(responseData) {
                 gettblhelp.innerHTML = "";
                 if (xmlDoc.getElementsByTagName("FAQs") != null && xmlDoc.getElementsByTagName("FAQs").length > 0) {
 
-                   var faqlist = xmlDoc.getElementsByTagName("FAQs");
-                   for (var i = 0; i < faqlist.length; i++) {
-                     var rowcount = gettblhelp.rows.length;
-                     var row = gettblhelp.insertRow(rowcount);
-                     var question = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
-                     var faqrowid = xmlDoc.getElementsByTagName("FAQID")[i].textContent;
-                     row.setAttribute('id', 'row' + faqrowid);
-                     var cell = row.insertCell(0);
-                     /*** question ***/
-                     var divques = document.createElement("div");
-                     var lblhelp = document.createElement("label");
-                     lblhelp.innerHTML = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
-                     divques.appendChild(lblhelp);
-                     cell.appendChild(divques);
-                     divques.setAttribute('class', 'textstyle3new');
-                     /*** img ***/
-                     var divimg = document.createElement("div");
-                     var img = document.createElement("img");
-                     img.src = 'public/images/EAslicing/rightsymbolarrow.png';
-                     divimg.appendChild(img);
-                     cell.appendChild(divimg);
-                     divimg.setAttribute('class', 'regcol1new');
-                     cell.setAttribute('class', 'qtn1');
-                     row.onclick = function () {
-                      document.getElementById('loaddingimg').style.display = "block";
-                        //setTimeout(function () {
-                         var FAQhelpID = this.id;
-                         FAQhelpID = FAQhelpID.replace('row', '');
-                         $("#tblquestionans tr").remove();
-                         setTimeout(function () {
-                             prevPage = currentPage;
-                             $.mobile.changePage('#qtnanswers', {
-                                 transition: "none",
-                                 reverse: false,
-                                 changeHash: false
-                             });
-                             currentPage = 'qtnanswers';
-                             pageData.push(currentPage);
-                             DisplayQuestionAnswers(FAQhelpID);
-                       }, 200);
-                    
-                     }
-                           
+                    var faqlist = xmlDoc.getElementsByTagName("FAQs");
+                    for (var i = 0; i < faqlist.length; i++) {
+                        var rowcount = gettblhelp.rows.length;
+                        var row = gettblhelp.insertRow(rowcount);
+                        var question = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
+                        var faqrowid = xmlDoc.getElementsByTagName("FAQID")[i].textContent;
+                        row.setAttribute('id', 'row' + faqrowid);
+                        var cell = row.insertCell(0);
+                        /*** question ***/
+                        var divques = document.createElement("div");
+                        var lblhelp = document.createElement("label");
+                        lblhelp.innerHTML = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
+                        divques.appendChild(lblhelp);
+                        cell.appendChild(divques);
+                        divques.setAttribute('class', 'textstyle3new');
+                        /*** img ***/
+                        var divimg = document.createElement("div");
+                        var img = document.createElement("img");
+                        img.src = 'public/images/EAslicing/rightsymbolarrow.png';
+                        divimg.appendChild(img);
+                        cell.appendChild(divimg);
+                        divimg.setAttribute('class', 'regcol1new');
+                        cell.setAttribute('class', 'qtn1');
+                        row.onclick = function () {
+                            document.getElementById('loaddingimg').style.display = "block";
+                            //setTimeout(function () {
+                            var FAQhelpID = this.id;
+                            FAQhelpID = FAQhelpID.replace('row', '');
+                            $("#tblquestionans tr").remove();
+                            setTimeout(function () {
+                                prevPage = currentPage;
+                                $.mobile.changePage('#qtnanswers', {
+                                    transition: "none",
+                                    reverse: false,
+                                    changeHash: false
+                                });
+                                currentPage = 'qtnanswers';
+                                pageData.push(currentPage);
+                                DisplayQuestionAnswers(FAQhelpID);
+                            }, 200);
+
                         }
-                     
+
+                    }
+
                 }
             }
         } catch (exp) {
@@ -2611,10 +2532,10 @@ function DisplayQuestionAnswers(FAQhelpID) {
     helpInputData = helpInputData + '</GetFAQs>'
     helpInputData = helpInputData + '</soap:Body>';
     helpInputData = helpInputData + '</soap:Envelope>';
-    
+
     CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=GetFAQs', helpInputData, 'POST', 'text/xml', DisplayQuestionAnswersCallback);
-   // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetFAQs', helpInputData, 'POST', 'text/xml', DisplayQuestionAnswersCallback);
-                    
+    // CallWebService('http://118.139.160.226:8058/EuropeAssistStaticDataWS.asmx?op=GetFAQs', helpInputData, 'POST', 'text/xml', DisplayQuestionAnswersCallback);
+
 }
 
 
@@ -2637,15 +2558,15 @@ function DisplayQuestionAnswersCallback(responseData) {
 
                         var rowcount = gettblquestionans.rows.length;
                         var row = gettblquestionans.insertRow(rowcount);
-                        
-                       // var rowid = xmlDoc.getElementsByTagName("FAQID")[i].textContent;
+
+                        // var rowid = xmlDoc.getElementsByTagName("FAQID")[i].textContent;
                         var question = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
 
                         var ans = xmlDoc.getElementsByTagName("Description")[i].textContent;
-                        
+
                         var cell1 = row.insertCell(0);
                         cell1.setAttribute('width', '100%');
-                        
+
                         var lblquestion = document.createElement("label");
                         var lblquestionformat = xmlDoc.getElementsByTagName("FAQName")[i].textContent;
                         lblquestionformat = lblquestionformat.replace(/&lt;/g, '<');
@@ -2678,12 +2599,12 @@ function DisplayQuestionAnswersCallback(responseData) {
 
                         $("a").removeAttr('href');
                     }
-                  
+
                 }
 
             }
         } catch (exp) {
-           // alert("exp:::::::::" + exp);
+            // alert("exp:::::::::" + exp);
         }
 
 
@@ -2694,39 +2615,39 @@ function DisplayQuestionAnswersCallback(responseData) {
 
 function GetMoreInfo(pageType) {
     if (checkLogin()) {
-         document.getElementById('loaddingimg').style.display = "block";
+        document.getElementById('loaddingimg').style.display = "block";
         setTimeout(function () {
-       
-        prevPage = currentPage;
-        $.mobile.changePage('#clickformoreinfo', {
-            transition: "none",
-            reverse: false,
-            changeHash: false
-        });
-        currentPage = 'clickformoreinfo';
-        pageData.push(currentPage);
-        document.getElementById('divhomeassist').style.display = 'none';
-        document.getElementById('divmediassist').style.display = 'none';
-        document.getElementById('divroadassist').style.display = 'none';
-        document.getElementById('legaldiv').style.display = 'none';
-        document.getElementById('traveldiv').style.display = 'none';
 
-        if (pageType == "Home") {
-            document.getElementById('divhomeassist').style.display = 'block';
-        } else if (pageType == "Medical") {
-            document.getElementById('divmediassist').style.display = 'block';
-        } else if (pageType == "Road") {
-            document.getElementById('divroadassist').style.display = 'block';
-        } else if (pageType == "Legal") {
-            document.getElementById('legaldiv').style.display = 'block';
-        } else if (pageType == "Travel") {
-            document.getElementById('traveldiv').style.display = 'block';
-        }
-        document.getElementById('loaddingimg').style.display = "none";
+            prevPage = currentPage;
+            $.mobile.changePage('#clickformoreinfo', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'clickformoreinfo';
+            pageData.push(currentPage);
+            document.getElementById('divhomeassist').style.display = 'none';
+            document.getElementById('divmediassist').style.display = 'none';
+            document.getElementById('divroadassist').style.display = 'none';
+            document.getElementById('legaldiv').style.display = 'none';
+            document.getElementById('traveldiv').style.display = 'none';
 
-        $("a").removeAttr('href');
-      
-    },
+            if (pageType == "Home") {
+                document.getElementById('divhomeassist').style.display = 'block';
+            } else if (pageType == "Medical") {
+                document.getElementById('divmediassist').style.display = 'block';
+            } else if (pageType == "Road") {
+                document.getElementById('divroadassist').style.display = 'block';
+            } else if (pageType == "Legal") {
+                document.getElementById('legaldiv').style.display = 'block';
+            } else if (pageType == "Travel") {
+                document.getElementById('traveldiv').style.display = 'block';
+            }
+            document.getElementById('loaddingimg').style.display = "none";
+
+            $("a").removeAttr('href');
+
+        },
         200);
     }
 }
@@ -2740,7 +2661,7 @@ function gotoFstpage(pagename) {
     document.getElementById('txtusernameregfirst').value = "";
     document.getElementById('txtpwregfirst').value = "";
     document.getElementById('txtconfirmpwregfirst').value = "";
-    document.getElementById('txtLoginUserName').value =  "";
+    document.getElementById('txtLoginUserName').value = "";
     document.getElementById('txtLoginPassword').value = "";
     Pagename = pagename;
     //$('#txtusernameregfirst,#txtpwregfirst,#txtconfirmpwregfirst').val('');

@@ -149,13 +149,10 @@
             }
         }
 
-       
-        //uncommented Asha dec 3rd
-        function callforassistance(type, value) {
-            //alert(type + '::' + value);
-            if (value == 1) {
-                CreatePleaseCallMeRequestNew(type);
-            }
+
+        //kavya(call image reverse back)
+        function callforassistance(type) {
+            setTimeout(function () { CreatePleaseCallMeRequestNew(type); }, 210);
         }
 
         
@@ -1080,7 +1077,7 @@
                                                 <tr>
                                                     <td width="49px" class="sliderLeft"></td>
                                                     <td class="slideclick">
-                                                        <select name="sliderhome" id="sliderhome" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('home', this.value);">
+                                                        <select name="sliderhome" id="sliderhome" data-role="slider" style="height: 50px; background-color:red;" onchange="javascript:callforassistance('home');">
                                                             <option value="0">SLIDE TO CALL FOR HOME ASSISTANCE</option>
                                                             
                                                             <option value="1"></option>
@@ -1155,7 +1152,7 @@
                                                 <tr>
                                                     <td width="49px" class="sliderLeft"></td>
                                                     <td class="slideclick">
-                                                        <select name="slidermedical" id="slidermedical" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('medical', this.value);">
+                                                        <select name="slidermedical" id="slidermedical" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('medical');">
                                                             <option value="0">SLIDE TO CALL FOR MEDICAL ASSISTANCE
                                                             </option>
                                                             <option value="1"></option>
@@ -1227,7 +1224,7 @@
                                                 <tr>
                                                     <td width="49px" class="sliderLeft"></td>
                                                     <td class="slideclick">
-                                                        <select name="sliderroad" id="sliderroad" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('road', this.value);">
+                                                        <select name="sliderroad" id="sliderroad" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('road');">
                                                             <option value="0">SLIDE TO CALL FOR ROAD ASSISTANCE
                                                             </option>
                                                             <option value="1"></option>
@@ -1300,7 +1297,7 @@
                                                 <tr>
                                                     <td width="49px" class="sliderLeft"></td>
                                                     <td class="slideclick">
-                                                        <select name="sliderlegal" id="sliderlegal" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('legal', this.value);">
+                                                        <select name="sliderlegal" id="sliderlegal" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('legal');">
                                                             <option value="0">SLIDE TO CALL FOR LEGAL ASSISTANCE
                                                             </option>
                                                             <option value="1"></option>
@@ -1373,7 +1370,7 @@
                                                 <tr>
                                                     <td width="49px" class="sliderLeft"></td>
                                                     <td class="slideclick">
-                                                        <select name="slidertravel" id="slidertravel" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('travel', this.value);">
+                                                        <select name="slidertravel" id="slidertravel" data-role="slider" style="height: 0px;" onchange="javascript:callforassistance('travel');">
                                                             <option value="0">SLIDE TO CALL FOR TRAVEL ASSISTANCE
                                                             </option>
                                                             <option value="1"></option>
@@ -6786,12 +6783,25 @@
                         </table>
                     </td>
                 </tr>
+                  <tr class="trheight2">
+                    <td class="middlecontent3">
+                        <table width="100%" height="100%" cellspacing="0" cellpadding="0">
+                            <tr style="vertical-align:middle">
+                                <td class="regcol1"></td>
+                                <td class="regtopHeader">Terms and conditions
+                                </td>
+                                <td class="regcol2" align="right">
+                                    <img alt=" " src="public/images/EAslicing/register.png" class="loginimg" style="display:none">
+                                </td>
+                                <td class="regcol1"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <div id=" maindiv" class="termsspace">
-                            <div id="div2" class="headeingdiv">
-                                Terms and conditions
-                            </div>
+                         
                             <div class="acceptdiv">
                                 <p>
                                     Europ Assistance South Africa, through its authorised service providers (referred to as “we” or “us”) will provide members (“you”) with functionality that allows you to push an emergency button on hand held devices to request services (“service”). You must be a valid member at the time of the emergency request for the services to be provided. Once the service is activated through the device, a communication request will be sent to us. Successful communication can only be achieved if you have a fully active data connection with your phone and your mobile network operator has a fully operation network coverage in the area. It is your responsibility to ensure that a working data channel exists, that the data transfer is acceptable and data transfer is possible. The service has been tested on the handset; we take no responsibility for the application not working on your handset for any reason whatsoever. Should the device fail to communicate with Europ Assistance, we will attempt to inform you that a communication error has occurred, in the event that no communication is receive from Europ Assistance, please contact us on 0861 …. for emergency assistance.

@@ -25,7 +25,7 @@ function GetDisplayCategoriesCallback(responseData) {
     if (checkLogin()) {
         try {
             //alert("GetDisplayCategories:::::::" + responseData);
-     responseData = responseData.replace(/&gt;/gi, '>');
+            responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
             if (responseData !== "") {
@@ -76,8 +76,8 @@ function GetDisplayCategoriesCallback(responseData) {
                         row.onclick = function () {
 
                             var categoryID = this.id;
-                            categoryID = categoryID.replace('row', '');
-
+                            //categoryID = categoryID.replace('row', '');
+                            localStorage.categoryID = categoryID.replace('row', '');
                             $("#tbldisplaycategoriesbycid tr").remove();
                             //  document.getElementById('txtmerchantsearch').innerHTML = null;
                             document.getElementById('txtmerchantsearch').value = "";
@@ -93,9 +93,11 @@ function GetDisplayCategoriesCallback(responseData) {
                             currentPage = 'merchantnames';
                             pageData.push(currentPage);
 
-                            setTimeout(function () { GetDisplayMerchantsByCategories(categoryID); }, 100);
-                          
-                          
+                            setTimeout(function () {
+                                var randgoInputData = ''; randgoInputData = '<?xml version="1.0" encoding="utf-8"?>'; randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'; randgoInputData = randgoInputData + '<soap:Body>'; randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">'; randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>'; randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>'; randgoInputData = randgoInputData + '</Login>'; randgoInputData = randgoInputData + '</soap:Body>'; randgoInputData = randgoInputData + '</soap:Envelope>'; CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNewMer1);
+                            }, 100);
+
+
 
                         }
                     }
@@ -104,10 +106,29 @@ function GetDisplayCategoriesCallback(responseData) {
         } catch (exp) {
 
         }
-        
+
     }
 }
-
+function RandoLoginCallBackNewMer1(responseData) {
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
+                window.localStorage.setItem("randgosessionid", xmlDoc.getElementsByTagName("sessionid")[0].textContent);
+                GetDisplayMerchantsByCategories(localStorage.categoryID);
+            }
+        }
+        else {
+            alert('No Data Found');
+            return false;
+        }
+    } catch (exp) {
+        //alert('RandoLoginCallBackNew' + exp);
+    }
+}
 
 /*****************************************************************************************************
 * PURPOSE :DisplayMerchantsByCategories(MerchantNames)
@@ -133,8 +154,8 @@ function GetDisplayMerchantsByCategories(categoryID) {
 
 function GetDisplayMerchantsByCategoriesCallback(responseData) {
     if (checkLogin()) {
-    try {
-           // alert("DisplayMerchantsByCategories:::::::" + responseData);
+        try {
+            // alert("DisplayMerchantsByCategories:::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
@@ -198,6 +219,7 @@ function GetDisplayMerchantsByCategoriesCallback(responseData) {
                             // window.location.href = "../Help/goeat.html?merchantId=" + this.id + "&merchantname=" + this.innerText;
                             var merchantId = this.id;
                             merchantId = merchantId.replace('row', '');
+                            localStorage.merchantId = merchantId;
                             $("#tbldisplaymerchantdeals tr").remove();
                             document.getElementById('txtmerchantsearch').value = "";
                             //heading display
@@ -211,14 +233,16 @@ function GetDisplayMerchantsByCategoriesCallback(responseData) {
                             });
                             currentPage = 'goeat';
                             pageData.push(currentPage);
-                            setTimeout(function () { GetDisplayMerchantDeals(merchantId); }, 100);
+                            setTimeout(function () {
+                                var randgoInputData = ''; randgoInputData = '<?xml version="1.0" encoding="utf-8"?>'; randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'; randgoInputData = randgoInputData + '<soap:Body>'; randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">'; randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>'; randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>'; randgoInputData = randgoInputData + '</Login>'; randgoInputData = randgoInputData + '</soap:Body>'; randgoInputData = randgoInputData + '</soap:Envelope>'; CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew2);
+                            }, 100);
 
-                           
+
                         }
                     }
                 }
-               /* else {
-                    alert("");
+                /* else {
+                alert("");
                 }*/
             }
         } catch (exp) {
@@ -228,7 +252,26 @@ function GetDisplayMerchantsByCategoriesCallback(responseData) {
 
     }
 }
-
+function RandoLoginCallBackNew2(responseData) {
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
+                window.localStorage.setItem("randgosessionid", xmlDoc.getElementsByTagName("sessionid")[0].textContent);
+                GetDisplayMerchantDeals(localStorage.merchantId);
+            }
+        }
+        else {
+            alert('No Data Found');
+            return false;
+        }
+    } catch (exp) {
+        //alert('RandoLoginCallBackNew' + exp);
+    }
+}
 
 /*****************************************************************************************************
 * PURPOSE :Display Merchant Deals(goeat.html)
@@ -255,9 +298,9 @@ function GetDisplayMerchantDeals(merchantID) {
 
 function GetDisplayMerchantDealsCallback(responseData) {
     if (checkLogin()) {
-   
+
         try {
-          //  alert("Display Merchant Deals:::::::::::::" + responseData);
+            //  alert("Display Merchant Deals:::::::::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
@@ -292,8 +335,8 @@ function GetDisplayMerchantDealsCallback(responseData) {
                             /***added**/
                             var offertype = xmlDoc.getElementsByTagName('deal')[i].getAttribute("offerType");
                             /** dec7th 2013 ***/
-                            var dealsms=xmlDoc.getElementsByTagName("dealSMS")[i].textContent;
-                           // alert("dealsms::::: " + dealsms);
+                            var dealsms = xmlDoc.getElementsByTagName("dealSMS")[i].textContent;
+                            // alert("dealsms::::: " + dealsms);
                             /** dec7th end***/
                             row.setAttribute('offerId', 'row' + offerid);
                             var cell = row.insertCell(0);
@@ -325,7 +368,8 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                 img.setAttribute('name', 'offerType' + offertype);
                                 celimg.setAttribute('align', 'right');
                                 celimg.setAttribute('class', 'regcol2 setheight');
-                                celimg.appendChild(img);
+                                celimg.appendChild(img); img.setAttribute('alt', 'dealSMS' + xmlDoc.getElementsByTagName("dealSMS")[i].textContent);
+                                img.setAttribute('id', 'row' + dealid);
                             }
                             else if (offertype == "email-based") {
                                 rowcount = gettbldisplaymerchantdeals.rows.length;
@@ -338,7 +382,8 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                 img.setAttribute('name', 'offerType' + offertype);
                                 celimg.setAttribute('align', 'right');
                                 celimg.setAttribute('class', 'regcol2 setheight');
-                                celimg.appendChild(img);
+                                celimg.appendChild(img); img.setAttribute('alt', 'dealSMS' + xmlDoc.getElementsByTagName("dealSMS")[i].textContent);
+                                img.setAttribute('id', 'row' + dealid);
                             }
 
                             else if ((offertype == "print-based") && (dealsms == 1)) {
@@ -353,11 +398,11 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                 celimg.setAttribute('align', 'right');
                                 celimg.setAttribute('class', 'regcol2 setheight');
                                 celimg.appendChild(img);
-
+                                img.setAttribute('alt', 'dealSMS' + xmlDoc.getElementsByTagName("dealSMS")[i].textContent);
+                                img.setAttribute('id', 'row' + dealid);
                             }
-                           // if ((offertype == "print-based") && (dealsms == 1)) 
-                            else 
-                            {
+                            // if ((offertype == "print-based") && (dealsms == 1)) 
+                            else {
                                 rowcount = gettbldisplaymerchantdeals.rows.length;
                                 var row3 = gettbldisplaymerchantdeals.insertRow(rowcount);
                                 var celimg = row3.insertCell(0);
@@ -368,38 +413,19 @@ function GetDisplayMerchantDealsCallback(responseData) {
                                 img.setAttribute('name', 'offerType' + offertype);
                                 celimg.setAttribute('align', 'right');
                                 celimg.setAttribute('class', 'regcol2 setheight');
-                                celimg.appendChild(img);
+                                celimg.appendChild(img); img.setAttribute('alt', 'dealSMS' + xmlDoc.getElementsByTagName("dealSMS")[i].textContent);
+                                img.setAttribute('id', 'row' + dealid);
                             }
 
                             $("a").removeAttr('href');
-                            
+
                             img.onclick = function () {
-                               
-                                var dealsID = this.id.replace('row', '');
-                                var offertype = this.name.replace('offerType', '');
-                                if (offertype == "url-based") {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
 
-                                    GetRequestUrlDeal(dealsID);
-                                }
-                                if (offertype == "email-based") {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
-                                    GetRequestEmailDeal(dealsID);
-                                }
-                                if (offertype == "sms-based") {
-                                   // alert("offertype:::::" + offertype + '::' + dealsms);
-                                    GetRequestSMSDeal(dealsID);
-                                }
-                              
+                                localStorage.dealsms = this.alt.replace('dealSMS', '');
+                                localStorage.dealsID = this.id.replace('row', '');
+                                localStorage.offertype = this.name.replace('offerType', '');
+                                var randgoInputData = ''; randgoInputData = '<?xml version="1.0" encoding="utf-8"?>'; randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'; randgoInputData = randgoInputData + '<soap:Body>'; randgoInputData = randgoInputData + '<Login xmlns="http://tempuri.org/">'; randgoInputData = randgoInputData + '<lUserName>ws@europassistance</lUserName>'; randgoInputData = randgoInputData + '<lPassword>e@s@ws</lPassword>'; randgoInputData = randgoInputData + '</Login>'; randgoInputData = randgoInputData + '</soap:Body>'; randgoInputData = randgoInputData + '</soap:Envelope>'; CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', RandoLoginCallBackNew3);
 
-                                if ((offertype == "print-based") && (dealsms == 0)) {
-                                   // alert("offertype:::dealsms::" + offertype + '::' + dealsms);
-                                    GetRequestPrintDeal(dealsID);
-                                }
-                                else if ((offertype == "print-based") && (dealsms == 1)) {
-                                    //alert("offertype:::dealsms::" + offertype + '::' + dealsms);
-                                    GetRequestSMSDeal(dealsID);
-                                }
 
                             }
                         }
@@ -412,18 +438,47 @@ function GetDisplayMerchantDealsCallback(responseData) {
         } catch (exp) {
 
         }
- 
+
+    }
+}
+
+function RandoLoginCallBackNew3(responseData) {
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+            if (xmlDoc.getElementsByTagName("status")[0] != null && xmlDoc.getElementsByTagName("status")[0].textContent !== "") {
+                window.localStorage.setItem("randgosessionid", xmlDoc.getElementsByTagName("sessionid")[0].textContent);
+                if (localStorage.offertype == "url-based") {
+                    GetRequestUrlDeal(localStorage.dealsID);
+                } if (localStorage.offertype == "email-based") {
+                    GetRequestEmailDeal(localStorage.dealsID);
+                } if (localStorage.offertype == "sms-based") {
+                    GetRequestSMSDeal(localStorage.dealsID);
+                } if ((localStorage.offertype == "print-based") && (localStorage.dealsms == 0)) {
+                    GetRequestPrintDeal(localStorage.dealsID);
+                } else if ((localStorage.offertype == "print-based") && (localStorage.dealsms == 1)) {
+                    GetRequestSMSDeal(localStorage.dealsID);
+                }
+            }
+        }
+        else {
+            alert('No Data Found');
+            return false;
+        }
+    } catch (exp) {
+        //alert('RandoLoginCallBackNew' + exp);
     }
 }
 
 
 
 
-
-
 function GetRequestEmailDeal(dealID) {
     var randgoInputData = '';
-  
+
     randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
     randgoInputData = randgoInputData + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
     randgoInputData = randgoInputData + '<soap:Body>';
@@ -442,10 +497,10 @@ function GetRequestEmailDeal(dealID) {
 }
 
 function GetRequestEmailDealCallback(responseData) {
-  
+
     if (checkLogin()) {
         try {
-           // alert("RequestEmailDeal:::::::responseData::::::" + responseData);
+            // alert("RequestEmailDeal:::::::responseData::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
@@ -468,11 +523,11 @@ function GetRequestEmailDealCallback(responseData) {
 
                 }
                 else {
-                  //  jAlert(xmlDoc.getElementsByTagName("message")[0].textContent, 'Info');
+                    //  jAlert(xmlDoc.getElementsByTagName("message")[0].textContent, 'Info');
                 }
             }
         } catch (exp) {
-           //alert(exp);
+            //alert(exp);
         }
     }
 }
@@ -499,105 +554,105 @@ function GetMerchantsBySearch() {
 
         CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', GetMerchantsBySearchCallback);
     }
-    
+
 
 }
 
 function GetMerchantsBySearchCallback(responseData) {
 
     if (checkLogin()) {
-    try {
-                   // alert("DisplayMerchantsBySearch::::::::::::" + responseData);
-                    responseData = responseData.replace(/&gt;/gi, '>');
-                    responseData = responseData.replace(/&lt;/gi, '<');
-                    var parser = new DOMParser();
-                    if (responseData !== "") {
-                        xmlDoc = parser.parseFromString(responseData, "text/xml");
-                        if (xmlDoc.getElementsByTagName("message")[0].textContent === "Your session has timed out. Please open a new session.") {
-                            localStorage.randgosessionid = null;
-                            jAlert('Your session has expired. Please login again.', 'Info');
+        try {
+            // alert("DisplayMerchantsBySearch::::::::::::" + responseData);
+            responseData = responseData.replace(/&gt;/gi, '>');
+            responseData = responseData.replace(/&lt;/gi, '<');
+            var parser = new DOMParser();
+            if (responseData !== "") {
+                xmlDoc = parser.parseFromString(responseData, "text/xml");
+                if (xmlDoc.getElementsByTagName("message")[0].textContent === "Your session has timed out. Please open a new session.") {
+                    localStorage.randgosessionid = null;
+                    jAlert('Your session has expired. Please login again.', 'Info');
+                    prevPage = currentPage;
+                    $.mobile.changePage('#log', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'log';
+                    pageData.push(currentPage);
+
+                }
+                var gettbldisplaycategoriesbycid = document.getElementById('tbldisplaycategoriesbycid');
+                gettbldisplaycategoriesbycid.innerHTML = null;
+                if (xmlDoc.getElementsByTagName("merchant") != null && xmlDoc.getElementsByTagName("merchant").length > 0) {
+                    var merchantlist = xmlDoc.getElementsByTagName("merchant");
+
+                    for (var i = 0; i < merchantlist.length; i++) {
+                        var rowcount = gettbldisplaycategoriesbycid.rows.length;
+                        var row = gettbldisplaycategoriesbycid.insertRow(rowcount);
+                        row.setAttribute('class', 'tdbgc');
+                        var merchantid = xmlDoc.getElementsByTagName('merchant')[i].getAttribute("id");
+                        row.setAttribute('id', 'row' + merchantid);
+
+                        var imgpath = xmlDoc.getElementsByTagName('merchant')[i].getAttribute("imageUrl");
+                        //row.setAttribute('imageUrl', 'row' + imgpath);
+
+                        //var cellBlank1 = row.insertCell(0);
+                        // cellBlank1.setAttribute('class', 'regcol1');
+                        var logoimgcell = row.insertCell(0);
+                        var logoimg = document.createElement("img");
+                        logoimg.src = imgpath;
+                        logoimg.setAttribute('class', 'logoimgclass');
+                        logoimgcell.setAttribute('class', 'cellclass');
+                        logoimgcell.appendChild(logoimg);
+
+                        var cell = row.insertCell(1);
+                        var lblcategory = document.createElement("label");
+                        cell.appendChild(lblcategory);
+                        cell.setAttribute('class', 'textstyle1 gorow');
+                        lblcategory.innerHTML = xmlDoc.getElementsByTagName("merchant")[i].textContent;
+
+                        var celimg = row.insertCell(2);
+                        var img = document.createElement("img");
+                        img.src = 'public/images/EAslicing/singlerightarrow.png';
+                        img.setAttribute('class', 'rightarr');
+                        celimg.setAttribute('align', 'center');
+                        celimg.setAttribute('class', 'regcol2');
+                        celimg.appendChild(img);
+
+                        //var cellBlank2 = row.insertCell(3);
+                        //cellBlank2.setAttribute('class', 'regcol1');
+
+                        row.onclick = function () {
+                            // window.location.href = "../Help/goeat.html?merchantId=" + this.id + "&merchantname=" + this.innerText;
+                            var merchantId = this.id;
+                            merchantId = merchantId.replace('row', '');
+
+                            //heading display
+                            var MName = this.innerText.replace(/%20/g, ' ');
+                            document.getElementById('tblmerchantnameheading').innerHTML = MName;
                             prevPage = currentPage;
-                            $.mobile.changePage('#log', {
+                            $.mobile.changePage('#goeat', {
                                 transition: "none",
                                 reverse: false,
                                 changeHash: false
                             });
-                            currentPage = 'log';
+                            currentPage = 'goeat';
                             pageData.push(currentPage);
-
-                        }
-                        var gettbldisplaycategoriesbycid = document.getElementById('tbldisplaycategoriesbycid');
-                        gettbldisplaycategoriesbycid.innerHTML = null;
-                        if (xmlDoc.getElementsByTagName("merchant") != null && xmlDoc.getElementsByTagName("merchant").length > 0) {
-                            var merchantlist = xmlDoc.getElementsByTagName("merchant");
-
-                            for (var i = 0; i < merchantlist.length; i++) {
-                                var rowcount = gettbldisplaycategoriesbycid.rows.length;
-                                var row = gettbldisplaycategoriesbycid.insertRow(rowcount);
-                                row.setAttribute('class', 'tdbgc');
-                                var merchantid = xmlDoc.getElementsByTagName('merchant')[i].getAttribute("id");
-                                row.setAttribute('id', 'row' + merchantid);
-
-                                var imgpath = xmlDoc.getElementsByTagName('merchant')[i].getAttribute("imageUrl");
-                                //row.setAttribute('imageUrl', 'row' + imgpath);
-
-                                //var cellBlank1 = row.insertCell(0);
-                                // cellBlank1.setAttribute('class', 'regcol1');
-                                var logoimgcell = row.insertCell(0);
-                                var logoimg = document.createElement("img");
-                                logoimg.src = imgpath;
-                                logoimg.setAttribute('class', 'logoimgclass');
-                                logoimgcell.setAttribute('class', 'cellclass');
-                                logoimgcell.appendChild(logoimg);
-
-                                var cell = row.insertCell(1);
-                                var lblcategory = document.createElement("label");
-                                cell.appendChild(lblcategory);
-                                cell.setAttribute('class', 'textstyle1 gorow');
-                                lblcategory.innerHTML = xmlDoc.getElementsByTagName("merchant")[i].textContent;
-
-                                var celimg = row.insertCell(2);
-                                var img = document.createElement("img");
-                                img.src = 'public/images/EAslicing/singlerightarrow.png';
-                                img.setAttribute('class', 'rightarr');
-                                celimg.setAttribute('align', 'center');
-                                celimg.setAttribute('class', 'regcol2');
-                                celimg.appendChild(img);
-
-                                //var cellBlank2 = row.insertCell(3);
-                                //cellBlank2.setAttribute('class', 'regcol1');
-
-                                row.onclick = function () {
-                                    // window.location.href = "../Help/goeat.html?merchantId=" + this.id + "&merchantname=" + this.innerText;
-                                    var merchantId = this.id;
-                                    merchantId = merchantId.replace('row', '');
-
-                                    //heading display
-                                    var MName = this.innerText.replace(/%20/g, ' ');
-                                    document.getElementById('tblmerchantnameheading').innerHTML = MName;
-                                    prevPage = currentPage;
-                                    $.mobile.changePage('#goeat', {
-                                        transition: "none",
-                                        reverse: false,
-                                        changeHash: false
-                                    });
-                                    currentPage = 'goeat';
-                                    pageData.push(currentPage);
-                                    GetDisplayMerchantDeals(merchantId);
-                                }
-                            }
-
-                        }
-                        else {
-                            jAlert('No Data Found', 'Info');
+                            GetDisplayMerchantDeals(merchantId);
                         }
                     }
 
-                }//try
-         catch (exp) {
+                }
+                else {
+                    jAlert('No Data Found', 'Info');
+                }
+            }
 
-        }//catch
-    }//checklogin
+        } //try
+        catch (exp) {
+
+        } //catch
+    } //checklogin
 }
 
 /*****************************************************************************************************
@@ -606,7 +661,7 @@ function GetMerchantsBySearchCallback(responseData) {
 * CREATED DATE : DEC 7th 2013
 ******************************************************************************************************/
 function GetRequestSMSDeal(dealID) {
-  //  alert("GetRequestSMSDeal:::::::");
+    //  alert("GetRequestSMSDeal:::::::");
     var randgoInputData = '';
     randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
     randgoInputData = randgoInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">';
@@ -626,10 +681,10 @@ function GetRequestSMSDeal(dealID) {
 }
 
 function GetRequestSMSDealCallback(responseData) {
-   // alert("RequestSMSDeal:::response::::::::::" + responseData);
+    // alert("RequestSMSDeal:::response::::::::::" + responseData);
     if (checkLogin()) {
         try {
-           // alert("Display Merchant Deals:::::::::::::" + responseData);
+            // alert("Display Merchant Deals:::::::::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
@@ -649,15 +704,15 @@ function GetRequestSMSDealCallback(responseData) {
                     pageData.push(currentPage);
                 }
                 else {
-                   
+
                     if (xmlDoc.getElementsByTagName("deals") != null && xmlDoc.getElementsByTagName("deals").length > 0) {
-                     
+
                         document.getElementById('divmsg').innerHTML = xmlDoc.getElementsByTagName("deals")[0].getElementsByTagName("oprationMessage")[0].textContent;
                         jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " oprationMessage: " + document.getElementById('divmsg').innerText, 'Info');
 
 
                     }
-                  
+
                     else {
                         jAlert('No Data Found', 'Info');
                     }
@@ -690,7 +745,7 @@ function GetRequestPrintDeal(dealID) {
 function GetRequestPrintDealCallback(responseData) {
     if (checkLogin()) {
         try {
-           // alert("RequestPrintDeal:::::responseData::::::::" + responseData);
+            // alert("RequestPrintDeal:::::responseData::::::::" + responseData);
             responseData = responseData.replace(/&gt;/gi, '>');
             responseData = responseData.replace(/&lt;/gi, '<');
             var parser = new DOMParser();
@@ -727,55 +782,55 @@ function GetRequestPrintDealCallback(responseData) {
 
 
 function GetRequestUrlDeal(dealID) {
-var randgoInputData = '';
-randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
-randgoInputData = randgoInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">';
-randgoInputData = randgoInputData + '<soapenv:Header/>';
-randgoInputData = randgoInputData + '<soapenv:Body>';
-randgoInputData = randgoInputData + '<tem:RequestUrlDeal>';
-randgoInputData = randgoInputData + '<tem:rSessionId>' + localStorage.randgosessionid + '</tem:rSessionId>';
-randgoInputData = randgoInputData + '<tem:rDealId>' + dealID + '</tem:rDealId>';
-randgoInputData = randgoInputData + '</tem:RequestUrlDeal>';
-randgoInputData = randgoInputData + '</soapenv:Body>';
-randgoInputData = randgoInputData + '</soapenv:Envelope>';
+    var randgoInputData = '';
+    randgoInputData = '<?xml version="1.0" encoding="utf-8"?>';
+    randgoInputData = randgoInputData + '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">';
+    randgoInputData = randgoInputData + '<soapenv:Header/>';
+    randgoInputData = randgoInputData + '<soapenv:Body>';
+    randgoInputData = randgoInputData + '<tem:RequestUrlDeal>';
+    randgoInputData = randgoInputData + '<tem:rSessionId>' + localStorage.randgosessionid + '</tem:rSessionId>';
+    randgoInputData = randgoInputData + '<tem:rDealId>' + dealID + '</tem:rDealId>';
+    randgoInputData = randgoInputData + '</tem:RequestUrlDeal>';
+    randgoInputData = randgoInputData + '</soapenv:Body>';
+    randgoInputData = randgoInputData + '</soapenv:Envelope>';
 
-CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', GetRequestUrlDealCallback);
+    CallWebService('http://www.randgo.com/3rdpartyservices/Service.asmx', randgoInputData, 'POST', 'text/xml', GetRequestUrlDealCallback);
 }
 
 
 
 function GetRequestUrlDealCallback(responseData) {
-if (checkLogin()) {
-try {
-//alert("Request Url Deal:::::::::::::" + responseData);
-responseData = responseData.replace(/&gt;/gi, '>');
-responseData = responseData.replace(/&lt;/gi, '<');
-var parser = new DOMParser();
-if (responseData !== "") {
-xmlDoc = parser.parseFromString(responseData, "text/xml");
-var alertmsg = xmlDoc.getElementsByTagName("deals")[0].getElementsByTagName("url")[0].textContent;
-jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " - " + alertmsg, 'Info');
-if (xmlDoc.getElementsByTagName("message")[0].textContent === "Your session has timed out. Please open a new session.") {
-localStorage.randgosessionid = null;
-jAlert('Your session has expired. Please login again.', 'Info');
-prevPage = currentPage;
-$.mobile.changePage('#log', {
-transition: "none",
-reverse: false,
-changeHash: false
-});
-currentPage = 'log';
-pageData.push(currentPage);
+    if (checkLogin()) {
+        try {
+            //alert("Request Url Deal:::::::::::::" + responseData);
+            responseData = responseData.replace(/&gt;/gi, '>');
+            responseData = responseData.replace(/&lt;/gi, '<');
+            var parser = new DOMParser();
+            if (responseData !== "") {
+                xmlDoc = parser.parseFromString(responseData, "text/xml");
+                var alertmsg = xmlDoc.getElementsByTagName("deals")[0].getElementsByTagName("url")[0].textContent;
+                jAlert(xmlDoc.getElementsByTagName("message")[0].textContent + " - " + alertmsg, 'Info');
+                if (xmlDoc.getElementsByTagName("message")[0].textContent === "Your session has timed out. Please open a new session.") {
+                    localStorage.randgosessionid = null;
+                    jAlert('Your session has expired. Please login again.', 'Info');
+                    prevPage = currentPage;
+                    $.mobile.changePage('#log', {
+                        transition: "none",
+                        reverse: false,
+                        changeHash: false
+                    });
+                    currentPage = 'log';
+                    pageData.push(currentPage);
 
-}
-else {
-//jAlert(xmlDoc.getElementsByTagName("message")[0].textContent, 'Info');
-}
-}
-} catch (exp) {
-//alert(exp);
-}
-}
+                }
+                else {
+                    //jAlert(xmlDoc.getElementsByTagName("message")[0].textContent, 'Info');
+                }
+            }
+        } catch (exp) {
+            //alert(exp);
+        }
+    }
 }
 
 
