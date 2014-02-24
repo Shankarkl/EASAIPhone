@@ -37,8 +37,8 @@
 
 #popup_content.confirm {
 	background-image: url(images/important.gif);
-    height:50px;
-    width:100px;
+    height:60px;
+   
 }
 
 #popup_content.prompt {
@@ -63,4 +63,20 @@
     height:40px;
     border-color:gray;
     border-width:5px;
+}
+/*Feb 21st ADDED PROFILE page confirm box*/
+#popup_ok
+{
+    width:75px;
+    height:40px;
+    border-color:gray;
+    border-width:5px;
+}
+#popup_cancel
+{
+    width:75px;
+    height:40px;
+    border-color:gray;
+    border-width:5px;
+    margin-left:10px;
 }

@@ -722,8 +722,6 @@ function GetSuburb() {
 }
 
 function payfrnd() {
-
-
     var peernumber = document.getElementById('txtfrnd').value;
     var amount = document.getElementById('txtfriendAmount').value;
 
@@ -1117,21 +1115,27 @@ function validation() {
                 jAlert("Passwords typed do not match, please re-enter your passwords!", "Info ");
                 return false;
             }
-            var confirmpw = confirm("Are you sure you want to change your password!", "Info ");
+          /*  var confirmpw = jConfirm("Are you sure you want to change your password!", "Info ");
             if (confirmpw == true) {
-                //ProfileChangepassword(pinnew);
+             
                 Profileupdate(document.getElementById('userid').value, FName, SurName, Name, pinnew, IdNumber, EmailID, CellNumberResult);
+            }*/
+            jConfirm('Are you sure you want to change your password!', 'Info', function (r) {
+            if (r == true) {
+            Profileupdate(document.getElementById('userid').value, FName, SurName, Name, pinnew, IdNumber, EmailID, CellNumberResult);
             }
-            else {
-                prevPage = currentPage;
-                $.mobile.changePage('#indexprofile', {
-                    transition: "none",
-                    reverse: false,
-                    changeHash: false
-                });
-                currentPage = 'indexprofile';
-                pageData.push(currentPage);
+        else {
+            prevPage = currentPage;
+            $.mobile.changePage('#indexprofile', {
+                transition: "none",
+                reverse: false,
+                changeHash: false
+            });
+            currentPage = 'indexprofile';
+            pageData.push(currentPage);
             }
+            });
+          
         }
     }
 
@@ -1267,9 +1271,6 @@ function checkremember() {
     $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
     $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
     $(".trheight3").hide();
-
-   // if (localStorage.randgosessionid == undefined || localStorage.randgosessionid == null || localStorage.randgosessionid == "null" || localStorage.randgosessionid == 'undefined' || localStorage.randgosessionid == '' || localStorage.randgosessionid == " " || localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
-   // if (localStorage.loginID == null || localStorage.loginID == undefined || localStorage.loginID == 0) {
     if (localStorage.loginID == 0 || localStorage.loginID == undefined || localStorage.loginID == null || localStorage.loginID == 'undefined' || localStorage.loginID == '' || localStorage.loginID == "null") {
         localStorage.randgosessionid = null;
 
@@ -1285,15 +1286,12 @@ function checkremember() {
             reverse: true,
             changeHash: false
         });
-        currentPage = 'indexPage'; //'indexservice'  indexwallet indexPage;qtnanswers;clickformoreinfo
+        currentPage = 'indexPage'; //'indexservice' indexbenefit indexwallet indexPage;qtnanswers;clickformoreinfo
         pageData.push(currentPage);
 
 
     }
-    /* else if (localStorage.loginID == 1) {
-    gotoService();
-
-    }*/
+   
     else {
         Pagename = 'indexservice';
         inputData = '<?xml version="1.0" encoding="utf-8"?>';
@@ -1390,11 +1388,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                 var nodval = xmlDoc.getElementsByTagName("SchemaUrlTable");
                 // alert(xmlDoc.getElementsByTagName("SchemaUrlTable")[0].childNodes[0].nodeValue);
                 for (i = 0; i < nodval.length; i++) {
-                    /* document.getElementById('loaddingimg').style.display = "block";
-                    setTimeout(function () {
-                    },
-                    200);*/
-
+                
                     if (i == 0) {
 
                         document.getElementById('homecontent').innerHTML = "";
@@ -1407,7 +1401,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc1 = desc1.replace(/&amp;/g, '&');
                         desc1 = desc1.replace(/&#39;/g, "'");
                         document.getElementById('homecontent').innerHTML = desc1;
-                        // desc1.setAttribute('width', '100%');
+                      
                         localStorage.imgUrlHome = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlHome = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
 
@@ -1423,7 +1417,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc2 = desc2.replace(/&amp;/g, '&');
                         desc2 = desc2.replace(/&#39;/g, "'");
                         document.getElementById('medicontent').innerHTML = desc2;
-                        // desc2.setAttribute('width', '100%');
+                       
                         localStorage.imgUrlMedical = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
                         // localStorage.imgUrlMedical = 'http://118.139.160.226:8059/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent; 
                     } else if (i == 2) {
@@ -1435,7 +1429,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc3 = desc3.replace(/&nbsp;/g, ' ');
                         desc3 = desc3.replace(/&amp;/g, '&');
                         desc3 = desc3.replace(/&#39;/g, "'");
-                        // desc3.setAttribute('width', '100%');
+                      
                         document.getElementById('rdcontent').innerHTML = desc3;
 
                         localStorage.imgUrlRoad = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
@@ -1449,7 +1443,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc4 = desc4.replace(/&nbsp;/g, ' ');
                         desc4 = desc4.replace(/&amp;/g, '&');
                         desc4 = desc4.replace(/&#39;/g, "'");
-                        // desc4.setAttribute('width', '100%');
+                       
                         document.getElementById('lecontent').innerHTML = desc4;
 
                         localStorage.imgUrlLegal = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
@@ -1463,7 +1457,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                         desc5 = desc5.replace(/&nbsp;/g, ' ');
                         desc5 = desc5.replace(/&amp;/g, '&');
                         desc5 = desc5.replace(/&#39;/g, "'");
-                        // desc5.setAttribute('width', '100%');
+                        
                         document.getElementById('travelcontent').innerHTML = desc5;
 
                         localStorage.imgUrlTravel = 'http://118.139.160.226/EASACMS2/Uploadimages/' + xmlDoc.getElementsByTagName("Filename")[i].textContent;
@@ -1524,7 +1518,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                     var productid = xmlDoc.getElementsByTagName("RoadAssistance")[0].childNodes[0].nodeValue;
                     var productname = " Roadside Assistance ";
                     $("#roadas,#rdtb").show();
-                    //document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                  
                     document.getElementById("rdimg").src = localStorage.imgUrlRoad;
                     document.getElementById("rdimg1").src = localStorage.imgUrlRoad;
                     $("#rdimg").show();
@@ -1547,7 +1541,6 @@ function MYLogintoAllServicesCallBack(responseData) {
                     document.getElementById("lgimg1").src = localStorage.imgUrlLegal;
                     $("#lgimg").show();
 
-                    // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
                     $("#homeseperator").removeClass("middlecontent3");
                     document.getElementById('divle').className = "panelcollapsed";
                     $("#divle").show();
@@ -1563,7 +1556,7 @@ function MYLogintoAllServicesCallBack(responseData) {
                     var productid = xmlDoc.getElementsByTagName("travelAssistance")[0].childNodes[0].nodeValue;
                     var productname = "Travel Assistance";
                     $("#travelas,#trtb").show();
-                    // document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                
                     document.getElementById("tlimg").src = localStorage.imgUrlTravel;
                     document.getElementById("tlimg1").src = localStorage.imgUrlTravel;
                     $("#tlimg").show();
@@ -1633,6 +1626,20 @@ function MYLogintoAllServicesCallBack(responseData) {
 function gotoService() {
 
     if (checkLogin()) {
+        $("#tlimg,#lgimg,#rdimg,#mdimg,#hmimg").hide();
+        $("#NOproductDiv").hide();
+        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
+        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
+        $(".trheight3").hide();
+        prevPage = currentPage;
+        $.mobile.changePage('#indexservice', {
+            transition: "none",
+            reverse: false,
+            changeHash: false
+        });
+        currentPage = 'indexservice';
+        pageData.push(currentPage);
+
         document.getElementById("hmimg").src = "";
         document.getElementById("hmimg1").src = "";
 
@@ -1670,8 +1677,7 @@ function gotoService() {
 function mobileuserguidCallBack(responseData) {
 
     try {
-        //  alert(responseData);
-        /** login callback **/
+      
         $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
         $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
         $(".trheight3").hide();
@@ -1850,25 +1856,25 @@ function mobileuserguidCallBack(responseData) {
                 if (localStorage.gethome == 0 && localStorage.getmedical == 0 && localStorage.getroad == 0 && localStorage.getlegal == 0 && localStorage.gettravel == 0) {
                     $("#NOproductDiv").show();
                     $(".trheight3").hide();
-                    prevPage = currentPage;
+                   /* prevPage = currentPage;
                     $.mobile.changePage('#indexservice', {
                         transition: "none",
                         reverse: false,
                         changeHash: false
                     });
                     currentPage = 'indexservice';
-                    pageData.push(currentPage);
+                    pageData.push(currentPage);*/
 
                 } else {
                     $("#NOproductDiv").hide();
-                    prevPage = currentPage;
+                  /*  prevPage = currentPage;
                     $.mobile.changePage('#indexservice', {
                         transition: "none",
                         reverse: false,
                         changeHash: false
                     });
                     currentPage = 'indexservice';
-                    pageData.push(currentPage);
+                    pageData.push(currentPage);*/
                 }
             } //if
             else {
@@ -1881,15 +1887,15 @@ function mobileuserguidCallBack(responseData) {
                     localStorage.gethome = 0;
                     $("#NOproductDiv").show();
                     $(".trheight3").hide();
-                    // localStorage.username = xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == undefined || xmlDoc.getElementsByTagName("UserName")[0].childNodes[0] == 'null' ? '' : xmlDoc.getElementsByTagName("UserName")[0].childNodes[0].nodeValue;
-                    prevPage = currentPage;
+                    
+                   /* prevPage = currentPage;
                     $.mobile.changePage('#indexservice', {
                         transition: "none",
                         reverse: false,
                         changeHash: false
                     });
                     currentPage = 'indexservice';
-                    pageData.push(currentPage);
+                    pageData.push(currentPage);*/
 
 
                 } else {
@@ -1904,13 +1910,13 @@ function mobileuserguidCallBack(responseData) {
     catch (exp) {
         //alert(exp);
         jAlert("The System is temporarily unavailable, please try again later.", 'Info');
-        $.mobile.changePage('#indexservice', {
+      /*  $.mobile.changePage('#indexservice', {
             transition: "none",
             reverse: false,
             changeHash: false
         });
         currentPage = 'indexservice';
-        pageData.push(currentPage);
+        pageData.push(currentPage);*/
 
     }
 }
@@ -1959,18 +1965,7 @@ function CreatePleaseCallMeRequestCallbackNew(responseData) {
         }
     }
 }
-/****top logo img click ****/
 
-function gohome() {
-    prevPage = currentPage;
-    $.mobile.changePage('#indexPage', {
-        transition: "none",
-        reverse: false,
-        changeHash: false
-    });
-    currentPage = 'indexPage';
-    pageData.push(currentPage);
-}
 
 
 
@@ -1986,7 +1981,7 @@ function UserRegistration() {
 
     // window.resizeTo($(window).width(), $(window).height());
     try {
-        $(window).scrollTop(0);
+        $(window).scrollTop(0);//sometimes alert box goes down 
         prevPage = currentPage;
         var Name = document.getElementById('txtRegName').value;
         var SurName = document.getElementById('txtRegSurName').value;
@@ -2013,7 +2008,8 @@ function UserRegistration() {
         var pwd = /^\d{5}$/;
         var checnum = /^\d+$/;
         if (Name == "") {
-            jAlert("Please enter the First Name!", 'Info');
+           jAlert("Please enter the First Name!", 'Info');
+        
             return false;
         }
         else if (!Name.match(unameexp)) {
@@ -2071,8 +2067,8 @@ function UserRegistration() {
             return false;
         }
         else if (policyno.length < 8) {
-            // jAlert("hello" + Password);
             jAlert("Policy number must contain at least 8 numbers!", 'Info');
+           
         }
         else if (curimgsource.indexOf('acceptedbutton.png') < 0) {
             jAlert("Please Accept Terms and Conditions!", 'Info');
@@ -2080,7 +2076,7 @@ function UserRegistration() {
         }
         else {
             CellNumberResult = CellNumberResult.slice(1);
-            // alert(CellNumber);
+           
             RegisterUserNew(Name, SurName, userName, CellNumberResult, passowrd, IdNumber, EmailID, policyno);
         }
 
@@ -2151,19 +2147,27 @@ function RegisterUserCallback(responseData) {
                     pageData.push(currentPage);
                     jAlert('Registration successfull, Thank you for registering.', 'Info');
                     return false;
-                } else {
-                    jAlert('Register is successful. You can login to the application, but you have no access to Europe Assist services', 'Info');
+                } 
+                else {
+                    jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue, 'Info', function (r) {
+                        if (r == true) {
+                            jAlert('Register is successfull. You can login to the application, but you have no access to Europe Assist services', 'Info');
+                            prevPage = currentPage;
+                            $.mobile.changePage('#indexPage', {
+                                transition: "none",
+                                reverse: true,
+                                changeHash: false
+                            });
+                            currentPage = 'indexPage';
+                            pageData.push(currentPage);
 
-                    prevPage = currentPage;
-                    $.mobile.changePage('#indexPage', {
-                        transition: "none",
-                        reverse: true,
-                        changeHash: false
+
+                        }
+
                     });
-                    currentPage = 'indexPage';
-                    pageData.push(currentPage);
-                    alert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue);
+
                 }
+               
 
 
             }
@@ -2177,6 +2181,8 @@ function RegisterUserCallback(responseData) {
 
     }
 }
+
+
 function oncheck() {
     var curimgsource = document.getElementById('chkAcceptTerms').src;
     // alert(curimgsource.indexOf());

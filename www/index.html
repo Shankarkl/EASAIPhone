@@ -7,25 +7,20 @@
 <link rel="stylesheet" href="js/jquerymobile110min.css" />
 <link href="newcss.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery164min.js" type="text/javascript"></script>
-<script src="js/spinmin.js" type="text/javascript"></script>
 <script src="js/jqueryalerts.js" type="text/javascript"></script>
 <link href="public/css/jqueryalerts.css" rel="stylesheet" type="text/css" />
 <link href="public/css/jqueryui.css" rel="stylesheet" />
 <script src="js/jqueryui.js" type="text/javascript"></script> 
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/RandgoServices.js"></script>
-<script src="js/jqueryuitouchpunch.js" type="text/javascript"></script>
 <script src="js/jquerymobile110min.js" type="text/javascript"></script>
 <script src="js/utils.js" type="text/javascript"></script>
 <script src="js/help.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
- <!--  <script type="text/javascript" charset="utf-8" src="cordova2.6.0.js"></script>
-<script type="text/javascript" src="cordova-2.7.0.js"></script>-->
+
 <script type="text/javascript" charset="utf-8">
     $().ready(function () {
-            //reg +27 function for
-        $("#txtRegCell,#txtfpcellno,#txtcellno").keypress(function (ev) {
-                // alert('dfds');
+     $("#txtRegCell,#txtfpcellno,#txtcellno").keypress(function (ev) {
                 var value = "+27";
                 var tval = this.value;
                 var c = ev.charCode || ev.keyCode;
@@ -63,16 +58,7 @@
         });
         document.addEventListener('deviceready', function () {
         document.addEventListener("backbutton", ShowExitDialog, false);
-          /*  if (device.model == "HTC Desire S") {
-                $(".footerHeight").height(10);
-
-            }
-
-            else {
-               
-                $(".footerHeight").height(200);
-            }*/
-
+        
         }, false);
 
         $(document).bind("mobileinit", function () {
@@ -83,8 +69,6 @@
         });
 
         /********* IndexServicesPage **************/
-
-        /**** below home logo click dec6th****/
         $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
           $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
 
@@ -104,7 +88,6 @@
            // }
             if (localStorage.getmedical == 2) {
                 $("#medical,#medtb").show();
-                // document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
                 document.getElementById("mdimg").src = localStorage.imgUrlMedical;
                 document.getElementById("mdimg1").src = localStorage.imgUrlMedical;
                 $("#mdimg").show(); 
@@ -115,7 +98,6 @@
             }
             if (localStorage.getroad == 3) {
                 $("#roadas,#rdtb").show();
-                // document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
                 document.getElementById("rdimg").src = localStorage.imgUrlRoad;
                 document.getElementById("rdimg1").src = localStorage.imgUrlRoad;
                 $("#rdimg").show(); 
@@ -127,7 +109,6 @@
             }
             if (localStorage.getlegal == 4) {
                 $("#legalas,#letb").show();
-                // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
                 document.getElementById("lgimg").src = localStorage.imgUrlLegal;
                 document.getElementById("lgimg1").src = localStorage.imgUrlLegal;
                 $("#lgimg").show(); 
@@ -138,7 +119,6 @@
             }
             if (localStorage.gettravel == 5) {
                 $("#travelas,#trtb").show();
-                //  document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
                 document.getElementById("tlimg").src = localStorage.imgUrlTravel;
                 document.getElementById("tlimg1").src = localStorage.imgUrlTravel;
                 $("#tlimg").show();
@@ -148,14 +128,10 @@
                 
             }
         }
-
-
         //kavya(call image reverse back)
         function callforassistance(type) {
             setTimeout(function () { CreatePleaseCallMeRequestNew(type); }, 210);
         }
-
-        
         /********* HEADING CLICK **********/
        $("#divhm,#divmm,#divrd,#divle,#divtr").hide();
        $("#hme,#medical,#roadas,#legalas,#travelas").hide(); //color img
@@ -169,7 +145,7 @@
                     $("#divhm").show(); //whole div red
                     $("#medical,#roadas,#legalas,#travelas").hide();
 
-                  //  document.getElementById('hme').style.backgroundImage = 'url(' + localStorage.imgUrlHome + ')';
+              
                     document.getElementById("hmimg").src = localStorage.imgUrlHome;
                     document.getElementById("hmimg1").src = localStorage.imgUrlHome;
                     $("#hmimg").show();   
@@ -204,8 +180,8 @@
                     document.getElementById('divmm').className = "panelcollapsed";
                     $("#divmm").show();
                     $("#hme,#roadas,#legalas,#travelas").hide();
-                 //  $("#medical").show();
-                    // document.getElementById('medical').style.backgroundImage = 'url(' + localStorage.imgUrlMedical + ')';
+               
+                
                     document.getElementById("mdimg").src = localStorage.imgUrlMedical;
                     document.getElementById("mdimg1").src = localStorage.imgUrlMedical;
                     $("#mdimg").show();
@@ -238,8 +214,7 @@
                     document.getElementById('divrd').className = "panelcollapsed";
                     $("#divrd").show();
                     $("#hme,#medical,#legalas,#travelas").hide();
-                    //$("#roadas").show();
-                    //  document.getElementById('roadas').style.backgroundImage = 'url(' + localStorage.imgUrlRoad + ')';
+                  
                     document.getElementById("rdimg").src = localStorage.imgUrlRoad;
                     document.getElementById("rdimg1").src = localStorage.imgUrlRoad;
                     $("#rdimg").show();
@@ -272,8 +247,7 @@
                     document.getElementById('divle').className = "panelcollapsed";
                     $("#divle").show();
                     $("#hme,#medical,#roadas,#travelas").hide();
-                   // $("#legalas").show();
-                    // document.getElementById('legalas').style.backgroundImage = 'url(' + localStorage.imgUrlLegal + ')';
+                  
                     document.getElementById("lgimg").src = localStorage.imgUrlLegal;
                     document.getElementById("lgimg1").src = localStorage.imgUrlLegal;
                     $("#lgimg").show(); 
@@ -305,8 +279,7 @@
                     document.getElementById('divtr').className = "panelcollapsed";
                     $("#divtr").show();
                     $("#hme,#medical,#roadas,#legalas,#travelas").hide();
-                   // $("#travelas").show();
-                    //  document.getElementById('travelas').style.backgroundImage = 'url(' + localStorage.imgUrlTravel + ')';
+                  
                     document.getElementById("tlimg").src = localStorage.imgUrlTravel;
                     document.getElementById("tlimg1").src = localStorage.imgUrlTravel;
                     $("#tlimg").show();
@@ -340,7 +313,7 @@
             document.getElementById('view-loading').style.display = "block";           
             document.getElementById('rusure').innerHTML = 'You are about to pay R ' +  document.getElementById('txtfriendAmount').value + ' to ' + document.getElementById('txtfrnd').value + ' Are you sure you wish to proceed?<br>';
         }
-        /* $.mobile.changePage('#myPage', { transition: 'pop', role: 'dialog' });   */
+      
         function yesplease() {
             document.getElementById('view-loading').style.display = "none";
             $.mobile.changePage('#transactionsuccessful', {
@@ -470,9 +443,6 @@
 </style>
 
 <!-- DEC 21st added for slide transistion last changed-->
-
-    <!--/*** Flicker check ****/-->
-    
   <script type="text/javascript">
          $(document).one('mobileinit', function () {
 
@@ -716,8 +686,30 @@
                 </tr>
                 <tr height="63%">
                     <td class="gobo">
-                        <table class="bgfooter" width="100%" cellspacing="0" cellpadding="0" id="tbldisplaycategories">
-                        
+                        <table  class="bgfooter" width="100%" cellspacing="0" cellpadding="0" id="tbldisplaycategories">
+                           
+                                        <!--  <tr>
+                                            <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                      
+                                          <tr>
+                                            <td class="regcol1 ">
+                                            </td>
+                                            <td class="textstyle1 menulist">
+                                              goeat
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                            </tr>
+                                            </table>
+                                          </td>
+                                          </tr>-->
+                                       
+                               
+                           
                         </table>
                     </td>
                 </tr>
@@ -738,11 +730,7 @@
                     <td>
                         <br />
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                       
                     </td>
                 </tr>
                 <!--BREAK END-->
@@ -942,26 +930,7 @@
                 </td>
             </tr>
 
-            <!--BREAK-->
-            <tr>
-                <td>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </td>
-            </tr>
-            <!--BREAK END-->
+          
         </table>
         <div data-role="footer">
             <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
@@ -975,7 +944,7 @@
                         <table width="102%" height="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="headerbckrndimg headerwt">
-                                <div style="width:100%" onclick="gohome()" >
+                                <div style="width:100%">
                                                <img src="public/images/EAslicing/innerlogo.png" class="europimght" />
                                     </div>
                                 </td>
@@ -2447,50 +2416,95 @@
                     <td class="airpadd">
                         <table class="bgfooter" cellspacing="0" cellpadding="0" width="100%" height="100%"
                             id="tblairtimelist">
-                             <tr class="tdbgc" id="Tr2">
-                                <td class="regcol1 "></td>
-                                <td class="textstyle1 menulist" onclick="gotoVodacom()">VODACOM
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1 ">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoVodacom()">
+                                                VODACOM
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoVodacom()">CELLC
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoVodacom()">
+                                                CELLC
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoVodacom()">MTN
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoVodacom()">
+                                                MTN
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoVodacom()">8TA
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoVodacom()">
+                                                8TA
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoVodacom()">VIRGIN MOBILE
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoVodacom()">
+                                                VIRGIN MOBILE
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
                         </table>
                     </td>
@@ -2596,78 +2610,114 @@
                     <td class="airpadd">
                         <table width="100%" height="100%" class="bgfooter" cellspacing="0" cellpadding="0"
                             id="tblavailabledeno">
-                             <tr class="tdbgc">
-                            <td class="regcol1 ">
-                            </td>
-                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
-                                R275.00
-                            </td>
-                            <td class="regcol2" align="right">
-                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                            </td>
-                            <td class="regcol1">
-                            </td>
-                        </tr>
-                        <tr class="tdbgc">
-                            <td class="regcol1">
-                            </td>
-                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
-                                R11.00
-                            </td>
-                            <td class="regcol2" align="right">
-                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                            </td>
-                            <td class="regcol1">
-                            </td>
-                        </tr>
-                        <tr class="tdbgc">
-                            <td class="regcol1">
-                            </td>
-                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
-                                R55.00
-                            </td>
-                            <td class="regcol2" align="right">
-                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                            </td>
-                            <td class="regcol1">
-                            </td>
-                        </tr>
-                        <tr class="tdbgc">
-                            <td class="regcol1">
-                            </td>
-                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
-                                R29.00
-                            </td>
-                            <td class="regcol2" align="right">
-                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                            </td>
-                            <td class="regcol1">
-                            </td>
-                        </tr>
-                        <tr class="tdbgc">
-                            <td class="regcol1">
-                            </td>
-                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
-                                R12.00
-                            </td>
-                            <td class="regcol2" align="right">
-                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                            </td>
-                            <td class="regcol1">
-                            </td>
-                        </tr>
-                        <tr class="tdbgc">
-                            <td class="regcol1">
-                            </td>
-                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
-                                R5.00
-                            </td>
-                            <td class="regcol2" align="right">
-                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                            </td>
-                            <td class="regcol1">
-                            </td>
-                        </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1 ">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
+                                                R275.00
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
+                                                R11.00
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
+                                                R55.00
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
+                                                R29.00
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
+                                                R12.00
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gototransactiondetails()">
+                                                R5.00
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
                         </table>
                     </td>
                 </tr>
@@ -2924,41 +2974,77 @@
                 <tr height="30%">
                     <td class="airpadd">
                         <table class="bgfooter" width="100%" height="100%" cellspacing="0" cellpadding="0">
-                            <tr class="tdbgc" id="air">
-                                <td class="regcol1 "></td>
-                                <td class="textstyle1 menulist" onclick="gotoAirtimePage()">AIRTIME
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1 ">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoAirtimePage()">
+                                                AIRTIME
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr" />
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoElecPage()">ELECTRICITY
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoElecPage()">
+                                                ELECTRICITY
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr" />
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoBillsPage()">BILLS
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoBillsPage()">
+                                                BILLS
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr" />
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist">OTHERS
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist">
+                                                OTHERS
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr" />
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
                         </table>
                     </td>
@@ -3888,52 +3974,76 @@
                 <tr height="23%">
                     <td>
                         <table height="100%" width="100%" class="bgfooter" cellspacing="0" cellpadding="0">
-                            <tr class="tdbgc">
-                                <td class="regcol1 ">
-                                </td>
-                                <td class="textstyle1 menulist" onclick="gotoPaystore()">
-                                    AIRTIME
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
-                                </td>
-                                <td class="textstyle1 menulist" onclick="gotoPaystore()">
-                                    ELECTRICITY
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1 ">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoPaystore()">
+                                                AIRTIME
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
-                                </td>
-                                <td class="textstyle1 menulist" onclick="gotoPaystore()">
-                                    BILLS
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoPaystore()">
+                                                ELECTRICITY
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoPaystore()">
+                                                BILLS
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="textstyle1 menulist" onclick="gotoPaystore()">
-                                    OTHERS
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoPaystore()">
+                                                OTHERS
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
@@ -4654,32 +4764,59 @@
                 <tr height="13%">
                     <td>
                         <table height="100%" width="100%" class="bgfooter" cellspacing="0" cellpadding="0">
-                            <tr class="tdbgc">
-                                <td class="regcol1 "></td>
-                                <td class="textstyle1 menulist" onclick="gotoAddremove()">CREDIT CARD
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1 ">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoAddremove()">
+                                                CREDIT CARD
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoEft()">EFT
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoEft()">
+                                                EFT
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoTopupin()">IN STORE
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoTopupin()">
+                                                IN STORE
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img alt=" " src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
                         </table>
                     </td>
@@ -5635,32 +5772,46 @@
                     <td class="voucher">
                         <table height="100%" width="100%" class="bgfooter" cellspacing="0" cellpadding="0"
                             id="tblvodacom">
-                           <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist" onclick="gotoairtimevoucher()">AIRTIME VOUCHER
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotoairtimevoucher()">
+                                                AIRTIME VOUCHER
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1"></td>
-                                <td class="textstyle1 menulist">SMS PACKAGE 
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist">
+                                                SMS PACKAGE
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1"></td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td>
-                        <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
         <div data-role="footer">
@@ -5890,8 +6041,8 @@
                 </tr>
                 <tr class="freshbrnd">
                     <td>
-                        <table class="piatto" cellspacing="0" cellpadding="10" width="100%" height="100%" 
-                            id="tbldisplaymerchantdeals">
+                        <table class="piatto" cellspacing="0" cellpadding="10" width="100%" height="100%" id="tbldisplaymerchantdeals">
+                            
                             
                         </table>
                     </td>
@@ -5901,8 +6052,7 @@
                     <td>
                         <br />
                         <br />
-                        <br />
-                        <br />
+                       
                     </td>
                 </tr>
             </table>
@@ -6021,6 +6171,7 @@
                 <tr height="63%">
                     <td class="gobo" style="overflow: scroll">
                         <table class="bgfooter" width="100%" cellspacing="0" cellpadding="0" id="tbldisplaycategoriesbycid">
+                        
                         </table>
                     </td>
                 </tr>
@@ -6150,74 +6301,100 @@
                     <td class="codepd">
                         <table class="bgfooter" width="100%" height="100%" cellspacing="0" cellpadding="0"
                             id="tblmycouponslist">
-                             <tr class="tdbgc" id="Tr1">
-                                <td class="regcol1">
-                                </td>
-                                <td class="textstyle1 menulist" onclick="gotopick()">
-                                    PICK N PAY
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
-                                </td>
-                                <td class="textstyle1 menulist" id="check" onclick="gotopick()">
-                                    CHECKERS
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" onclick="gotopick()">
+                                                PICK N PAY
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
-                                </td>
-                                <td class="textstyle1 menulist" id="shp" onclick="gotopick()">
-                                    SHOPRITE
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
-                                </td>
-                            </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
-                                </td>
-                                <td class="textstyle1 menulist" id="kwai" onclick="gotopick()">
-                                    KWAI
-                                </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" id="check" onclick="gotopick()">
+                                                CHECKERS
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                            <tr class="tdbgc">
-                                <td class="regcol1">
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" id="shp" onclick="gotopick()">
+                                                SHOPRITE
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="textstyle1 menulist" id="fortnum" onclick="gotopick()">
-                                    FORTNUM & MASON
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" id="kwai" onclick="gotopick()">
+                                                KWAI
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="regcol2" align="right">
-                                    <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
-                                </td>
-                                <td class="regcol1">
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="tdbgc" width="100%" height="100%" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="regcol1">
+                                            </td>
+                                            <td class="textstyle1 menulist" id="fortnum" onclick="gotopick()">
+                                                FORTNUM & MASON
+                                            </td>
+                                            <td class="regcol2" align="right">
+                                                <img src="public/images/EAslicing/singlerightarrow.png" class="rightarr">
+                                            </td>
+                                            <td class="regcol1">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                <!--<tr class="trheight">
-                    <td style="position: fixed; bottom: 0; left: 0">
-                        <img src="public/images/EAslicing/backbutton.png" class="headerimgstyle1" onclick="goBack();" />
-                    </td>
-                </tr>-->
+              
             </table>
         </div>
         <div data-role="footer">
@@ -7424,11 +7601,7 @@
                     <br />
                         <br />
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                      
                     </td>
                 </tr>
             
@@ -7529,13 +7702,8 @@
                     <td>
                         <br />
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        
+                        
                     </td>
                 </tr>
                 <!-- Footer-->
