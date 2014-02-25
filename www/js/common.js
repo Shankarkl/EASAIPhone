@@ -619,7 +619,7 @@ function LoginValidation() {
     var logunameexp = /^[A-Za-z ']*$/;
     var curimgsrc = document.getElementById('chkremember').src;
     if (cell == "") {
-        jAlert("Please enter cell number", 'Info');
+        jAlert("Please enter your cellphone number", 'Info');
         document.txtcellnumber.focus();
         return false;
     }
@@ -1046,15 +1046,15 @@ function validation() {
         jAlert("Please enter valid User Name!", 'Info');
         return false;
     } else if (FName == "") {
-        jAlert("Please enter the First Name!", 'Info');
+        jAlert("Please enter your first name!", 'Info');
         return false;
     }
     else if (!FName.match(unameexp)) {
-        jAlert("Please enter valid First Name!", 'Info');
+        jAlert("Please enter your first name!", 'Info');
         return false;
     }
     else if (SurName == "") {
-        jAlert("Please enter the Surname!", 'Info');
+        jAlert("Please enter your surname!", 'Info');
         return false;
     }
     else if (!SurName.match(unameexp)) {
@@ -1062,38 +1062,38 @@ function validation() {
         return false;
     }
     else if (EmailID == "") {
-        jAlert("Please enter the Email id!", 'Info');
+        jAlert("Please enter your email address!", 'Info');
         return false;
     }
     else if (EmailID.indexOf("@", 0) < 0) {
-        jAlert("Please enter valid Email id!", 'Info');
+        jAlert("Please enter a valid Email address!", 'Info');
         return false;
     }
 
     else if (EmailID.indexOf(".", 0) < 0) {
-        jAlert("Please enter a valid Email id!", 'Info');
+        jAlert("Please enter your email address!", 'Info');
         return false;
     }
 
     else if (CellNumberResult == "+27") {
-        jAlert("Please enter the Cellphone number!", 'Info');
+        jAlert("Please enter your cellphone number!", 'Info');
         return false;
     } else if (!CellNumberResult.match(num)) {
-        jAlert("Please enter a valid Cellphone number!", 'Info');
+        jAlert("Please enter your cellphone number!", 'Info');
         return false;
     }
     else if (CellNumberResult.length < '12') {
-        jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
+        jAlert("Please enter your cellphone number!", 'Info'); return false;
     }
     else if (CellNumberResult.length > '12') {
-        jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
+        jAlert("Please enter your cellphone number!", 'Info'); return false;
     }
     else if (IdNumber == "") {
-        jAlert("Please enter the Id number!", 'Info');
+        jAlert("Please enter your ID Number!", 'Info');
         return false;
     }
     else if (!IdNumber.match(idexp)) {
-        jAlert("Please enter 13 digit Id number!", 'Info');
+        jAlert("Please enter a valid 13 digit ID number!", 'Info');
         return false;
     } else {
         //  alert(CellNumberResult);
@@ -1112,7 +1112,7 @@ function validation() {
                 return false;
             }
             if (pinnew != pinconfirm) {
-                jAlert("Passwords typed do not match, please re-enter your passwords!", "Info ");
+                jAlert("Passwords do not match please confirm your password!", "Info ");
                 return false;
             }
           /*  var confirmpw = jConfirm("Are you sure you want to change your password!", "Info ");
@@ -1120,7 +1120,7 @@ function validation() {
              
                 Profileupdate(document.getElementById('userid').value, FName, SurName, Name, pinnew, IdNumber, EmailID, CellNumberResult);
             }*/
-            jConfirm('Are you sure you want to change your password!', 'Info', function (r) {
+            jConfirm('Are you sure you want to change your password?', 'Info', function (r) {
             if (r == true) {
             Profileupdate(document.getElementById('userid').value, FName, SurName, Name, pinnew, IdNumber, EmailID, CellNumberResult);
             }
@@ -1226,12 +1226,12 @@ function ProfileupdateCallback(responseData) {
             else {
                 //alert('::' + document.getElementById('txtnewpin').value);
                 if (document.getElementById('txtnewpin').value == 'gohome') {
-                    jAlert("Profile updated successfully!", 'Info');
+                    jAlert("Thank you! Your profile has updated successfully.", 'Info');
                     document.getElementById('txtnewpin').value = '';
                     gotoService();
                     return false;
                 } else {
-                    jAlert("Your password changed successfully!", 'Info');
+                    jAlert("Thank you! Your password is now changed.", 'Info');
                     localStorage.randgosessionid = null;
                     localStorage.loginID = null;
                     prevPage = currentPage;
@@ -1319,7 +1319,7 @@ function EALoginValidation() {
     var curimgsrc = document.getElementById('chkremember').src;
 
     if (name == "") {
-        jAlert("Please enter the Username!", 'Info');
+        jAlert("Please enter your username!", 'Info');
         document.txtusername.focus();
         return false;
     }
@@ -2008,70 +2008,70 @@ function UserRegistration() {
         var pwd = /^\d{5}$/;
         var checnum = /^\d+$/;
         if (Name == "") {
-           jAlert("Please enter the First Name!", 'Info');
+            jAlert("Please enter your first name!", 'Info');
         
             return false;
         }
         else if (!Name.match(unameexp)) {
-            jAlert("Please enter valid First Name!", 'Info');
+            jAlert("Please enter your first name!", 'Info');
             return false;
         }
         else if (SurName == "") {
-            jAlert("Please enter the Surname!", 'Info');
+            jAlert("Please enter your surname!", 'Info');
             return false;
         }
         else if (!SurName.match(unameexp)) {
-            jAlert("Please enter valid Surname!", 'Info');
+            jAlert("Please enter your surname!", 'Info');
             return false;
         }
         else if (EmailID == "") {
-            jAlert("Please enter the Email id!", 'Info');
+            jAlert("Please enter your email address!", 'Info');
             return false;
         }
         else if (EmailID.indexOf("@", 0) < 0) {
-            jAlert("Please enter valid Email id!", 'Info');
+            jAlert("Please enter a valid Email address!", 'Info');
             return false;
         }
 
         else if (EmailID.indexOf(".", 0) < 0) {
-            jAlert("Please enter a valid Email id!", 'Info');
+            jAlert("Please enter your email address!", 'Info');
             return false;
         }
 
         else if (CellNumberResult == "+27") {
-            jAlert("Please enter the Cellphone number!", 'Info');
+            jAlert("Please enter your cellphone number!", 'Info');
             return false;
         } else if (!CellNumberResult.match(num)) {
-            jAlert("Please enter a valid Cellphone number!", 'Info');
+            jAlert("Please enter a valid cellphone number!", 'Info');
             return false;
         }
         else if (CellNumberResult.length < '12') {
-            jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
+            jAlert("Please enter a valid cellphone number!", 'Info'); return false;
         }
         else if (CellNumberResult.length > '12') {
-            jAlert("Please enter a valid Cellphone number!", 'Info'); return false;
+            jAlert("Please enter a valid cellphone number!", 'Info'); return false;
         }
         else if (IdNumber == "") {
-            jAlert("Please enter the Id number!", 'Info');
+            jAlert("Please enter your ID Number!", 'Info');
             return false;
         }
         else if (!IdNumber.match(idexp)) {
-            jAlert("Please enter 13 digit Id number!", 'Info');
+            jAlert("Please enter a valid 13 digit ID number!", 'Info');
             return false;
         }
         else if (policyno == "") {
-            jAlert("Please enter the Policy number!", 'Info');
+            jAlert("Please enter your Policy Number!", 'Info');
             return false;
         } else if (!policyno.match(checnum)) {
             jAlert("Please enter valid Policy number!", 'Info');
             return false;
         }
         else if (policyno.length < 8) {
-            jAlert("Policy number must contain at least 8 numbers!", 'Info');
+            jAlert("Please enter a valid  8 digit Policy number!", 'Info');
            
         }
         else if (curimgsource.indexOf('acceptedbutton.png') < 0) {
-            jAlert("Please Accept Terms and Conditions!", 'Info');
+            jAlert("Please accept the Terms and Conditions!", 'Info');
             return false;
         }
         else {
@@ -2133,7 +2133,7 @@ function RegisterUserCallback(responseData) {
             var xmlDoc = parser.parseFromString(responseData, "text/xml");
             if (xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != null && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != "" && xmlDoc.getElementsByTagName("MobileUserRegisterResult")[0] != undefined) {
                 if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == '-1') {
-
+                    //User already registered.
                     jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue, 'Info');
                     return false;
                 } else if (xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == '0' || xmlDoc.getElementsByTagName("ErrorCode")[0].childNodes[0].nodeValue == 0) {
@@ -2145,13 +2145,14 @@ function RegisterUserCallback(responseData) {
                     });
                     currentPage = 'indexPage';
                     pageData.push(currentPage);
-                    jAlert('Registration successfull, Thank you for registering.', 'Info');
+                    jAlert('Registration successful, Thank you for registering.', 'Info');
                     return false;
                 } 
                 else {
                     jAlert(xmlDoc.getElementsByTagName("ErrorMessage")[0].childNodes[0].nodeValue, 'Info', function (r) {
                         if (r == true) {
-                            jAlert('Register is successfull. You can login to the application, but you have no access to Europe Assist services', 'Info');
+                            // jAlert('Register is successfull. You can login to the application, but you have no access to Europe Assist services', 'Info');
+                            jAlert('Registration has been successful. You can now login to the application with limited access within the application', 'Info');
                             prevPage = currentPage;
                             $.mobile.changePage('#indexPage', {
                                 transition: "none",
@@ -2236,16 +2237,16 @@ function gotoRegister() {
     var unameexp = /^[A-Za-z ']*$/;
 
     if (regfirstuname == "") {
-        jAlert("Please enter the Username!", 'Info');
+        jAlert("Please enter your username!", 'Info');
         return false;
     }
     else if (!regfirstuname.match(unameexp)) {
-        jAlert("Please enter valid Username!", 'Info');
+        jAlert("Please enter a valid username!", 'Info');
         return false;
     }
 
     if (regfirstpw == "") {
-        jAlert("Please enter the Password!", 'Info');
+        jAlert("Please enter your password!", 'Info');
         return false;
     }
     //alert(regfirstpw.length);
@@ -2256,11 +2257,11 @@ function gotoRegister() {
     }
 
     if (regfirstconfirmpw == "") {
-        jAlert("Please enter Confirm Password!", 'Info');
+        jAlert("Please confirm your password!", 'Info');
         return false;
     }
     if (regfirstconfirmpw != regfirstpw) {
-        jAlert("Passwords typed do not match, please re-enter your passwords!", 'Info');
+        jAlert("Passwords typed do not match, please re-enter your password!", 'Info');
         return false;
 
     }
@@ -2306,19 +2307,19 @@ function ForgotPasswordValidation() {
 
     }
     if (document.getElementById('txtfpcellno').value == "+27") {
-        jAlert("Please enter Cell number!", 'Info');
+        jAlert("Please enter your cellphone number!", 'Info');
 
     } else if (!cellRemoveFirstZero.match(num)) {
 
-        jAlert("Please enter a valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid cellphone number!", 'Info');
 
     }
     else if (cellRemoveFirstZero.length < '12') {
-        jAlert("Please enter a valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid cellphone number!", 'Info');
 
     }
     else if (cellRemoveFirstZero.length > '12') {
-        jAlert("Please enter a valid Cellphone number!", 'Info');
+        jAlert("Please enter a valid cellphone number!", 'Info');
 
     } else {
         var FCellNumber = document.getElementById('txtfpcellno').value;
@@ -2366,7 +2367,8 @@ function ForgotPasswordServiceCallback(responseData) {
             else {
                 // jAlert("Thank you,We have sent you an Email with your password", 'Info');
                 //   jAlert("Thank you,We have sent your password to the registered EmailAddress", 'Info');
-                jAlert("Thank you,We have sent your password to your registered EmailAddress", 'Info');
+                // jAlert("Thank you,We have sent your password to your registered EmailAddress", 'Info');
+                jAlert("Thank you. We have sent your password to the registered email address listed", 'Info');
 
                 prevPage = currentPage;
                 $.mobile.changePage('#indexPage', {
