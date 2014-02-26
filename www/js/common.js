@@ -1616,11 +1616,6 @@ function MYLogintoAllServicesCallBack(responseData) {
     catch (exp) {
     }
 }
-/**********************/
-
-
-
-
 
 /***********DEC9th ************/
 function gotoService() {
@@ -2222,10 +2217,6 @@ function gotoRegFirstPage() {
 
 }
 
-//txtusernameregfirst
-
-
-
 
 /*******Second time click clear all fields in page & navigate ****/
 
@@ -2249,9 +2240,9 @@ function gotoRegister() {
         jAlert("Please enter your password!", 'Info');
         return false;
     }
-    //alert(regfirstpw.length);
+  
     if (regfirstpw.length < 5) {
-        // jAlert("hello" + Password);
+      
         jAlert("Password must contain at least five characters!", 'Info');
         return false;
     }
@@ -2278,15 +2269,55 @@ function gotoRegister() {
         document.getElementById('txtRegPolicyNumber').value = "";
         var curimgsource = document.getElementById('chkAcceptTerms').src;
         document.getElementById('chkAcceptTerms').src = "public/images/checkbox.png";
-        $.mobile.changePage('#reg', {
-            transition: "none",
-            reverse: false,
-            changeHash: false
-        });
-        currentPage = 'reg';
-        pageData.push(currentPage);
+      
+        GetUsernames(userName)
     }
 
+}
+
+function GetUsernames(UName) {
+    var getUN = "";
+    getUN = '<?xml version="1.0" encoding="utf-8"?>';
+    getUN = getUN + '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">';
+    getUN = getUN + '<soap:Body>';
+    getUN = getUN + '<GetUsernames xmlns="http://tempuri.org/">';
+    getUN = getUN + '<username>' + UName + '</username>';
+    getUN = getUN + '</GetUsernames>';
+    getUN = getUN + '</soap:Body>';
+    getUN = getUN + '</soap:Envelope>';
+    CallWebService('http://118.139.160.226/Europewebservice/EuropeAssistStaticDataWS.asmx?op=GetUsernames', getUN, 'POST', 'text/xml', GetUsernamesCallback);
+}
+
+
+function GetUsernamesCallback(responseData) {
+   
+    try {
+        responseData = responseData.replace(/&gt;/gi, '>');
+        responseData = responseData.replace(/&lt;/gi, '<');
+        var parser = new DOMParser();
+        if (responseData !== "") {
+            var xmlDoc = parser.parseFromString(responseData, "text/xml");
+
+            if (xmlDoc.getElementsByTagName("GetUsernamesResult")[0].textContent == 1) {
+                jAlert("Username exists, please login or access forgot password", 'Info');
+                return false;
+            }
+            else {
+               prevPage = currentPage;
+                $.mobile.changePage('#reg', {
+                    transition: "none",
+                    reverse: false,
+                    changeHash: false
+                });
+                currentPage = 'reg';
+                pageData.push(currentPage);
+
+            }
+        }
+    }
+    catch (exp) {
+       
+    }
 }
 
 /*****************************************************************************************************
